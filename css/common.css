@@ -15,3 +15,8 @@ body {
     border-radius: 25px;
     background: #F8F8F8;
 }
+
+.btn:active {
+    background-color: #c5c5c5;
+    transform: translateY(2px);
+}

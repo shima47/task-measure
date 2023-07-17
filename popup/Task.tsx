@@ -5,17 +5,30 @@ import "../css/task.css"
 
 
 function Task() {
-  const [data, setData] = useState("")
+  const [taskTitle, setTaskTitle] = useState("")
+  const [taskTime, setTaskTime] = useState("00h 00m")
+  const [doTask, setDoTask] = useState(false)
+
+  const onChangeTitle = (event) => {
+    setTaskTitle(event.target.value)
+  }
 
   return (
     <div className="task">
       <div className="taskTitle">
-        <input className="taskForm" />
+        <input className="taskForm" type="text" value={taskTitle} onChange={onChangeTitle} />
       </div>
-      <div className="taskTime">3h 20m</div>
-      <div className="btn">
-        <img src={startIcon} alt="新規追加" />
-      </div>
+      <div className="taskTime">{taskTime}</div>
+      {
+        doTask ?
+          <div className="btn">
+            <img src={stopIcon} alt="ストップ" />
+          </div>
+          :
+          <div className="btn">
+            <img src={startIcon} alt="スタート" />
+          </div>
+      }
     </div>
   )
 }

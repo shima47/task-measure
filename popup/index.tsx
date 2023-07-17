@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Header from "./Header"
 import DayDiv from "./DayDiv"
+import "../css/common.css"
 import "../css/index.css"
 
 
@@ -10,12 +11,12 @@ function IndexPopup() {
   return (
     <div className="page">
       <div className="container">
-        <Header></Header>
-        <DayDiv></DayDiv>
-        <DayDiv></DayDiv>
-        <DayDiv></DayDiv>
-        <DayDiv></DayDiv>
-        <DayDiv></DayDiv>
+        <Header />
+        <DayDiv />
+        <DayDiv />
+        <DayDiv />
+        <DayDiv />
+        <DayDiv />
       </div>
     </div>
   )

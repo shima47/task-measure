@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Task from "./Task"
 import addIcon from "data-base64:~assets/add.svg"
 import "../css/dayDiv.css"
 
@@ -16,7 +17,7 @@ function dayDiv() {
       </div>
       <div className="dayLine"></div>
       <div className="taskDiv">
-
+        <Task />
       </div>
     </div>
   )

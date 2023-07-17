@@ -11,10 +11,17 @@
     align-items: center;
     gap: 10px;
     flex: 1 0 0;
+}
+
+.taskForm {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px white;
+    outline: none;
 
     color: #FFF;
     font-family: Inter;
-    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -28,7 +35,6 @@
 
     color: #FFF;
     font-family: Inter;
-    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

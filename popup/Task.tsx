@@ -10,7 +10,7 @@ function Task() {
   return (
     <div className="task">
       <div className="taskTitle">
-        <input />
+        <input className="taskForm" />
       </div>
       <div className="taskTime">3h 20m</div>
       <div className="btn">

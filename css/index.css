@@ -8,8 +8,8 @@ body {
 
 .page {
     display: flex;
-    width: 470px;
-    padding: 20px;
+    width: 400px;
+    padding: 10px;
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -21,13 +21,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    gap: 10px;
     align-self: stretch;
 }
 
 .btn {
     display: flex;
-    padding: 10px;
+    padding: 5px;
     align-items: center;
     gap: 10px;
 

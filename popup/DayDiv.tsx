@@ -5,6 +5,7 @@ import "../css/dayDiv.css"
 
 
 function dayDiv(props) {
+  const taskAry = props.task
   const [data, setData] = useState("")
 
   return (
@@ -12,12 +13,12 @@ function dayDiv(props) {
       <div className="dayTitleDiv">
         <div className="dayTitile">{props.dayTitle}</div>
         <div className="btn">
-          <img src={addIcon} alt="新規追加"></img>
+          <img src={addIcon} alt="新規追加" />
         </div>
       </div>
-      <div className="dayLine"></div>
+      {/* <div className="dayLine"></div> */}
       <div className="taskDiv">
-        <Task />
+        {taskAry.map((task) => <Task task={task} />)}
       </div>
     </div>
   )

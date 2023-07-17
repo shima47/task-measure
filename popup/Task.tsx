@@ -5,8 +5,9 @@ import "../css/task.css"
 
 
 function Task(props) {
-  const [taskTitle, setTaskTitle] = useState("")
-  const [taskTime, setTaskTime] = useState("00h 00m")
+  const task = props.task
+  const [taskTitle, setTaskTitle] = useState(task.title)
+  const [taskTime, setTaskTime] = useState(task.time)
   const [doTask, setDoTask] = useState(false)
 
   const onChangeTitle = (event) => {

@@ -1,11 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background: #5F5F5F;
-}
-
 .page {
     display: flex;
     width: 400px;
@@ -23,14 +15,4 @@ body {
     align-items: flex-start;
     gap: 10px;
     align-self: stretch;
-}
-
-.btn {
-    display: flex;
-    padding: 5px;
-    align-items: center;
-    gap: 10px;
-
-    border-radius: 25px;
-    background: #F8F8F8;
 }

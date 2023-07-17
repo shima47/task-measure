@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #5F5F5F;
+}
+
+.btn {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 25px;
+    background: #F8F8F8;
+}

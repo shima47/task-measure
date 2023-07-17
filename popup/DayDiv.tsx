@@ -4,13 +4,13 @@ import addIcon from "data-base64:~assets/add.svg"
 import "../css/dayDiv.css"
 
 
-function dayDiv() {
+function dayDiv(props) {
   const [data, setData] = useState("")
 
   return (
     <div className="dayDiv">
       <div className="dayTitleDiv">
-        <div className="dayTitile">Mon.</div>
+        <div className="dayTitile">{props.dayTitle}</div>
         <div className="btn">
           <img src={addIcon} alt="新規追加"></img>
         </div>

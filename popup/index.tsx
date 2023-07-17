@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Header } from "./Header"
+import Header from "./Header"
 import "../css/index.css"
 
 
@@ -9,7 +9,7 @@ function IndexPopup() {
   return (
     <div className="page">
       <div className="container">
-        <div></div>
+        <Header></Header>
       </div>
     </div>
   )

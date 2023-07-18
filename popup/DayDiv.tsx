@@ -18,7 +18,7 @@ function dayDiv(props) {
       </div>
       {/* <div className="dayLine"></div> */}
       <div className="taskDiv">
-        {taskAry.map((task) => <Task task={task} />)}
+        {taskAry.map((task) => <Task task={task} doingTaskState={props.doingTaskState} />)}
       </div>
     </div>
   )

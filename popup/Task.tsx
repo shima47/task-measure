@@ -8,19 +8,20 @@ function Task(props) {
   const task = props.task
   const [taskTitle, setTaskTitle] = useState(task.title)
   const [taskTime, setTaskTime] = useState(task.time)
-  const [doTask, setDoTask] = useState(false)
+
+  const [doingTaskId, setDoingTaskId] = props.doingTaskState
+  const doTask = doingTaskId == task.id //実行中のタスクかどうか
 
   const onChangeTitle = (event) => {
     setTaskTitle(event.target.value)
   }
 
   const stopTask = () => {
-    setDoTask(current => !current)
+    setDoingTaskId("")
   }
 
   const startTask = () => {
-    setDoTask(current => !current)
-
+    setDoingTaskId(task.id)
   }
 
   return (

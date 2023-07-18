@@ -39,7 +39,11 @@ function IndexPopup() {
       <div className="container">
         <Header />
         {dOfWAry.map((dOfW, index) => {
-          return <DayDiv dayTitle={dOfW} task={taskData[index]} />
+          return <DayDiv
+            dayTitle={dOfW}
+            task={taskData[index]}
+            doingTaskState={[doingTaskId, setDoingTaskId]}
+          />
         })}
       </div>
     </div>

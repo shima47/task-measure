@@ -4,8 +4,7 @@ import addIcon from "data-base64:~assets/add.svg"
 import "../css/dayDiv.css"
 
 
-function dayDiv(props) {
-  const taskAry = props.task
+function dayDiv({ taskAry, ...props }) {
   const [data, setData] = useState("")
 
   return (
@@ -18,7 +17,9 @@ function dayDiv(props) {
       </div>
       {/* <div className="dayLine"></div> */}
       <div className="taskDiv">
-        {taskAry.map((task) => <Task task={task} doingTaskState={props.doingTaskState} />)}
+        {taskAry.map((task) => {
+          return <Task task={task} {...props} />
+        })}
       </div>
     </div>
   )

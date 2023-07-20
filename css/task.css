@@ -1,5 +1,6 @@
 .task {
     display: flex;
+    padding: 0px 0px;
     align-items: center;
     gap: 10px;
     align-self: stretch;
@@ -7,7 +8,7 @@
 
 .taskTitle {
     display: flex;
-    padding: 5px;
+    padding: 0px;
     align-items: center;
     gap: 10px;
     flex: 1 0 0;
@@ -23,13 +24,14 @@
     color: #FFF;
     font-family: Inter;
     font-style: normal;
+    font-size: 12px;
     font-weight: 400;
     line-height: normal;
 }
 
 .taskTime {
     display: flex;
-    padding: 10px;
+    padding: 0px;
     align-items: center;
     gap: 10px;
 

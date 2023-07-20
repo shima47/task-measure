@@ -1,10 +1,10 @@
 .dayDiv {
     display: flex;
-    padding: 5px 10px;
+    padding: 10px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 0px;
+    gap: 5px;
     align-self: stretch;
 
     border-radius: 15px;
@@ -20,7 +20,7 @@
 
 .dayTitile {
     display: flex;
-    padding: 10px;
+    padding: 0px 5px;
     align-items: center;
     gap: 10px;
     flex: 1 0 0;
@@ -44,6 +44,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 0px;
+    gap: 5px;
     align-self: stretch;
 }

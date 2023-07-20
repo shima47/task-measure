@@ -49,8 +49,9 @@ function IndexPopup() {
         {allTask.map((dayTask, index) => {
           return <DayDiv
             key={index}
-            index={index}
+            dayIndex={index}
             dayTask={dayTask}
+            allTaskState={[allTask, setAllTask]}
             doingTaskState={[doingTaskId, setDoingTaskId]}
             startTimeState={[startTime, setStartTime]}
           />

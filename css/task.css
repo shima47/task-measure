@@ -6,6 +6,10 @@
     align-self: stretch;
 }
 
+.task:hover {
+    cursor: pointer;
+}
+
 .taskTitle {
     display: flex;
     padding: 0px;

@@ -11,6 +11,11 @@
     border: 1px solid #FFF;
 }
 
+.dayDiv:hover {
+    cursor: pointer;
+}
+
+
 .dayTitleDiv {
     display: flex;
     align-items: center;

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
+import { useStorage } from "@plasmohq/storage/hook"
 import Header from "./Header"
 import DayDiv from "./DayDiv"
-import { formatElapsedTime } from "./common"
 import "../css/common.css"
 import "../css/index.css"
 
-const taskData = [
+const ALL_TASK = [
   [
     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d", title: "タスク", time: 11234567, },
     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb62", title: "タスク", time: 2334567, },
@@ -21,7 +21,7 @@ const taskData = [
   ],
 ]
 
-const orderData = [
+const ORDER = [
   ["9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d", "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb62"],
   ["9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb61",],
   [],
@@ -29,27 +29,28 @@ const orderData = [
   ["9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb64", "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb63"],
 ]
 
-const dOfWAry = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri."]
-
 
 function IndexPopup() {
-  const [doingTaskId, setDoingTaskId] = useState("")
-  const [startTime, setStartTime] = useState("")
+  const [allTask, setAllTask] = useStorage("taskData", ALL_TASK)
+  const [orderData, setOrderData] = useStorage("orderData", ORDER)
+
+  const [doingTaskId, setDoingTaskId] = useStorage("doingTaskId", "")
+  const [startTime, setStartTime] = useStorage("startTime", 0)
 
   useEffect(() => {
     // alert("a")
   }, [])
 
 
-
   return (
     <div className="page">
       <div className="container">
         <Header />
-        {dOfWAry.map((dOfW, index) => {
+        {allTask.map((dayTask, index) => {
           return <DayDiv
-            dayTitle={dOfW}
-            taskAry={taskData[index]}
+            key={index}
+            index={index}
+            dayTask={dayTask}
             doingTaskState={[doingTaskId, setDoingTaskId]}
             startTimeState={[startTime, setStartTime]}
           />

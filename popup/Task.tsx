@@ -18,13 +18,12 @@ function Task(props) {
   const newTaskTime = task.time + (Date.now() - startTime)
   const formatedTaskTime = formatElapsedTime(doTask ? newTaskTime : task.time)
 
-
   const onChangeTitle = (event) => {
     setTaskTitle(event.target.value)
   }
 
   const stopTask = () => {
-    setStartTime("")
+    setStartTime(0)
     setDoingTaskId("")
   }
 
@@ -34,6 +33,9 @@ function Task(props) {
       doingTaskId: task.id
     }
     await chrome.storage.local.set(saveObj)
+
+    setStartTime(Date.now())
+    setDoingTaskId(task.id)
   }
 
   return (

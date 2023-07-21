@@ -1,48 +1,61 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useStorage } from "@plasmohq/storage/hook"
 import Header from "./Header"
 import DayDiv from "./DayDiv"
 import "../css/common.css"
 import "../css/index.css"
 
-const taskData = [
-  [
-    { id: "fgv08werg", title: "タスク", time: "00h 00m", },
-    { id: "egv453634gv6v", title: "タスク", time: "00h 00m", },
-  ],
-  [
-    { id: "34g53ybgb34", title: "タスク", time: "00h 00m", },
-  ],
+// const ALL_TASK = [
+//   [
+//     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d", title: "タスク", time: 11234567, },
+//     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb62", title: "タスク", time: 2334567, },
+//   ],
+//   [
+//     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb61", title: "タスク", time: 3244567, },
+//   ],
+//   [],
+//   [],
+//   [
+//     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb64", title: "タスク", time: 9235567, },
+//     { id: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb63", title: "タスク", time: 4235567, },
+//   ],
+// ]
+const ALL_TASK = [[], [], [], [], [],]
+
+const ORDER = [
+  ["9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d", "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb62"],
+  ["9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb61",],
   [],
   [],
-  [
-    { id: "b45y4b", title: "タスク", time: "00h 00m", },
-    { id: "v5y4567gv56", title: "タスク", time: "00h 00m", },
-  ],
+  ["9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb64", "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb63"],
 ]
 
-const orderData = [
-  ["fgv08werg", "egv453634gv6v"],
-  ["34g53ybgb34",],
-  [],
-  [],
-  ["b45y4b", "v5y4567gv56"],
-]
-
-const dOfWAry = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri."]
 
 function IndexPopup() {
-  const [doingTaskId, setDoingTaskId] = useState("")
-  const [startTime, setStartTime] = useState("")
+  const [allTask, setAllTask] = useStorage("taskData", ALL_TASK)
+  const [orderData, setOrderData] = useStorage("orderData", ORDER)
+
+  const [doingTaskId, setDoingTaskId] = useStorage("doingTaskId", "")
+  const [startTime, setStartTime] = useStorage("startTime", 0)
+
+  console.dir(allTask)
+  // alert("a")
+  useEffect(() => {
+  }, [])
+
 
   return (
     <div className="page">
       <div className="container">
         <Header />
-        {dOfWAry.map((dOfW, index) => {
+        {allTask.map((dayTask, index) => {
           return <DayDiv
-            dayTitle={dOfW}
-            task={taskData[index]}
+            key={index}
+            dayIndex={index}
+            dayTask={dayTask}
+            allTaskState={[allTask, setAllTask]}
             doingTaskState={[doingTaskId, setDoingTaskId]}
+            startTimeState={[startTime, setStartTime]}
           />
         })}
       </div>
@@ -51,3 +64,5 @@ function IndexPopup() {
 }
 
 export default IndexPopup
+
+

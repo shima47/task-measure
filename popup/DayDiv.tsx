@@ -1,24 +1,35 @@
 import { useState } from "react"
+import { v4 as uuid } from "uuid"
 import Task from "./Task"
 import addIcon from "data-base64:~assets/add.svg"
 import "../css/dayDiv.css"
 
 
-function dayDiv(props) {
-  const taskAry = props.task
-  const [data, setData] = useState("")
+const dOfWAry = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri."]
+
+function dayDiv({ dayIndex, dayTask, ...props }) {
+  const [allTask, setAllTask] = props.allTaskState
+
+  const createTask = () => {
+    const newTask = { id: uuid(), title: "タスク", time: 0, }
+    const newDayTask = [...dayTask, newTask]
+    const newAllTask = allTask.map((dayTask, index) => index === dayIndex ? newDayTask : dayTask)
+    setAllTask(newAllTask)
+  }
 
   return (
     <div className="dayDiv">
       <div className="dayTitleDiv">
-        <div className="dayTitile">{props.dayTitle}</div>
-        <div className="btn">
+        <div className="dayTitile">{dOfWAry[dayIndex]}</div>
+        <div className="btn" onClick={createTask}>
           <img src={addIcon} alt="新規追加" />
         </div>
       </div>
       {/* <div className="dayLine"></div> */}
       <div className="taskDiv">
-        {taskAry.map((task) => <Task task={task} doingTaskState={props.doingTaskState} />)}
+        {dayTask.map((task, index) => {
+          return <Task key={index} task={task} {...props} />
+        })}
       </div>
     </div>
   )

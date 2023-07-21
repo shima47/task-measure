@@ -1,26 +1,48 @@
 import { useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
+import { formatElapsedTime, updateTask } from "./common"
 import "../css/task.css"
 
 
 function Task(props) {
-  const task = props.task
-  const [taskTitle, setTaskTitle] = useState(task.title)
-  const [taskTime, setTaskTime] = useState(task.time)
-
+  const [startTime, setStartTime] = props.startTimeState
   const [doingTaskId, setDoingTaskId] = props.doingTaskState
+
+  const task = props.task
+  console.dir(task.title)
+  const [taskTitle, setTaskTitle] = useState(task.title)
+
   const doTask = doingTaskId == task.id //実行中のタスクかどうか
 
+  let formatedTaskTime
+  if (doTask) {
+    const newTaskTime = task.time + (Date.now() - startTime)
+    formatedTaskTime = formatElapsedTime(newTaskTime)
+  } else {
+    formatedTaskTime = formatElapsedTime(task.time)
+  }
+
   const onChangeTitle = (event) => {
+    const updatedTask = { ...task, title: event.target.value }
+    updateTask(props.allTaskState, updatedTask)
+
     setTaskTitle(event.target.value)
   }
 
   const stopTask = () => {
+    setStartTime(0)
     setDoingTaskId("")
+
+    const newTaskTime = task.time + (Date.now() - startTime)
+    const updatedTask = { ...task, time: newTaskTime, }
+
+    updateTask(props.allTaskState, updatedTask)
   }
 
-  const startTask = () => {
+
+  const startTask = async () => {
+    setStartTime(Date.now())
     setDoingTaskId(task.id)
   }
 
@@ -29,7 +51,7 @@ function Task(props) {
       <div className="taskTitle">
         <input className="taskForm" type="text" value={taskTitle} onChange={onChangeTitle} />
       </div>
-      <div className="taskTime">{taskTime}</div>
+      <div className="taskTime">{formatedTaskTime}</div>
       {
         doTask ?
           <div className="btn" onClick={stopTask}>

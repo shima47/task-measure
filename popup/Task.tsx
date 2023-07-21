@@ -1,39 +1,47 @@
 import { useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
-import { formatElapsedTime } from "./common"
+import { formatElapsedTime, updateTask } from "./common"
 import "../css/task.css"
 
 
 function Task(props) {
-  const task = props.task
-
-  const [doingTaskId, setDoingTaskId] = props.doingTaskState
-  const doTask = doingTaskId == task.id //実行中のタスクかどうか
-
   const [startTime, setStartTime] = props.startTimeState
+  const [doingTaskId, setDoingTaskId] = props.doingTaskState
 
+  const task = props.task
+  console.dir(task.title)
   const [taskTitle, setTaskTitle] = useState(task.title)
 
-  const newTaskTime = task.time + (Date.now() - startTime)
-  const formatedTaskTime = formatElapsedTime(doTask ? newTaskTime : task.time)
+  const doTask = doingTaskId == task.id //実行中のタスクかどうか
+
+  let formatedTaskTime
+  if (doTask) {
+    const newTaskTime = task.time + (Date.now() - startTime)
+    formatedTaskTime = formatElapsedTime(newTaskTime)
+  } else {
+    formatedTaskTime = formatElapsedTime(task.time)
+  }
 
   const onChangeTitle = (event) => {
+    const updatedTask = { ...task, title: event.target.value }
+    updateTask(props.allTaskState, updatedTask)
+
     setTaskTitle(event.target.value)
   }
 
   const stopTask = () => {
     setStartTime(0)
     setDoingTaskId("")
+
+    const newTaskTime = task.time + (Date.now() - startTime)
+    const updatedTask = { ...task, time: newTaskTime, }
+
+    updateTask(props.allTaskState, updatedTask)
   }
 
-  const startTask = async () => {
-    const saveObj = {
-      startTime: Date.now(),
-      doingTaskId: task.id
-    }
-    await chrome.storage.local.set(saveObj)
 
+  const startTask = async () => {
     setStartTime(Date.now())
     setDoingTaskId(task.id)
   }

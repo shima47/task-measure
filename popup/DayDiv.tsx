@@ -8,12 +8,11 @@ import "../css/dayDiv.css"
 const dOfWAry = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri."]
 
 function dayDiv({ dayIndex, dayTask, ...props }) {
-  const [data, setData] = useState("")
+  const [allTask, setAllTask] = props.allTaskState
 
   const createTask = () => {
     const newTask = { id: uuid(), title: "タスク", time: 0, }
     const newDayTask = [...dayTask, newTask]
-    const [allTask, setAllTask] = props.allTaskState
     const newAllTask = allTask.map((dayTask, index) => index === dayIndex ? newDayTask : dayTask)
     setAllTask(newAllTask)
   }

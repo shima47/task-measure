@@ -18,3 +18,17 @@ export const formatElapsedTime = (milliseconds: number) => {
   // フォーマットして返す
   return `${formattedHours}h ${formattedMinutes}m`;
 }
+
+
+export const updateTask = (allTaskState, newTask) => {
+  const [allTask, setAllTask] = allTaskState
+
+  const newAllTask = allTask.map((dayTask) => {
+    return dayTask.map((task) => {
+      return task.id === newTask.id ? newTask : task
+    })
+  })
+
+  console.dir(newAllTask)
+  setAllTask(newAllTask)
+}

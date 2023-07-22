@@ -31,13 +31,13 @@ function Task(props) {
   }
 
   const stopTask = () => {
-    setStartTime(0)
-    setDoingTaskId("")
-
     const newTaskTime = task.time + (Date.now() - startTime)
     const updatedTask = { ...task, time: newTaskTime, }
 
-    updateTask(props.allTaskState, updatedTask)
+    updateTask(props.allTaskState, doingTaskId, updatedTask)
+
+    setStartTime(0)
+    setDoingTaskId("")
   }
 
 

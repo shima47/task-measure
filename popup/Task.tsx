@@ -6,11 +6,14 @@ import "../css/task.css"
 
 
 function Task(props) {
+  const [allTask, setAllTask] = props.allTaskState
+  const [orderData, setOrderData] = props.orderDataState
+
   const [startTime, setStartTime] = props.startTimeState
   const [doingTaskId, setDoingTaskId] = props.doingTaskState
 
-  const task = props.task
-  console.dir(task.title)
+  const task = allTask[props.taskId]
+  console.dir(task)
   const [taskTitle, setTaskTitle] = useState(task.title)
 
   const doTask = doingTaskId == task.id //実行中のタスクかどうか

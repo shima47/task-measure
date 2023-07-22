@@ -14,9 +14,10 @@ function Task(props) {
 
   const task = allTask[props.taskId]
   console.dir(task)
+
   const [taskTitle, setTaskTitle] = useState(task.title)
 
-  const doTask = doingTaskId == task.id //実行中のタスクかどうか
+  const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
 
   let formatedTaskTime
   if (doTask) {
@@ -46,7 +47,7 @@ function Task(props) {
 
   const startTask = async () => {
     setStartTime(Date.now())
-    setDoingTaskId(task.id)
+    setDoingTaskId(props.taskId)
   }
 
   return (

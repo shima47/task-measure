@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import { formatElapsedTime, updateTask } from "./common"
@@ -15,8 +15,6 @@ function Task(props) {
   const task = allTask[props.taskId]
   console.dir(task)
 
-  const [taskTitle, setTaskTitle] = useState(task.title)
-
   const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
 
   let formatedTaskTime
@@ -29,9 +27,7 @@ function Task(props) {
 
   const onChangeTitle = (event) => {
     const updatedTask = { ...task, title: event.target.value }
-    updateTask(props.allTaskState, updatedTask)
-
-    setTaskTitle(event.target.value)
+    updateTask(props.allTaskState, props.taskId, updatedTask)
   }
 
   const stopTask = () => {
@@ -53,7 +49,7 @@ function Task(props) {
   return (
     <div className="task">
       <div className="taskTitle">
-        <input className="taskForm" type="text" value={taskTitle} onChange={onChangeTitle} />
+        <input className="taskForm" type="text" value={task.title} onChange={onChangeTitle} />
       </div>
       <div className="taskTime">{formatedTaskTime}</div>
       {

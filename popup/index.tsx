@@ -8,15 +8,18 @@ import "../css/index.css"
 
 const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]
 
-function IndexPopup() {
+const IndexPopup = () => {
+  const [reRender, setReRender] = useState(false)
+
   const [allTask, setAllTask] = useStorage("taskData", ALL_TASK)
   const [orderData, setOrderData] = useStorage("orderData", ORDER)
+  // const [allTask, setAllTask] = useStorage("taskData")
+  // const [orderData, setOrderData] = useStorage("orderData")
 
   const [doingTaskId, setDoingTaskId] = useStorage("doingTaskId", "")
   const [startTime, setStartTime] = useStorage("startTime", 0)
 
   console.dir(allTask)
-  // alert("a")
   useEffect(() => {
   }, [])
 

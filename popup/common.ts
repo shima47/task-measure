@@ -49,15 +49,10 @@ export const changeOrder = (orderData: (string | number)[], str: string, directi
   return copyOrderData;
 }
 
-export const updateTask = (allTaskState, newTask) => {
+export const updateTask = (allTaskState, taskId, newTask) => {
   const [allTask, setAllTask] = allTaskState
-
-  const newAllTask = allTask.map((dayTask) => {
-    return dayTask.map((task) => {
-      return task.id === newTask.id ? newTask : task
-    })
-  })
-
+  const newAllTask = { ...allTask, [taskId]: newTask }
+  console.dir("newAllTask")
   console.dir(newAllTask)
   setAllTask(newAllTask)
 }

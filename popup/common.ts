@@ -49,11 +49,24 @@ export const changeOrder = (orderData: (string | number)[], str: string, directi
   return copyOrderData;
 }
 
-export const updateTask = (allTaskState, taskId, newTask) => {
+export const updateTaskTitle = (allTaskState, taskId: string, title: string) => {
   const [allTask, setAllTask] = allTaskState
-  const newAllTask = { ...allTask, [taskId]: newTask }
-  console.dir("newAllTask")
-  console.dir(newAllTask)
+
+  const task = allTask[taskId]
+  const updatedTask = { ...task, title: title }
+
+  const newAllTask = { ...allTask, [taskId]: updatedTask }
+  setAllTask(newAllTask)
+}
+
+export const updateTaskTime = (allTaskState, taskId: string, startTime: number) => {
+  const [allTask, setAllTask] = allTaskState
+
+  const task = allTask[taskId]
+  const newTaskTime = task.time + (Date.now() - startTime)
+  const updatedTask = { ...task, time: newTaskTime, }
+
+  const newAllTask = { ...allTask, [taskId]: updatedTask }
   setAllTask(newAllTask)
 }
 

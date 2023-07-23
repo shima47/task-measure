@@ -1,3 +1,6 @@
+import { v4 as uuid } from "uuid"
+
+
 /**
  * ミリ秒を00h 00mの形にフォーマットする関数 by ChatGPT3.5
  * @param milliseconds 
@@ -49,6 +52,39 @@ export const changeOrder = (orderData: (string | number)[], str: string, directi
   return copyOrderData;
 }
 
+export const createNewTask = (allTaskState, orderDataState, dayIndex) => {
+  const [allTask, setAllTask] = allTaskState
+  const [orderData, setOrderData] = orderDataState
+
+  const newId = createNewUUID(orderData) // かぶらないようにUUID発行
+
+  // orderDataのdayIndexの次の仕切りの手前に挿入する
+  const newOrderData = [...orderData]
+  const indexToInsert = newOrderData.indexOf(dayIndex + 1); 
+  newOrderData.splice(indexToInsert, 0, newId)
+
+  const newTask = { title: "タスク", time: 0, }
+  const newAllTask = { ...allTask, [newId]: newTask }
+
+  setAllTask(newAllTask)
+  setOrderData(newOrderData)
+}
+
+
+const orderData = [0, "a", "b", 1, "c", 2, 3, 4, "d", "e", 5,]
+
+export const createNewUUID = (orderData) => {
+  //既存のOrderData配列に含まれないUUIDが出たらReturn
+  let tries = 0;
+  while (tries < 100) {
+    const id: string = uuid();
+    if (!orderData.includes(id)) { return id }
+    tries++;
+  }
+
+  throw new Error("新しいUUIDが生成できませんでした。");
+}
+
 export const updateTaskTitle = (allTaskState, taskId: string, title: string) => {
   const [allTask, setAllTask] = allTaskState
 
@@ -59,14 +95,16 @@ export const updateTaskTitle = (allTaskState, taskId: string, title: string) => 
   setAllTask(newAllTask)
 }
 
-export const updateTaskTime = (allTaskState, taskId: string, startTime: number) => {
+export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: number) => {
+  if (!doingTaskId) return
+
   const [allTask, setAllTask] = allTaskState
 
-  const task = allTask[taskId]
+  const task = allTask[doingTaskId]
   const newTaskTime = task.time + (Date.now() - startTime)
   const updatedTask = { ...task, time: newTaskTime, }
 
-  const newAllTask = { ...allTask, [taskId]: updatedTask }
+  const newAllTask = { ...allTask, [doingTaskId]: updatedTask }
   setAllTask(newAllTask)
 }
 

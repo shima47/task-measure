@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
-import { formatElapsedTime, updateTaskTitle } from "./common"
+import { formatElapsedTime, updateTaskTitle, updateTaskTime } from "./common"
 import "../css/task.css"
 
 /**
@@ -29,6 +29,9 @@ function Task(props) {
   let formatedTaskTime
   if (doTask) {
     const newTaskTime = task.time + (Date.now() - startTime)
+    console.dir(task.time)
+    console.dir(Date.now())
+    console.dir(startTime)
     formatedTaskTime = formatElapsedTime(newTaskTime)
   } else {
     formatedTaskTime = formatElapsedTime(task.time)
@@ -50,23 +53,24 @@ function Task(props) {
   }
   // 日本語入力完了時
   const endComposition = () => {
-    setComposition(false);
     updateTaskTitle(props.allTaskState, props.taskId, composingTitle) //ストレージに保存する
-  }
-
-  const stopTask = () => {
-    const newTaskTime = task.time + (Date.now() - startTime)
-    const updatedTask = { ...task, time: newTaskTime, }
-
-    updateTaskTitle(props.allTaskState, doingTaskId, updatedTask)
-
-    setStartTime(0)
-    setDoingTaskId("")
+    setComposition(false);
   }
 
   const startTask = async () => {
+    // 前に実行中だったタスクに時間を記録する
+    updateTaskTime(props.allTaskState, doingTaskId, startTime)
+
     setStartTime(Date.now())
     setDoingTaskId(props.taskId)
+  }
+
+  const stopTask = () => {
+    // 実行中だったタスクに時間を記録する
+    updateTaskTime(props.allTaskState, doingTaskId, startTime)
+
+    setStartTime(0)
+    setDoingTaskId("")
   }
 
 

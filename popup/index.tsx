@@ -42,10 +42,7 @@ const IndexPopup = () => {
             dayIndex={index}
             dOfW={DAY_OF_WEEK}
             dayTaskOrder={dayTaskOrder}
-            allTaskState={[allTask, setAllTask]}
-            orderDataState={[orderData, setOrderData]}
-            doingTaskState={[doingTaskId, setDoingTaskId]}
-            startTimeState={[startTime, setStartTime]}
+            storageProps={storageProps}
           />
         })}
       </div>

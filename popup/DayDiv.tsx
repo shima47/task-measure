@@ -8,11 +8,9 @@ import "../css/dayDiv.css"
 
 
 function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
-  const [allTask, setAllTask] = props.allTaskState
-  const [orderData, setOrderData] = props.orderDataState
 
   const onClickNewTask = () => {
-    createNewTask(props.allTaskState, props.orderDataState, dayIndex)
+    createNewTask(props.storageProps.allTaskState, props.storageProps.orderDataState, dayIndex)
   }
 
   return (

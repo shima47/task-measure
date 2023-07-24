@@ -13,13 +13,13 @@ import "../css/task.css"
 
 function Task(props) {
   // データ系
-  const [allTask, setAllTask] = props.allTaskState
+  const [allTask, setAllTask] = props.storageProps.allTaskState
+  const [orderData, setOrderData] = props.storageProps.orderDataState
+  const [startTime, setStartTime] = props.storageProps.doingTaskState
+  const [doingTaskId, setDoingTaskId] = props.storageProps.startTimeState
+
   const task = allTask[props.taskId]
   console.dir(task)
-  const [orderData, setOrderData] = props.orderDataState
-  // 全体のState
-  const [startTime, setStartTime] = props.startTimeState
-  const [doingTaskId, setDoingTaskId] = props.doingTaskState
   // ローカルのState
   const [composing, setComposition] = useState(false);
   const [composingTitle, setComposingTitle] = useState(task.title)
@@ -42,7 +42,7 @@ function Task(props) {
     if (composing) {
       setComposingTitle(event.target.value)
     } else {
-      updateTaskTitle(props.allTaskState, props.taskId, event.target.value)
+      updateTaskTitle(props.storageProps.allTaskState, props.taskId, event.target.value)
     }
   }
 
@@ -53,13 +53,13 @@ function Task(props) {
   }
   // 日本語入力完了時
   const endComposition = () => {
-    updateTaskTitle(props.allTaskState, props.taskId, composingTitle) //ストレージに保存する
+    updateTaskTitle(props.storageProps.allTaskState, props.taskId, composingTitle) //ストレージに保存する
     setComposition(false);
   }
 
   const startTask = async () => {
     // 前に実行中だったタスクに時間を記録する
-    updateTaskTime(props.allTaskState, doingTaskId, startTime)
+    updateTaskTime(props.storageProps.allTaskState, doingTaskId, startTime)
 
     setStartTime(Date.now())
     setDoingTaskId(props.taskId)
@@ -67,7 +67,7 @@ function Task(props) {
 
   const stopTask = () => {
     // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.allTaskState, doingTaskId, startTime)
+    updateTaskTime(props.storageProps.allTaskState, doingTaskId, startTime)
 
     setStartTime(0)
     setDoingTaskId("")

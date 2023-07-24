@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { updateTaskTime } from "./common"
+import { updateTaskTime, getChangedOrder } from "./common"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
@@ -16,6 +16,18 @@ function Header(props) {
   const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
 
+
+  const onClickForward = () => {
+    if (selectedTaskId === "") return
+    const changedOrder = getChangedOrder(orderData, selectedTaskId)
+    setOrderData(changedOrder)
+  }
+
+  const onClickBackward = () => {
+    if (selectedTaskId === "") return
+    const changedOrder = getChangedOrder(orderData, selectedTaskId, "backward")
+    setOrderData(changedOrder)
+  }
 
   const onClickDelete = () => {
     allDelete()
@@ -38,25 +50,16 @@ function Header(props) {
     setDoingTaskId("")
   }
 
-  const onClickForward = () => {
-    // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
-
-    setStartTime(0)
-    setDoingTaskId("")
-  }
-
-
 
   return (
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
         <div className="btn">
-          <img src={upArrowIcon} alt="上矢印"></img>
+          <img src={upArrowIcon} alt="上矢印" onClick={onClickBackward}></img>
         </div>
         <div className="btn">
-          <img src={downArrowIcon} alt="下矢印"></img>
+          <img src={downArrowIcon} alt="下矢印" onClick={onClickForward}></img>
         </div>
         <div className="btn" onClick={onClickDelete}>
           <img src={deleteIcon} alt="削除"></img>

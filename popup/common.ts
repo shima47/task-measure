@@ -34,8 +34,8 @@ export const getDayTaskOrder = (orderData, index) => {
   return dayTaskOrder
 }
 
-export const changeOrder = (orderData: (string | number)[], str: string, direction: "forward" | "backward" = "forward") => {
-  const currentIndex = orderData.indexOf(str);
+export const getChangedOrder = (orderData: (string | number)[], taskId: string, direction: "forward" | "backward" = "forward") => {
+  const currentIndex = orderData.indexOf(taskId);
   if (currentIndex === -1) {
     return orderData; // 該当する文字列が見つからない場合は元の配列を返す
   }

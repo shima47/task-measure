@@ -16,6 +16,10 @@ body {
     background: #F8F8F8;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
 .btn:active {
     background-color: #c5c5c5;
     transform: translateY(2px);

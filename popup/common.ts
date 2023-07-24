@@ -6,20 +6,10 @@ import { v4 as uuid } from "uuid"
  * @param milliseconds 
  * @returns 
  */
-export const formatElapsedTime = (milliseconds: number) => {
-  // ミリ秒を秒に変換
-  const seconds = Math.floor(milliseconds / 1000);
-
-  // 時間と分を計算
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  // 2桁の0埋め
-  const formattedHours = String(hours).padStart(2, '0');
-  const formattedMinutes = String(minutes).padStart(2, '0');
-
-  // フォーマットして返す
-  return `${formattedHours}h ${formattedMinutes}m`;
+export const millisecondsToHours = (milliseconds: number) => {
+  const hours = milliseconds / 3600000; // 1時間のミリ秒数で割る
+  const result = parseFloat(hours.toFixed(2)); // 小数点以下2桁までの小数を取得
+  return result === 0 ? "0.00h" : `${String(result)}h`; // 0のとき表示を変える
 }
 
 export const getDayTaskOrder = (orderData, index) => {
@@ -98,7 +88,7 @@ export const updateTaskTitle = (allTaskState, taskId: string, title: string) => 
 
 export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: number) => {
   const [allTask, setAllTask] = allTaskState
-  
+
   const task = allTask[doingTaskId]
   if (!task) return
   const newTaskTime = task.time + (Date.now() - startTime)

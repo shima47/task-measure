@@ -13,10 +13,11 @@ import "../css/task.css"
 
 function Task(props) {
   // データ系
-  const [allTask, setAllTask] = props.storageProps.allTaskState
-  const [orderData, setOrderData] = props.storageProps.orderDataState
-  const [startTime, setStartTime] = props.storageProps.doingTaskState
-  const [doingTaskId, setDoingTaskId] = props.storageProps.startTimeState
+  const [allTask, setAllTask] = props.grobalState.allTaskState
+  const [orderData, setOrderData] = props.grobalState.orderDataState
+  const [startTime, setStartTime] = props.grobalState.doingTaskState
+  const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
+  const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
 
   const task = allTask[props.taskId]
   console.dir(task)
@@ -25,6 +26,7 @@ function Task(props) {
   const [composingTitle, setComposingTitle] = useState(task.title)
 
   const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
+  const selected = selectedTaskId === props.taskId //実行中のタスクかどうか
 
   let formatedTaskTime
   if (doTask) {
@@ -42,7 +44,7 @@ function Task(props) {
     if (composing) {
       setComposingTitle(event.target.value)
     } else {
-      updateTaskTitle(props.storageProps.allTaskState, props.taskId, event.target.value)
+      updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
     }
   }
 
@@ -53,13 +55,13 @@ function Task(props) {
   }
   // 日本語入力完了時
   const endComposition = () => {
-    updateTaskTitle(props.storageProps.allTaskState, props.taskId, composingTitle) //ストレージに保存する
+    updateTaskTitle(props.grobalState.allTaskState, props.taskId, composingTitle) //ストレージに保存する
     setComposition(false);
   }
 
   const startTask = async () => {
     // 前に実行中だったタスクに時間を記録する
-    updateTaskTime(props.storageProps.allTaskState, doingTaskId, startTime)
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
 
     setStartTime(Date.now())
     setDoingTaskId(props.taskId)
@@ -67,15 +69,25 @@ function Task(props) {
 
   const stopTask = () => {
     // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.storageProps.allTaskState, doingTaskId, startTime)
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
 
     setStartTime(0)
     setDoingTaskId("")
   }
 
+  const onClickSelect = () => {
+    // すでに選択済みなら選択を外す
+    if (selected) {
+      setSelectedTaskId("")
+    } else {
+      setSelectedTaskId(props.taskId)
+    }
+  }
+
 
   return (
-    <div className="task">
+    <div className={`task ${selected && "selectedTask"}`}>
+      <input type="checkbox" checked={selected} onClick={onClickSelect} />
       <div className="taskTitle">
         <input
           className="taskForm"

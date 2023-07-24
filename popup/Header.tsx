@@ -10,10 +10,12 @@ import "../css/header.css"
 
 function Header(props) {
   // データ系
-  const [allTask, setAllTask] = props.storageProps.allTaskState
-  const [orderData, setOrderData] = props.storageProps.orderDataState
-  const [startTime, setStartTime] = props.storageProps.doingTaskState
-  const [doingTaskId, setDoingTaskId] = props.storageProps.startTimeState
+  const [allTask, setAllTask] = props.grobalState.allTaskState
+  const [orderData, setOrderData] = props.grobalState.orderDataState
+  const [startTime, setStartTime] = props.grobalState.doingTaskState
+  const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
+  const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
+
 
   const onClickDelete = () => {
     allDelete()
@@ -30,7 +32,15 @@ function Header(props) {
 
   const onClickStop = () => {
     // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.storageProps.allTaskState, doingTaskId, startTime)
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
+
+    setStartTime(0)
+    setDoingTaskId("")
+  }
+
+  const onClickForward = () => {
+    // 実行中だったタスクに時間を記録する
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
 
     setStartTime(0)
     setDoingTaskId("")

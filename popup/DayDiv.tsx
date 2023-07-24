@@ -10,7 +10,7 @@ import "../css/dayDiv.css"
 function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
 
   const onClickNewTask = () => {
-    createNewTask(props.storageProps.allTaskState, props.storageProps.orderDataState, dayIndex)
+    createNewTask(props.grobalState.allTaskState, props.grobalState.orderDataState, dayIndex)
   }
 
   return (

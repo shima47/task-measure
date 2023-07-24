@@ -6,6 +6,10 @@
     align-self: stretch;
 }
 
+.selectedTask {
+    background-color: gray;
+}
+
 .task:hover {
     cursor: pointer;
 }

@@ -23,7 +23,6 @@ function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
           <img src={addIcon} alt="新規追加" />
         </div>
       </div>
-      {/* <div className="dayLine"></div> */}
       <div className="taskDiv">
         {dayTaskOrder.map((taskId, index) => {
           return <Task key={taskId} taskId={taskId} {...props} />

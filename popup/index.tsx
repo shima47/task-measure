@@ -23,11 +23,17 @@ const IndexPopup = () => {
   useEffect(() => {
   }, [])
 
+  const storageProps = {
+    allTaskState: [allTask, setAllTask],
+    orderDataState: [orderData, setOrderData],
+    doingTaskState: [doingTaskId, setDoingTaskId],
+    startTimeState: [startTime, setStartTime],
+  }
 
   return (
     <div className="page">
       <div className="container">
-        <Header />
+        <Header storageProps={storageProps} />
         {DAY_OF_WEEK_ARY.map((DAY_OF_WEEK, index) => {
           const dayTaskOrder = getDayTaskOrder(orderData, index)
 

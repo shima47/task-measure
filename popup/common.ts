@@ -30,7 +30,8 @@ export const getDayTaskOrder = (orderData, index) => {
     return [];
   }
 
-  return orderData.slice(taskStartIndex, taskEndIndex);
+  const dayTaskOrder = orderData.slice(taskStartIndex, taskEndIndex);
+  return dayTaskOrder
 }
 
 export const changeOrder = (orderData: (string | number)[], str: string, direction: "forward" | "backward" = "forward") => {
@@ -60,7 +61,7 @@ export const createNewTask = (allTaskState, orderDataState, dayIndex) => {
 
   // orderDataのdayIndexの次の仕切りの手前に挿入する
   const newOrderData = [...orderData]
-  const indexToInsert = newOrderData.indexOf(dayIndex + 1); 
+  const indexToInsert = newOrderData.indexOf(dayIndex + 1);
   newOrderData.splice(indexToInsert, 0, newId)
 
   const newTask = { title: "タスク", time: 0, }
@@ -96,11 +97,10 @@ export const updateTaskTitle = (allTaskState, taskId: string, title: string) => 
 }
 
 export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: number) => {
-  if (!doingTaskId) return
-
   const [allTask, setAllTask] = allTaskState
-
+  
   const task = allTask[doingTaskId]
+  if (!task) return
   const newTaskTime = task.time + (Date.now() - startTime)
   const updatedTask = { ...task, time: newTaskTime, }
 
@@ -110,21 +110,21 @@ export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: num
 
 
 export const ALL_TASK = {
-  "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },
-  "9c874c99-1364-178c-d8d0-e19b45c67a8e": { title: "タスク", time: 11234567, },
-  "8056d430-1342-1a64-7591-ba1af8b5dae3": { title: "タスク", time: 11234567, },
-  "bde841f3-3d9c-9e45-4196-672302ca5f9e": { title: "タスク", time: 11234567, },
-  "46767c15-cb33-2c6d-1baa-72e093aae910": { title: "タスク", time: 11234567, },
+  // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },
+  // "9c874c99-1364-178c-d8d0-e19b45c67a8e": { title: "タスク", time: 11234567, },
+  // "8056d430-1342-1a64-7591-ba1af8b5dae3": { title: "タスク", time: 11234567, },
+  // "bde841f3-3d9c-9e45-4196-672302ca5f9e": { title: "タスク", time: 11234567, },
+  // "46767c15-cb33-2c6d-1baa-72e093aae910": { title: "タスク", time: 11234567, },
 }
 
 export const ORDER = [
   0,
-  "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f",
-  "9c874c99-1364-178c-d8d0-e19b45c67a8e",
+  // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f",
+  // "9c874c99-1364-178c-d8d0-e19b45c67a8e",
   1,
-  "8056d430-1342-1a64-7591-ba1af8b5dae3",
+  // "8056d430-1342-1a64-7591-ba1af8b5dae3",
   2, 3, 4,
-  "bde841f3-3d9c-9e45-4196-672302ca5f9e",
-  "46767c15-cb33-2c6d-1baa-72e093aae910",
+  // "bde841f3-3d9c-9e45-4196-672302ca5f9e",
+  // "46767c15-cb33-2c6d-1baa-72e093aae910",
   5,
 ]

@@ -98,6 +98,48 @@ export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: num
   setAllTask(newAllTask)
 }
 
+export const deleteTask = (grobalState) => {
+  if (!confirm("タスクを削除しますか？")) return
+
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+  const [startTime, setStartTime] = grobalState.doingTaskState
+  const [doingTaskId, setDoingTaskId] = grobalState.startTimeState
+  const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
+
+  // 削除するIDの項目を削除
+  const newAllTask = { ...allTask };
+  delete newAllTask[selectedTaskId];
+
+  // 削除するID以外を抽出
+  const newOrderData = orderData.filter(item => item !== selectedTaskId);
+
+  setAllTask(newAllTask)
+  setOrderData(newOrderData)
+  setSelectedTaskId("")
+
+  // 消えたのが実行中のタスクじゃなければ中断
+  if (selectedTaskId !== doingTaskId) return
+
+  setStartTime(0)
+  setDoingTaskId("")
+}
+
+export const deleteAllTask = (grobalState) => {
+  if (!confirm("タスクを全て削除しますか？")) return
+
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+  const [startTime, setStartTime] = grobalState.doingTaskState
+  const [doingTaskId, setDoingTaskId] = grobalState.startTimeState
+  const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
+
+  setAllTask({})
+  setOrderData([0, 1, 2, 3, 4, 5])
+  setStartTime(0)
+  setDoingTaskId("")
+  setSelectedTaskId("")
+}
 
 export const ALL_TASK = {
   // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },

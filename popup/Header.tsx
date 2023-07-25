@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { updateTaskTime, getChangedOrder } from "./common"
+import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "./common"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
@@ -30,15 +30,11 @@ function Header(props) {
   }
 
   const onClickDelete = () => {
-    allDelete()
-  }
-
-  const allDelete = () => {
-    if (confirm("タスクを全て削除しますか？")) {
-      setAllTask({})
-      setOrderData([0, 1, 2, 3, 4, 5])
-      setStartTime(0)
-      setDoingTaskId("")
+    // タスクが選択されていなければ全削除
+    if (selectedTaskId === "") {
+      deleteAllTask(props.grobalState)
+    } else {
+      deleteTask(props.grobalState)
     }
   }
 
@@ -55,11 +51,11 @@ function Header(props) {
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
-        <div className="btn">
-          <img src={upArrowIcon} alt="上矢印" onClick={onClickBackward}></img>
+        <div className="btn" onClick={onClickBackward}>
+          <img src={upArrowIcon} alt="上矢印" ></img>
         </div>
-        <div className="btn">
-          <img src={downArrowIcon} alt="下矢印" onClick={onClickForward}></img>
+        <div className="btn" onClick={onClickForward}>
+          <img src={downArrowIcon} alt="下矢印"></img>
         </div>
         <div className="btn" onClick={onClickDelete}>
           <img src={deleteIcon} alt="削除"></img>

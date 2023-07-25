@@ -20,6 +20,9 @@ function Task(props) {
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
 
   const task = allTask[props.taskId]
+
+  if (!task) return null
+
   console.dir(task)
   // ローカルのState
   const [composing, setComposition] = useState(false);

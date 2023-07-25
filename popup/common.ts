@@ -6,20 +6,10 @@ import { v4 as uuid } from "uuid"
  * @param milliseconds 
  * @returns 
  */
-export const formatElapsedTime = (milliseconds: number) => {
-  // ミリ秒を秒に変換
-  const seconds = Math.floor(milliseconds / 1000);
-
-  // 時間と分を計算
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-
-  // 2桁の0埋め
-  const formattedHours = String(hours).padStart(2, '0');
-  const formattedMinutes = String(minutes).padStart(2, '0');
-
-  // フォーマットして返す
-  return `${formattedHours}h ${formattedMinutes}m`;
+export const millisecondsToHours = (milliseconds: number) => {
+  const hours = milliseconds / 3600000; // 1時間のミリ秒数で割る
+  const result = parseFloat(hours.toFixed(2)); // 小数点以下2桁までの小数を取得
+  return result === 0 ? "0.00h" : `${String(result)}h`; // 0のとき表示を変える
 }
 
 export const getDayTaskOrder = (orderData, index) => {
@@ -34,8 +24,8 @@ export const getDayTaskOrder = (orderData, index) => {
   return dayTaskOrder
 }
 
-export const changeOrder = (orderData: (string | number)[], str: string, direction: "forward" | "backward" = "forward") => {
-  const currentIndex = orderData.indexOf(str);
+export const getChangedOrder = (orderData: (string | number)[], taskId: string, direction: "forward" | "backward" = "forward") => {
+  const currentIndex = orderData.indexOf(taskId);
   if (currentIndex === -1) {
     return orderData; // 該当する文字列が見つからない場合は元の配列を返す
   }
@@ -98,7 +88,7 @@ export const updateTaskTitle = (allTaskState, taskId: string, title: string) => 
 
 export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: number) => {
   const [allTask, setAllTask] = allTaskState
-  
+
   const task = allTask[doingTaskId]
   if (!task) return
   const newTaskTime = task.time + (Date.now() - startTime)
@@ -108,6 +98,48 @@ export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: num
   setAllTask(newAllTask)
 }
 
+export const deleteTask = (grobalState) => {
+  if (!confirm("タスクを削除しますか？")) return
+
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+  const [startTime, setStartTime] = grobalState.doingTaskState
+  const [doingTaskId, setDoingTaskId] = grobalState.startTimeState
+  const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
+
+  // 削除するIDの項目を削除
+  const newAllTask = { ...allTask };
+  delete newAllTask[selectedTaskId];
+
+  // 削除するID以外を抽出
+  const newOrderData = orderData.filter(item => item !== selectedTaskId);
+
+  setAllTask(newAllTask)
+  setOrderData(newOrderData)
+  setSelectedTaskId("")
+
+  // 消えたのが実行中のタスクじゃなければ中断
+  if (selectedTaskId !== doingTaskId) return
+
+  setStartTime(0)
+  setDoingTaskId("")
+}
+
+export const deleteAllTask = (grobalState) => {
+  if (!confirm("タスクを全て削除しますか？")) return
+
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+  const [startTime, setStartTime] = grobalState.doingTaskState
+  const [doingTaskId, setDoingTaskId] = grobalState.startTimeState
+  const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
+
+  setAllTask({})
+  setOrderData([0, 1, 2, 3, 4, 5])
+  setStartTime(0)
+  setDoingTaskId("")
+  setSelectedTaskId("")
+}
 
 export const ALL_TASK = {
   // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },

@@ -33,8 +33,8 @@ const IndexPopup = () => {
 
   return (
     <div className="page">
+      <Header grobalState={grobalState} />
       <div className="container">
-        <Header grobalState={grobalState} />
         {DAY_OF_WEEK_ARY.map((DAY_OF_WEEK, index) => {
           const dayTaskOrder = getDayTaskOrder(orderData, index)
 

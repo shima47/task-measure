@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { updateTaskTime } from "./common"
+import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "./common"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
@@ -17,16 +17,24 @@ function Header(props) {
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
 
 
-  const onClickDelete = () => {
-    allDelete()
+  const onClickForward = () => {
+    if (selectedTaskId === "") return
+    const changedOrder = getChangedOrder(orderData, selectedTaskId)
+    setOrderData(changedOrder)
   }
 
-  const allDelete = () => {
-    if (confirm("タスクを全て削除しますか？")) {
-      setAllTask({})
-      setOrderData([0, 1, 2, 3, 4, 5])
-      setStartTime(0)
-      setDoingTaskId("")
+  const onClickBackward = () => {
+    if (selectedTaskId === "") return
+    const changedOrder = getChangedOrder(orderData, selectedTaskId, "backward")
+    setOrderData(changedOrder)
+  }
+
+  const onClickDelete = () => {
+    // タスクが選択されていなければ全削除
+    if (selectedTaskId === "") {
+      deleteAllTask(props.grobalState)
+    } else {
+      deleteTask(props.grobalState)
     }
   }
 
@@ -38,24 +46,15 @@ function Header(props) {
     setDoingTaskId("")
   }
 
-  const onClickForward = () => {
-    // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
-
-    setStartTime(0)
-    setDoingTaskId("")
-  }
-
-
 
   return (
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
-        <div className="btn">
-          <img src={upArrowIcon} alt="上矢印"></img>
+        <div className="btn" onClick={onClickBackward}>
+          <img src={upArrowIcon} alt="上矢印" ></img>
         </div>
-        <div className="btn">
+        <div className="btn" onClick={onClickForward}>
           <img src={downArrowIcon} alt="下矢印"></img>
         </div>
         <div className="btn" onClick={onClickDelete}>

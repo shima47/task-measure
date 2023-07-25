@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
-import { formatElapsedTime, updateTaskTitle, updateTaskTime } from "./common"
+import { millisecondsToHours, updateTaskTitle, updateTaskTime } from "./common"
 import "../css/task.css"
 
 /**
@@ -20,6 +20,9 @@ function Task(props) {
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
 
   const task = allTask[props.taskId]
+
+  if (!task) return null
+
   console.dir(task)
   // ローカルのState
   const [composing, setComposition] = useState(false);
@@ -34,9 +37,9 @@ function Task(props) {
     console.dir(task.time)
     console.dir(Date.now())
     console.dir(startTime)
-    formatedTaskTime = formatElapsedTime(newTaskTime)
+    formatedTaskTime = millisecondsToHours(newTaskTime)
   } else {
-    formatedTaskTime = formatElapsedTime(task.time)
+    formatedTaskTime = millisecondsToHours(task.time)
   }
 
   const onChangeTitle = (event) => {

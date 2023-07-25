@@ -41,11 +41,27 @@
     display: flex;
     padding: 0px;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 
     color: #FFF;
     font-family: Inter;
     font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.taskTimeForm {
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px white;
+    outline: none;
+    text-align: right;
+
+    color: #FFF;
+    font-family: Inter;
+    font-style: normal;
+    font-size: 12px;
     font-weight: 400;
     line-height: normal;
 }

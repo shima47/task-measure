@@ -29,7 +29,7 @@ function Task(props) {
   const [composingTitle, setComposingTitle] = useState(task.title)
 
   const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
-  const selected = selectedTaskId === props.taskId //実行中のタスクかどうか
+  const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
   let formatedTaskTime
   if (doTask) {
@@ -62,9 +62,21 @@ function Task(props) {
     setComposition(false);
   }
 
+  const onChangeTime = (event) => {
+    try {
+      const inputTime = event.target.value
+      const newTaskTime = parseFloat(inputTime) * 3600000
+      updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+      doTask && setStartTime(Date.now())
+    } catch (error) {
+
+    }
+  }
+
   const startTask = async () => {
     // 前に実行中だったタスクに時間を記録する
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
+    const newTaskTime = task.time + (Date.now() - startTime)
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
 
     setStartTime(Date.now())
     setDoingTaskId(props.taskId)
@@ -72,7 +84,8 @@ function Task(props) {
 
   const stopTask = () => {
     // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
+    const newTaskTime = task.time + (Date.now() - startTime)
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
 
     setStartTime(0)
     setDoingTaskId("")
@@ -100,7 +113,14 @@ function Task(props) {
           onCompositionEnd={endComposition}
           onChange={onChangeTitle} />
       </div>
-      <div className="taskTime">{formatedTaskTime}</div>
+      <div className="taskTime">
+        <input
+          className="taskTimeForm"
+          type="text"
+          value={formatedTaskTime}
+          onChange={onChangeTime} />
+        h
+      </div>
       {
         doTask ?
           <div className="btn" onClick={stopTask}>
@@ -111,7 +131,7 @@ function Task(props) {
             <img src={startIcon} alt="スタート" />
           </div>
       }
-    </div>
+    </div >
   )
 }
 

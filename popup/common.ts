@@ -9,7 +9,7 @@ import { v4 as uuid } from "uuid"
 export const millisecondsToHours = (milliseconds: number) => {
   const hours = milliseconds / 3600000; // 1時間のミリ秒数で割る
   const result = parseFloat(hours.toFixed(2)); // 小数点以下2桁までの小数を取得
-  return result === 0 ? "0.00h" : `${String(result)}h`; // 0のとき表示を変える
+  return result === 0 ? "0.00" : `${String(result)}`; // 0のとき表示を変える
 }
 
 export const getDayTaskOrder = (orderData, index) => {
@@ -61,9 +61,6 @@ export const createNewTask = (allTaskState, orderDataState, dayIndex) => {
   setOrderData(newOrderData)
 }
 
-
-const orderData = [0, "a", "b", 1, "c", 2, 3, 4, "d", "e", 5,]
-
 export const createNewUUID = (orderData) => {
   //既存のOrderData配列に含まれないUUIDが出たらReturn
   let tries = 0;
@@ -86,12 +83,11 @@ export const updateTaskTitle = (allTaskState, taskId: string, title: string) => 
   setAllTask(newAllTask)
 }
 
-export const updateTaskTime = (allTaskState, doingTaskId: string, startTime: number) => {
+export const updateTaskTime = (allTaskState, doingTaskId: string, newTaskTime: number) => {
   const [allTask, setAllTask] = allTaskState
 
   const task = allTask[doingTaskId]
   if (!task) return
-  const newTaskTime = task.time + (Date.now() - startTime)
   const updatedTask = { ...task, time: newTaskTime, }
 
   const newAllTask = { ...allTask, [doingTaskId]: updatedTask }

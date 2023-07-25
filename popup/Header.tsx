@@ -40,7 +40,8 @@ function Header(props) {
 
   const onClickStop = () => {
     // 実行中だったタスクに時間を記録する
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, startTime)
+    const newTaskTime = allTask[doingTaskId].time + (Date.now() - startTime)
+    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
 
     setStartTime(0)
     setDoingTaskId("")

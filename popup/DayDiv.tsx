@@ -26,7 +26,7 @@ function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
     <div className="dayDiv">
       <div className="dayTitleDiv" onClick={onClickDayTitle}>
         <div className="dayTitile">
-          <img src={accordionIcon} alt="開く" />
+          <img className={isOpen ? "accordionOpen" : "accordionClose"} src={accordionIcon} alt="開く" />
           {dOfW}
         </div>
         <div className="btn" onClick={onClickNewTask}>

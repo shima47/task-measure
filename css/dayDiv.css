@@ -37,6 +37,12 @@
     line-height: normal;
 }
 
+.accordionClose {}
+
+.accordionOpen {
+    transform: rotate(-180deg);
+}
+
 .dayLine {
     width: 100%;
     height: 1px;

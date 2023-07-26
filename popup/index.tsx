@@ -11,11 +11,10 @@ const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]
 const IndexPopup = () => {
   const [allTask, setAllTask] = useStorage("taskData", ALL_TASK)
   const [orderData, setOrderData] = useStorage("orderData", ORDER)
-  // const [allTask, setAllTask] = useStorage("taskData")
-  // const [orderData, setOrderData] = useStorage("orderData")
 
   const [doingTaskId, setDoingTaskId] = useStorage("doingTaskId", "")
   const [startTime, setStartTime] = useStorage("startTime", 0)
+  const [isOpenAry, setIsOpenAry] = useStorage("isOpen", [true, true, true, true, true])
 
   const [selectedTaskId, setSelectedTaskId] = useState("")
 
@@ -28,6 +27,7 @@ const IndexPopup = () => {
     orderDataState: [orderData, setOrderData],
     doingTaskState: [doingTaskId, setDoingTaskId],
     startTimeState: [startTime, setStartTime],
+    isOpenAryState: [isOpenAry, setIsOpenAry],
     selectedTaskIdState: [selectedTaskId, setSelectedTaskId],
   }
 

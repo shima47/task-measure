@@ -7,7 +7,7 @@
 }
 
 .selectedTask {
-    background-color: gray;
+    background-color: lightgray;
 }
 
 .task:hover {
@@ -26,10 +26,10 @@
     width: 100%;
     background-color: transparent;
     border: none;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px black;
     outline: none;
 
-    color: #FFF;
+    color: black;
     font-family: Inter;
     font-style: normal;
     font-size: 12px;
@@ -41,11 +41,27 @@
     display: flex;
     padding: 0px;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 
-    color: #FFF;
+    color: black;
     font-family: Inter;
     font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.taskTimeForm {
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px black;
+    outline: none;
+    text-align: right;
+
+    color: black;
+    font-family: Inter;
+    font-style: normal;
+    font-size: 12px;
     font-weight: 400;
     line-height: normal;
 }

@@ -18,7 +18,15 @@ function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
     setIsOpenAry(newIsOpenAry)
   }
 
-  const onClickNewTask = () => {
+  const onClickNewTask = (event) => {
+    // 親コンポーネントへのイベントの伝搬を防ぐ
+    event.stopPropagation()
+    
+    // 新規作成時はアコーディオンを開く
+    const newIsOpenAry = [...isOpenAry]
+    newIsOpenAry[dayIndex] = true
+    setIsOpenAry(newIsOpenAry)
+
     createNewTask(props.grobalState.allTaskState, props.grobalState.orderDataState, dayIndex)
   }
 

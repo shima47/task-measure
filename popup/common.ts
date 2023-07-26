@@ -13,16 +13,19 @@ export const millisecondsToHours = (milliseconds: number) => {
 }
 
 export const getDayTaskOrder = (orderData, index) => {
+  // タスクの開始インデックスを見つける
   const taskStartIndex = orderData.indexOf(index) + 1;
+  // タスクの終了インデックスを見つける
   const taskEndIndex = orderData.indexOf(index + 1);
 
-  if (taskStartIndex === 0 || taskEndIndex === -1) {
-    return [];
-  }
+  // 開始インデックスが0または終了インデックスが-1の場合、タスクは存在しないため、空の配列を返す
+  if (taskStartIndex === 0 || taskEndIndex === -1) { return []; }
 
+  // 開始インデックスと終了インデックスの間の部分配列を取得する
   const dayTaskOrder = orderData.slice(taskStartIndex, taskEndIndex);
-  return dayTaskOrder
+  return dayTaskOrder;
 }
+
 
 export const getChangedOrder = (orderData: (string | number)[], taskId: string, direction: "forward" | "backward" = "forward") => {
   const currentIndex = orderData.indexOf(taskId);

@@ -8,6 +8,14 @@ import "../css/dayDiv.css"
 
 
 function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
+  const [isOpenAry, setIsOpenAry] = props.grobalState.isOpenAryState
+  const isOpen = isOpenAry[dayIndex]
+
+  const onClickDayTitle = () => {
+    const newIsOpenAry = [...isOpenAry]
+    newIsOpenAry[dayIndex] = !isOpenAry[dayIndex]
+    setIsOpenAry(newIsOpenAry)
+  }
 
   const onClickNewTask = () => {
     createNewTask(props.grobalState.allTaskState, props.grobalState.orderDataState, dayIndex)
@@ -15,16 +23,21 @@ function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
 
   return (
     <div className="dayDiv">
-      <div className="dayTitleDiv">
+      <div className="dayTitleDiv" onClick={onClickDayTitle}>
         <div className="dayTitile">{dOfW}</div>
         <div className="btn" onClick={onClickNewTask}>
           <img src={addIcon} alt="新規追加" />
         </div>
       </div>
       <div className="taskDiv">
-        {dayTaskOrder.map((taskId, index) => {
-          return <Task key={taskId} taskId={taskId} {...props} />
-        })}
+        {
+          isOpen ?
+            dayTaskOrder.map((taskId, index) => {
+              return <Task key={taskId} taskId={taskId} {...props} />
+            })
+            :
+            <></>
+        }
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid"
 import { createNewTask } from "./common"
 import Task from "./Task"
 import addIcon from "data-base64:~assets/add.svg"
+import accordionIcon from "data-base64:~assets/accordion.svg"
 import "../css/dayDiv.css"
 
 
@@ -24,7 +25,10 @@ function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
   return (
     <div className="dayDiv">
       <div className="dayTitleDiv" onClick={onClickDayTitle}>
-        <div className="dayTitile">{dOfW}</div>
+        <div className="dayTitile">
+          <img src={accordionIcon} alt="開く" />
+          {dOfW}
+        </div>
         <div className="btn" onClick={onClickNewTask}>
           <img src={addIcon} alt="新規追加" />
         </div>

@@ -1,0 +1,67 @@
+.task {
+    display: flex;
+    padding: 0px 0px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.selectedTask {
+    background-color: lightgray;
+}
+
+.task:hover {
+    cursor: pointer;
+}
+
+.taskTitle {
+    display: flex;
+    padding: 0px;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+}
+
+.taskForm {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px black;
+    outline: none;
+
+    color: black;
+    font-family: Inter;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.taskTime {
+    display: flex;
+    padding: 0px;
+    align-items: center;
+    gap: 5px;
+
+    color: black;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.taskTimeForm {
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px black;
+    outline: none;
+    text-align: right;
+
+    color: black;
+    font-family: Inter;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+}

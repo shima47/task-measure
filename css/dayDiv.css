@@ -27,7 +27,7 @@
     display: flex;
     padding: 0px 5px;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     flex: 1 0 0;
 
     color: black;
@@ -35,6 +35,12 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.accordionClose {}
+
+.accordionOpen {
+    transform: rotate(-180deg);
 }
 
 .dayLine {

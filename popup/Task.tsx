@@ -25,8 +25,7 @@ function Task(props) {
 
   console.dir(task)
   // ローカルのState
-  const [composing, setComposition] = useState(false);
-  const [composingTitle, setComposingTitle] = useState(task.title)
+  const [taskTitle, setTaskTitle] = useState(task.title)
 
   const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
@@ -43,27 +42,8 @@ function Task(props) {
   }
 
   const onChangeTitle = (event) => {
-    setComposingTitle(event.target.value)
+    setTaskTitle(event.target.value)
     updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
-  }
-  // const onChangeTitle = (event) => {
-  //   // 日本語入力の間はストレージに保存しない
-  //   if (composing) {
-  //     setComposingTitle(event.target.value)
-  //   } else {
-  //     updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
-  //   }
-  // }
-
-  // 日本語入力開始時
-  const startComposition = () => {
-    setComposingTitle(task.title) //現在のタイトルをもらう
-    setComposition(true);
-  }
-  // 日本語入力完了時
-  const endComposition = () => {
-    updateTaskTitle(props.grobalState.allTaskState, props.taskId, composingTitle) //ストレージに保存する
-    setComposition(false);
   }
 
   const onChangeTime = (event) => {
@@ -112,9 +92,7 @@ function Task(props) {
         <input
           className="taskForm"
           type="text"
-          value={composingTitle}
-          onCompositionStart={startComposition}
-          onCompositionEnd={endComposition}
+          value={taskTitle}
           onChange={onChangeTitle} />
       </div>
       <div className="taskTime">

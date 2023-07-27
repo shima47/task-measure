@@ -43,13 +43,17 @@ function Task(props) {
   }
 
   const onChangeTitle = (event) => {
-    // 日本語入力の間はストレージに保存しない
-    if (composing) {
-      setComposingTitle(event.target.value)
-    } else {
-      updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
-    }
+    setComposingTitle(event.target.value)
+    updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
   }
+  // const onChangeTitle = (event) => {
+  //   // 日本語入力の間はストレージに保存しない
+  //   if (composing) {
+  //     setComposingTitle(event.target.value)
+  //   } else {
+  //     updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
+  //   }
+  // }
 
   // 日本語入力開始時
   const startComposition = () => {
@@ -91,7 +95,7 @@ function Task(props) {
     setDoingTaskId("")
   }
 
-  const onClickSelect = () => {
+  const onChangeSelect = () => {
     // すでに選択済みなら選択を外す
     if (selected) {
       setSelectedTaskId("")
@@ -103,12 +107,12 @@ function Task(props) {
 
   return (
     <div className={`task ${selected && "selectedTask"}`} >
-      <input className="taskCheckbox" type="checkbox" checked={selected} onClick={onClickSelect} />
+      <input className="taskCheckbox" type="checkbox" checked={selected} onChange={onChangeSelect} />
       <div className="taskTitle">
         <input
           className="taskForm"
           type="text"
-          value={composing ? composingTitle : task.title} //日本語入力の間はローカルのUseStateに切り替える
+          value={composingTitle}
           onCompositionStart={startComposition}
           onCompositionEnd={endComposition}
           onChange={onChangeTitle} />

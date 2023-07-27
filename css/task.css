@@ -10,7 +10,11 @@
     background-color: lightgray;
 }
 
-.task:hover {
+.taskCheckbox {
+    transform: scale(1.5);
+}
+
+.taskCheckbox:hover {
     cursor: pointer;
 }
 

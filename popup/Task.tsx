@@ -102,8 +102,8 @@ function Task(props) {
 
 
   return (
-    <div className={`task ${selected && "selectedTask"}`}>
-      <input type="checkbox" checked={selected} onClick={onClickSelect} />
+    <div className={`task ${selected && "selectedTask"}`} >
+      <input className="taskCheckbox" type="checkbox" checked={selected} onClick={onClickSelect} />
       <div className="taskTitle">
         <input
           className="taskForm"

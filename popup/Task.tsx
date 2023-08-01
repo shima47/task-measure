@@ -58,10 +58,12 @@ function Task(props) {
   }
 
   const startTask = async () => {
-    // 前に実行中だったタスクに時間を記録する
-    const didTask = allTask[doingTaskId]
-    const newTaskTime = didTask.time + (Date.now() - startTime)
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+    if (doingTaskId) {
+      // 前に実行中だったタスクに時間を記録する
+      const didTask = allTask[doingTaskId]
+      const newTaskTime = didTask.time + (Date.now() - startTime)
+      updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+    }
 
     setStartTime(Date.now())
     setDoingTaskId(props.taskId)

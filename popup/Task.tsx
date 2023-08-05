@@ -24,12 +24,24 @@ function Task(props) {
   console.dir(task)
   // ローカルのState
   const [taskTitle, setTaskTitle] = useState(task.title)
+  const [taskTime, setTaskTime] = useState<string>(task.time.toFixed(2))
 
-  const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
+  const [editedTaskTime, setEditedTaskTime] = useState("")
+  const [isEditTaskTime, setIsEditTaskTime] = useState(false)
+
+  const isRunningTask = doingTaskId === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
+  useEffect(() => {
+    if (!isRunningTask) return
+    // 実行中のタスクならば実行時間分を加算して保存する
+    const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - startTime)) / 3600000
+    updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+    setTaskTime(newTaskTime.toFixed(2))
+  }, [])
+
   let formatedTaskTime
-  if (doTask) {
+  if (isRunningTask) {
     const newTaskTime = task.time + (Date.now() - startTime)
     console.dir(task.time)
     console.dir(Date.now())
@@ -45,15 +57,36 @@ function Task(props) {
   }
 
   const onChangeTime = (event) => {
-    try {
-      const inputTime = event.target.value
-      const newTaskTime = parseFloat(inputTime)
-      updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
-      doTask && setStartTime(Date.now())
-    } catch (error) {
+    setEditedTaskTime(event.target.value)
+  }
 
+  const onFocusTaskTime = () => {
+    // focus時に編集中に変更する
+    setIsEditTaskTime(true)
+    // 現在のフォーム内容を編集フォームに渡す
+    setEditedTaskTime(taskTime)
+  }
+
+  const onBlurTaskTime = () => {
+    try {
+      // 編集内容を小数に変換する
+      const newTaskTime = parseFloat(editedTaskTime)
+      // 小数変換に失敗したら編集中の値は保存しない
+      if (isNaN(newTaskTime)) { throw new Error("NaN") }
+      // DBに保存
+      updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+      // 小数二桁まで四捨五入して表示用Stateに反映
+      const roundedTime = newTaskTime.toFixed(2)
+      setTaskTime(roundedTime)
+      // 実行中のタスクなら開始時間をリセットする
+      isRunningTask && setStartTime(Date.now())
+    } catch (error) {
+      // 小数変換に失敗したら編集中の値は保存しない
+    } finally {
+      setIsEditTaskTime(false)
     }
   }
+
 
   const startTask = async () => {
     if (doingTaskId) {
@@ -100,12 +133,15 @@ function Task(props) {
         <input
           className="taskTimeForm"
           type="text"
-          value={formatedTaskTime}
-          onChange={onChangeTime} />
+          value={isEditTaskTime ? editedTaskTime : taskTime}
+          onChange={onChangeTime}
+          onFocus={onFocusTaskTime}
+          onBlur={onBlurTaskTime}
+        />
         h
       </div>
       {
-        doTask ?
+        isRunningTask ?
           <div className="btn" onClick={stopTask}>
             <img src={stopIcon} alt="ストップ" />
           </div>

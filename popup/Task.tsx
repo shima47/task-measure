@@ -7,8 +7,6 @@ import "../css/task.css"
 /**
  * タスク名のInputについて
  * Inputの内容をUseStorageに依存すると、日本語入力が上手くいかない
- * ex: テスト ->ｔｔてｔｔてｓｔｔてｔｔてｓす みたいになる
- * そこで日本語入力の間だけUseStateを利用して、入力終了時にUseStorageに切り替える運用にしている
  */
 
 function Task(props) {
@@ -49,7 +47,7 @@ function Task(props) {
   const onChangeTime = (event) => {
     try {
       const inputTime = event.target.value
-      const newTaskTime = parseFloat(inputTime) * 3600000
+      const newTaskTime = parseFloat(inputTime)
       updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
       doTask && setStartTime(Date.now())
     } catch (error) {

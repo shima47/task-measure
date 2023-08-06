@@ -19,8 +19,7 @@ const IndexPopup = () => {
   const [selectedTaskId, setSelectedTaskId] = useState("")
 
   console.dir(allTask)
-  useEffect(() => {
-  }, [])
+
 
   const grobalState = {
     allTaskState: [allTask, setAllTask],

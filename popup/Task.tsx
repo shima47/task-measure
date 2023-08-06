@@ -32,6 +32,7 @@ function Task(props) {
   const isRunningTask = doingTaskId === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
+  // 実行中のタスクは実行時間を更新する
   useEffect(() => {
     if (!isRunningTask) return
     // 実行中のタスクならば実行時間分を加算して保存する
@@ -43,9 +44,6 @@ function Task(props) {
   let formatedTaskTime
   if (isRunningTask) {
     const newTaskTime = task.time + (Date.now() - startTime)
-    console.dir(task.time)
-    console.dir(Date.now())
-    console.dir(startTime)
     formatedTaskTime = millisecondsToHours(newTaskTime)
   } else {
     formatedTaskTime = millisecondsToHours(task.time)
@@ -87,12 +85,11 @@ function Task(props) {
     }
   }
 
-
   const startTask = async () => {
     if (doingTaskId) {
       // 前に実行中だったタスクに時間を記録する
       const didTask = allTask[doingTaskId]
-      const newTaskTime = didTask.time + (Date.now() - startTime)
+      const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
       updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
     }
 
@@ -102,7 +99,8 @@ function Task(props) {
 
   const stopTask = () => {
     // 実行中だったタスクに時間を記録する
-    const newTaskTime = task.time + (Date.now() - startTime)
+    const didTask = allTask[doingTaskId]
+    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
     updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
 
     setStartTime(0)

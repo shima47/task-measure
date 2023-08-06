@@ -7,8 +7,6 @@ import "../css/task.css"
 /**
  * タスク名のInputについて
  * Inputの内容をUseStorageに依存すると、日本語入力が上手くいかない
- * ex: テスト ->ｔｔてｔｔてｓｔｔてｔｔてｓす みたいになる
- * そこで日本語入力の間だけUseStateを利用して、入力終了時にUseStorageに切り替える運用にしている
  */
 
 function Task(props) {
@@ -25,58 +23,75 @@ function Task(props) {
 
   console.dir(task)
   // ローカルのState
-  const [composing, setComposition] = useState(false);
-  const [composingTitle, setComposingTitle] = useState(task.title)
+  const [taskTitle, setTaskTitle] = useState(task.title)
+  // const [taskTime, setTaskTime] = useState<string>(task.time.toFixed(2))
 
-  const doTask = doingTaskId === props.taskId //実行中のタスクかどうか
+  const [editedTaskTime, setEditedTaskTime] = useState("")
+  const [isEditTaskTime, setIsEditTaskTime] = useState(false)
+
+  const isRunningTask = doingTaskId === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
-  let formatedTaskTime
-  if (doTask) {
-    const newTaskTime = task.time + (Date.now() - startTime)
-    console.dir(task.time)
-    console.dir(Date.now())
-    console.dir(startTime)
-    formatedTaskTime = millisecondsToHours(newTaskTime)
+  // // 実行中のタスクは実行時間を更新する
+  // useEffect(() => {
+  //   if (!isRunningTask) return
+  //   // 実行中のタスクならば実行時間分を加算して保存する
+  //   const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - startTime)) / 3600000
+  //   updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+  //   setTaskTime(newTaskTime.toFixed(2))
+  // }, [])
+
+  let taskTime
+  if (isRunningTask) {
+    const newTaskTime = ((parseFloat(task.time) * 3600000) + (Date.now() - startTime)) / 3600000
+    taskTime = newTaskTime.toFixed(2)
   } else {
-    formatedTaskTime = millisecondsToHours(task.time)
+    taskTime = task.time.toFixed(2)
   }
 
   const onChangeTitle = (event) => {
-    // 日本語入力の間はストレージに保存しない
-    if (composing) {
-      setComposingTitle(event.target.value)
-    } else {
-      updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
-    }
-  }
-
-  // 日本語入力開始時
-  const startComposition = () => {
-    setComposingTitle(task.title) //現在のタイトルをもらう
-    setComposition(true);
-  }
-  // 日本語入力完了時
-  const endComposition = () => {
-    updateTaskTitle(props.grobalState.allTaskState, props.taskId, composingTitle) //ストレージに保存する
-    setComposition(false);
+    setTaskTitle(event.target.value)
+    updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
   }
 
   const onChangeTime = (event) => {
-    try {
-      const inputTime = event.target.value
-      const newTaskTime = parseFloat(inputTime) * 3600000
-      updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
-      doTask && setStartTime(Date.now())
-    } catch (error) {
+    setEditedTaskTime(event.target.value)
+  }
 
+  const onFocusTaskTime = () => {
+    // focus時に編集中に変更する
+    setIsEditTaskTime(true)
+    // 現在のフォーム内容を編集フォームに渡す
+    setEditedTaskTime(taskTime)
+  }
+
+  const onBlurTaskTime = () => {
+    try {
+      // 編集内容を小数に変換する
+      const newTaskTime = parseFloat(editedTaskTime)
+      // 小数変換に失敗したら編集中の値は保存しない
+      if (isNaN(newTaskTime)) { throw new Error("NaN") }
+      // DBに保存
+      updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+      // // 小数二桁まで四捨五入して表示用Stateに反映
+      // const roundedTime = newTaskTime.toFixed(2)
+      // setTaskTime(roundedTime)
+      // 実行中のタスクなら開始時間をリセットする
+      isRunningTask && setStartTime(Date.now())
+    } catch (error) {
+      // 小数変換に失敗したら編集中の値は保存しない
+    } finally {
+      setIsEditTaskTime(false)
     }
   }
 
   const startTask = async () => {
-    // 前に実行中だったタスクに時間を記録する
-    const newTaskTime = task.time + (Date.now() - startTime)
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+    if (doingTaskId) {
+      // 前に実行中だったタスクに時間を記録する
+      const didTask = allTask[doingTaskId]
+      const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
+      updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+    }
 
     setStartTime(Date.now())
     setDoingTaskId(props.taskId)
@@ -84,14 +99,15 @@ function Task(props) {
 
   const stopTask = () => {
     // 実行中だったタスクに時間を記録する
-    const newTaskTime = task.time + (Date.now() - startTime)
+    const didTask = allTask[doingTaskId]
+    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
     updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
 
     setStartTime(0)
     setDoingTaskId("")
   }
 
-  const onClickSelect = () => {
+  const onChangeSelect = () => {
     // すでに選択済みなら選択を外す
     if (selected) {
       setSelectedTaskId("")
@@ -102,27 +118,28 @@ function Task(props) {
 
 
   return (
-    <div className={`task ${selected && "selectedTask"}`}>
-      <input type="checkbox" checked={selected} onClick={onClickSelect} />
+    <div className={`task ${selected && "selectedTask"}`} >
+      <input className="taskCheckbox" type="checkbox" checked={selected} onChange={onChangeSelect} />
       <div className="taskTitle">
         <input
           className="taskForm"
           type="text"
-          value={composing ? composingTitle : task.title} //日本語入力の間はローカルのUseStateに切り替える
-          onCompositionStart={startComposition}
-          onCompositionEnd={endComposition}
+          value={taskTitle}
           onChange={onChangeTitle} />
       </div>
       <div className="taskTime">
         <input
           className="taskTimeForm"
           type="text"
-          value={formatedTaskTime}
-          onChange={onChangeTime} />
+          value={isEditTaskTime ? editedTaskTime : taskTime}
+          onChange={onChangeTime}
+          onFocus={onFocusTaskTime}
+          onBlur={onBlurTaskTime}
+        />
         h
       </div>
       {
-        doTask ?
+        isRunningTask ?
           <div className="btn" onClick={stopTask}>
             <img src={stopIcon} alt="ストップ" />
           </div>

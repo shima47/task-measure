@@ -32,14 +32,15 @@ function Task(props) {
   const isRunningTask = doingTaskId === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
-  // // 実行中のタスクは実行時間を更新する
-  // useEffect(() => {
-  //   if (!isRunningTask) return
-  //   // 実行中のタスクならば実行時間分を加算して保存する
-  //   const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - startTime)) / 3600000
-  //   updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
-  //   setTaskTime(newTaskTime.toFixed(2))
-  // }, [])
+  // 実行中のタスクは実行時間を更新する
+  useEffect(() => {
+    if (!isRunningTask) return
+    // 実行中のタスクならば実行時間分を加算して保存する
+    const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - startTime)) / 3600000
+    updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+    // 開始時間をリセットする
+    isRunningTask && setStartTime(Date.now())
+  }, [])
 
   let taskTime
   if (isRunningTask) {

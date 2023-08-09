@@ -24,7 +24,6 @@ function Task(props) {
   console.dir(task)
   // ローカルのState
   const [taskTitle, setTaskTitle] = useState(task.title)
-  // const [taskTime, setTaskTime] = useState<string>(task.time.toFixed(2))
 
   const [editedTaskTime, setEditedTaskTime] = useState("")
   const [isEditTaskTime, setIsEditTaskTime] = useState(false)
@@ -32,23 +31,18 @@ function Task(props) {
   const isRunningTask = doingTaskId === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
+  const taskTime = task.time.toFixed(2)
+
   // 実行中のタスクは実行時間を更新する
   useEffect(() => {
     if (!isRunningTask) return
     // 実行中のタスクならば実行時間分を加算して保存する
     const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - startTime)) / 3600000
+    console.log(taskTime)
     updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
     // 開始時間をリセットする
     isRunningTask && setStartTime(Date.now())
   }, [])
-
-  let taskTime
-  if (isRunningTask) {
-    const newTaskTime = ((parseFloat(task.time) * 3600000) + (Date.now() - startTime)) / 3600000
-    taskTime = newTaskTime.toFixed(2)
-  } else {
-    taskTime = task.time.toFixed(2)
-  }
 
   const onChangeTitle = (event) => {
     setTaskTitle(event.target.value)

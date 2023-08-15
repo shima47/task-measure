@@ -1,22 +1,44 @@
 import { useState, useEffect } from "react"
-import { useStorage } from "@plasmohq/storage/hook"
 import { ALL_TASK, ORDER, getDayTaskOrder } from "./common"
 import "../css/common.css"
+import "../css/dataImport.css"
 
 
 const DataImport = ({ grobalState }) => {
+  const [isImporting, setIsImporting] = grobalState.isImportingState
+
+  const [jsonData, setJsonData] = useState("")
+
+  useEffect(() => {
+
+  }, [])
+
+  const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setJsonData(event.target.value)
+  }
 
   const onClickCancel = () => {
-    const [isImporting, setIsImporting] = grobalState.isImportingState
     setIsImporting(false)
   }
 
+  const onClickApply = () => {
+    if (!confirm("データをインポートして上書きしますか？")) return
+    setIsImporting(false)
+  }
+
+  const exportJSON = () => {
+  }
+
+  const applyImport = () => {
+  }
+
+
   return (
     <div className="dataImport">
-      <textarea />
+      <textarea className="dataImportTextArea" value={jsonData} onChange={onChangeTextarea} />
       <div className="btnRow">
-        <div className="cancelBtn">Cancel</div>
-        <div className="applyBtn">Import</div>
+        <div className="btn dataImportApplyBtn" onClick={onClickApply}>Import</div>
+        <div className="btn dataImportCancelBtn" onClick={onClickCancel} >Cancel</div>
       </div>
     </div>
   )

@@ -32,7 +32,7 @@ function Header(props) {
   }
 
   const onClickImport = () => {
-    setIsImporting(true)
+    setIsImporting(current => !current)
   }
 
   const onClickDelete = () => {

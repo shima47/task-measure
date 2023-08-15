@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { dataToJSON } from "./common"
+import { dataToJSON, applyImport } from "./common"
 import "../css/common.css"
 import "../css/dataImport.css"
 
@@ -23,7 +23,14 @@ const DataImport = ({ grobalState }) => {
 
   const onClickApply = () => {
     if (!confirm("データをインポートして上書きしますか？")) return
-    setIsImporting(false)
+
+    try {
+      applyImport(jsonData, grobalState)
+      setIsImporting(false)
+    } catch (error) {
+      // validationImport(json)
+      alert("インポートに失敗しました")
+    }
   }
 
 

@@ -159,15 +159,23 @@ export const dataToJSON = (grobalState) => {
 
   const dataObj = {
     allTask: allTask,
-    orderData: orderData,
+    order: orderData,
   }
 
   // console.log(JSON.stringify(dataObj))
   return JSON.stringify(dataObj, null, 2)
 }
 
-export const applyImport = (grobalState) => {
+export const applyImport = (json: string, grobalState) => {
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+  
+  const dataObj = JSON.parse(json)
+  const importedAllTask = dataObj.allTask
+  const importedOrder = dataObj.order
 
+  setAllTask(importedAllTask)
+  setOrderData(importedOrder)
 }
 
 

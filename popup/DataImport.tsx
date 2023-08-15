@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ALL_TASK, ORDER, getDayTaskOrder } from "./common"
+import { dataToJSON } from "./common"
 import "../css/common.css"
 import "../css/dataImport.css"
 
@@ -10,7 +10,7 @@ const DataImport = ({ grobalState }) => {
   const [jsonData, setJsonData] = useState("")
 
   useEffect(() => {
-
+    setJsonData(dataToJSON(grobalState))
   }, [])
 
   const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,12 +24,6 @@ const DataImport = ({ grobalState }) => {
   const onClickApply = () => {
     if (!confirm("データをインポートして上書きしますか？")) return
     setIsImporting(false)
-  }
-
-  const exportJSON = () => {
-  }
-
-  const applyImport = () => {
   }
 
 

@@ -1,0 +1,26 @@
+.dataImport {
+    width: 100%;
+}
+
+.dataImportTextArea {
+    margin: 10px 0px;
+    width: 100%;
+    height: 400px;
+
+    color: black;
+    font-family: Inter;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.dataImportCancelBtn,
+.dataImportApplyBtn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* 子要素を水平方向（左右）中央に配置する */
+    align-items: center;
+    /* 子要素を垂直方向（上下）中央に配置する */
+}

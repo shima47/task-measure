@@ -153,6 +153,32 @@ export const deleteAllTask = (grobalState) => {
   setSelectedTaskId("")
 }
 
+export const dataToJSON = (grobalState) => {
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+
+  const dataObj = {
+    allTask: allTask,
+    order: orderData,
+  }
+
+  // console.log(JSON.stringify(dataObj))
+  return JSON.stringify(dataObj, null, 2)
+}
+
+export const applyImport = (json: string, grobalState) => {
+  const [allTask, setAllTask] = grobalState.allTaskState
+  const [orderData, setOrderData] = grobalState.orderDataState
+  
+  const dataObj = JSON.parse(json)
+  const importedAllTask = dataObj.allTask
+  const importedOrder = dataObj.order
+
+  setAllTask(importedAllTask)
+  setOrderData(importedOrder)
+}
+
+
 export const ALL_TASK = {
   // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },
   // "9c874c99-1364-178c-d8d0-e19b45c67a8e": { title: "タスク", time: 11234567, },

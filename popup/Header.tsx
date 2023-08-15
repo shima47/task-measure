@@ -2,6 +2,7 @@ import { useState } from "react"
 import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "./common"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
+import exportIcon from "data-base64:~assets/export.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
 import resetIcon from "data-base64:~assets/reset.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
@@ -15,6 +16,7 @@ function Header(props) {
   const [startTime, setStartTime] = props.grobalState.doingTaskState
   const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
+  const [isImporting, setIsImporting] = props.grobalState.isImportingState
 
 
   const onClickForward = () => {
@@ -27,6 +29,10 @@ function Header(props) {
     if (selectedTaskId === "") return
     const changedOrder = getChangedOrder(orderData, selectedTaskId, "backward")
     setOrderData(changedOrder)
+  }
+
+  const onClickImport = () => {
+    setIsImporting(current => !current)
   }
 
   const onClickDelete = () => {
@@ -64,6 +70,9 @@ function Header(props) {
         </div>
         <div className="btn">
           <img src={resetIcon} alt="リセット"></img>
+        </div>
+        <div className="btn" onClick={onClickImport}>
+          <img src={exportIcon} alt="JSONエクスポート"></img>
         </div>
         <div className="btn" onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>

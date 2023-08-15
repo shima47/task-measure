@@ -19,6 +19,13 @@ body {
     border-radius: 25px;
     background: white;
     box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+    color: black;
+    font-family: Inter;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .btn:hover {
@@ -28,4 +35,9 @@ body {
 .btn:active {
     background-color: #c5c5c5;
     transform: translateY(2px);
+}
+
+.btnRow {
+    display: flex;
+    gap: 10px;
 }

@@ -21,11 +21,11 @@ const DataImport = ({ grobalState }) => {
     setIsImporting(false)
   }
 
-  const onClickApply = () => {
+  const onClickApply = async () => {
     if (!confirm("データをインポートして上書きしますか？")) return
 
     try {
-      applyImport(jsonData, grobalState)
+      await applyImport(jsonData, grobalState)
       setIsImporting(false)
     } catch (error) {
       // validationImport(json)

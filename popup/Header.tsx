@@ -6,6 +6,7 @@ import exportIcon from "data-base64:~assets/export.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
 import resetIcon from "data-base64:~assets/reset.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
+import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
 import "../css/header.css"
 
 
@@ -44,6 +45,17 @@ function Header(props) {
     }
   }
 
+  const onClickRewindTime = () => {
+    if (selectedTaskId === "") return
+
+    const timeToRewind = 0.25
+    // 実行中だったタスクに時間を記録する
+    const didTask = allTask[selectedTaskId]
+    const newTaskTime = (parseFloat(didTask.time) - timeToRewind)
+    updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
+  }
+
+
   const onClickStop = () => {
     // 実行中だったタスクに時間を記録する
     const didTask = allTask[doingTaskId]
@@ -73,6 +85,9 @@ function Header(props) {
         </div>
         <div className="btn" onClick={onClickImport}>
           <img src={exportIcon} alt="JSONエクスポート"></img>
+        </div>
+        <div className="btn" onClick={onClickRewindTime}>
+          <img src={rewindTimeIcon} alt="巻き戻し"></img>
         </div>
         <div className="btn" onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>

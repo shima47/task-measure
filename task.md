@@ -14,6 +14,7 @@
   - [x] 元のStateに反映
   - [x] 実行中のタスクならStartTimeをリセットする
   - [x] 編集状態OFF
+- [ ] 0.25減らすボタン
 
 ## タスク実行
 - [ ] 実行時間計算の共通化
@@ -30,10 +31,35 @@
 - [ ] 選択の場所に作成
 - [ ] コピー機能
 - [ ] 削除保護
+  - [ ] Task.tsxにボタン追加する
+  - [ ] onClickProtection関数作る
+  - [ ] UpdateTaskProtection作成
+    - [ ] 新規作成関数でisProtectedプロパティを追加するように修正
+    - [ ] isProtectedプロパティ：Boolを変更する
+    - [ ] 他の関数に影響ありそう？
+  - [ ] DeleteTaskの修正
+    - [ ] CheckProtection関数で共通化したい
+    - [ ] DeleteAllTask関数修正
+      - [ ] Filterで削除しないデータだけ抜き取る
+        - [ ] AllTask
+        - [ ] Order
+    - [ ] DeleteTask関数修正
+      - [ ] 保護フラグチェックするだけ
+  - [ ] 保護表示かどうかをUIに反映
+    - [ ] isProtectedStateで管理
 
 ## JSON
-- [ ] エクスポート
+- [x] エクスポート
 - [ ] インポート
+  - [ ] バリデーション
+  - [x] 基礎機能
 
-## State
-- [ ] UseContextに変更
+## リファクタ
+- [ ] UseStateをまとめる
+  - [ ] 全体レンダリング系をまとめる
+    - order, startTime, runningTaskId, 
+    - [ ] UseContextにする
+  - [ ] 全体レンダリングが不要なものを分散
+    - [ ] allTask, isOpenAryはトップに初回のみStateを置きつつ子コンポーネントで各自Stateを持つ
+    - [ ] 更新はlocalstorageを直に更新
+    - [ ] UseContextを使う

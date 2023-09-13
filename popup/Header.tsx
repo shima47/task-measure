@@ -4,7 +4,7 @@ import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import exportIcon from "data-base64:~assets/export.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
-import resetIcon from "data-base64:~assets/reset.svg"
+import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
 import "../css/header.css"
@@ -20,13 +20,13 @@ function Header(props) {
   const [isImporting, setIsImporting] = props.grobalState.isImportingState
 
 
-  const onClickForward = () => {
+  const onClickUpArrow = () => {
     if (selectedTaskId === "") return
     const changedOrder = getChangedOrder(orderData, selectedTaskId)
     setOrderData(changedOrder)
   }
 
-  const onClickBackward = () => {
+  const onClickDownArrow = () => {
     if (selectedTaskId === "") return
     const changedOrder = getChangedOrder(orderData, selectedTaskId, "backward")
     setOrderData(changedOrder)
@@ -45,7 +45,7 @@ function Header(props) {
     }
   }
 
-  const onClickRewindTime = () => {
+  const onClickRewind = () => {
     if (selectedTaskId === "") return
 
     const timeToRewind = 0.25
@@ -55,6 +55,15 @@ function Header(props) {
     updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
   }
 
+  const onClickForward = () => {
+    if (selectedTaskId === "") return
+
+    const timeToForward = 0.25
+    // 実行中だったタスクに時間を記録する
+    const didTask = allTask[selectedTaskId]
+    const newTaskTime = (parseFloat(didTask.time) + timeToForward)
+    updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
+  }
 
   const onClickStop = () => {
     // 実行中だったタスクに時間を記録する
@@ -71,23 +80,23 @@ function Header(props) {
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
-        <div className="btn" onClick={onClickBackward}>
+        <div className="btn" onClick={onClickDownArrow}>
           <img src={upArrowIcon} alt="上矢印" ></img>
         </div>
-        <div className="btn" onClick={onClickForward}>
+        <div className="btn" onClick={onClickUpArrow}>
           <img src={downArrowIcon} alt="下矢印"></img>
         </div>
         <div className="btn" onClick={onClickDelete}>
           <img src={deleteIcon} alt="削除"></img>
         </div>
-        <div className="btn">
-          <img src={resetIcon} alt="リセット"></img>
-        </div>
         <div className="btn" onClick={onClickImport}>
           <img src={exportIcon} alt="JSONエクスポート"></img>
         </div>
-        <div className="btn" onClick={onClickRewindTime}>
+        <div className="btn" onClick={onClickRewind}>
           <img src={rewindTimeIcon} alt="巻き戻し"></img>
+        </div>
+        <div className="btn" onClick={onClickForward}>
+          <img src={forwardIcon} alt="早送り"></img>
         </div>
         <div className="btn" onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>

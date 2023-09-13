@@ -4,7 +4,7 @@ import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import exportIcon from "data-base64:~assets/export.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
-import resetIcon from "data-base64:~assets/reset.svg"
+import fastForwardIcon from "data-base64:~assets/fastForward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
 import "../css/header.css"
@@ -80,14 +80,14 @@ function Header(props) {
         <div className="btn" onClick={onClickDelete}>
           <img src={deleteIcon} alt="削除"></img>
         </div>
-        <div className="btn">
-          <img src={resetIcon} alt="リセット"></img>
-        </div>
         <div className="btn" onClick={onClickImport}>
           <img src={exportIcon} alt="JSONエクスポート"></img>
         </div>
         <div className="btn" onClick={onClickRewindTime}>
           <img src={rewindTimeIcon} alt="巻き戻し"></img>
+        </div>
+        <div className="btn">
+          <img src={fastForwardIcon} alt="早送り"></img>
         </div>
         <div className="btn" onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>

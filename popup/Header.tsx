@@ -55,6 +55,15 @@ function Header(props) {
     updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
   }
 
+  const onClickFastForward = () => {
+    if (selectedTaskId === "") return
+
+    const timeToForward = 0.25
+    // 実行中だったタスクに時間を記録する
+    const didTask = allTask[selectedTaskId]
+    const newTaskTime = (parseFloat(didTask.time) + timeToForward)
+    updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
+  }
 
   const onClickStop = () => {
     // 実行中だったタスクに時間を記録する
@@ -86,7 +95,7 @@ function Header(props) {
         <div className="btn" onClick={onClickRewindTime}>
           <img src={rewindTimeIcon} alt="巻き戻し"></img>
         </div>
-        <div className="btn">
+        <div className="btn" onClick={onClickFastForward}>
           <img src={fastForwardIcon} alt="早送り"></img>
         </div>
         <div className="btn" onClick={onClickStop}>

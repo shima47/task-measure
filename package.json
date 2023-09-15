@@ -10,6 +10,7 @@
     "test": "plasmo test"
   },
   "dependencies": {
+    "@extend-chrome/storage": "^1.5.0",
     "@plasmohq/storage": "^1.7.0",
     "plasmo": "0.80.0",
     "react": "18.2.0",

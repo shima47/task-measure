@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@extend-chrome/storage':
+    specifier: ^1.5.0
+    version: 1.5.0
   '@plasmohq/storage':
     specifier: ^1.7.0
     version: 1.7.0(react@18.2.0)
@@ -435,6 +438,13 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       cross-spawn: 7.0.3
+    dev: false
+
+  /@extend-chrome/storage@1.5.0:
+    resolution: {integrity: sha512-JhoBZ1xIzu0/mauNR/MadUsfNsWP1lTmWR8RlVJvWStUifzNZdAxI2i8NFCkd4RfjyTn4FcDETik3SDlAfGQRA==}
+    dependencies:
+      chrome-promise: 3.0.5
+      rxjs: 7.8.1
     dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
@@ -2684,6 +2694,10 @@ packages:
 
   /chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
+    dev: false
+
+  /chrome-promise@3.0.5:
+    resolution: {integrity: sha512-ekIevrJOO5S6ezSzl5TdaLhlQkovY5nVaNSgA2XyhuNtlGniUvTbf7rzH95alh1OajArwoP2xVGYUJbpVLmZYA==}
     dev: false
 
   /chrome-trace-event@1.0.3:

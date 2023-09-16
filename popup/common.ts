@@ -126,8 +126,8 @@ export const deleteTask = (grobalState) => {
   // 削除するID以外を抽出
   const newOrderData = orderData.filter(item => item !== selectedTaskId);
 
-  setAllTask(newAllTask)
   setOrderData(newOrderData)
+  setAllTask(newAllTask)
   setSelectedTaskId("")
 
   // 消えたのが実行中のタスクじゃなければ中断
@@ -146,8 +146,8 @@ export const deleteAllTask = (grobalState) => {
   const [startTime, setStartTime] = grobalState.startTimeState
   const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
 
-  setAllTask({})
   setOrderData([0, 1, 2, 3, 4, 5])
+  setAllTask({})
   setStartTime(0)
   setDoingTaskId("")
   setSelectedTaskId("")

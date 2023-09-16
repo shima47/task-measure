@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import { millisecondsToHours, updateTaskTitle, updateTaskTime } from "./common"
-import "../css/task.css"
 
 /**
  * タスク名のInputについて

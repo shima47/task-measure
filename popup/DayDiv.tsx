@@ -4,7 +4,6 @@ import { createNewTask, getTotalDayTime } from "./common"
 import Task from "./Task"
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
-import "../css/dayDiv.css"
 
 
 

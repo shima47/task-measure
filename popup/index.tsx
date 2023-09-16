@@ -6,7 +6,10 @@ import DayDiv from "./DayDiv"
 import DataImport from "./DataImport"
 import "../css/common.css"
 import "../css/index.css"
-import { type } from "os"
+import "../css/header.css"
+import "../css/dayDiv.css"
+import "../css/task.css"
+import "../css/dataImport.css"
 
 const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]
 
@@ -62,13 +65,3 @@ const IndexPopup = () => {
 
 export default IndexPopup
 
-
-// type grobalState = {
-//   allTaskState: [allTask, setAllTask],
-//   orderDataState: [orderData, setOrderData],
-//   doingTaskState: [doingTaskId, setDoingTaskId],
-//   startTimeState: [startTime, setStartTime],
-//   isOpenAryState: [isOpenAry, setIsOpenAry],
-//   selectedTaskIdState: [selectedTaskId, setSelectedTaskId],
-//   isImportingState: [isImporting, setIsImporting],
-// }

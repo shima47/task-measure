@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react"
 import { dataToJSON, applyImport } from "./common"
-import "../css/common.css"
-import "../css/dataImport.css"
 
 
 const DataImport = ({ grobalState }) => {

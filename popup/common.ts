@@ -115,8 +115,8 @@ export const deleteTask = (grobalState) => {
 
   const [allTask, setAllTask] = grobalState.allTaskState
   const [orderData, setOrderData] = grobalState.orderDataState
-  const [startTime, setStartTime] = grobalState.doingTaskState
-  const [doingTaskId, setDoingTaskId] = grobalState.startTimeState
+  const [doingTaskId, setDoingTaskId] = grobalState.doingTaskState
+  const [startTime, setStartTime] = grobalState.startTimeState
   const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
 
   // 削除するIDの項目を削除
@@ -142,8 +142,8 @@ export const deleteAllTask = (grobalState) => {
 
   const [allTask, setAllTask] = grobalState.allTaskState
   const [orderData, setOrderData] = grobalState.orderDataState
-  const [startTime, setStartTime] = grobalState.doingTaskState
-  const [doingTaskId, setDoingTaskId] = grobalState.startTimeState
+  const [doingTaskId, setDoingTaskId] = grobalState.doingTaskState
+  const [startTime, setStartTime] = grobalState.startTimeState
   const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
 
   setAllTask({})

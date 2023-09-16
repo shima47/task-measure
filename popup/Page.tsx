@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useStorage } from "@plasmohq/storage/hook"
-import { ALL_TASK, ORDER, getDayTaskOrder } from "./common"
+import { getDayTaskOrder } from "./common"
+import { INITIAL_DATA } from "~components/Provider/initialData"
 import Header from "./Header"
 import DayDiv from "./DayDiv"
 import DataImport from "./DataImport"
@@ -8,12 +9,12 @@ import DataImport from "./DataImport"
 const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]
 
 const Page = () => {
-  const [allTask, setAllTask] = useStorage("taskData", ALL_TASK)
-  const [orderData, setOrderData] = useStorage("orderData", ORDER)
+  const [allTask, setAllTask] = useStorage("taskData", INITIAL_DATA.ALL_TASK)
+  const [orderData, setOrderData] = useStorage("orderData", INITIAL_DATA.ORDER)
 
   const [doingTaskId, setDoingTaskId] = useStorage("doingTaskId", "")
   const [startTime, setStartTime] = useStorage("startTime", 0)
-  const [isOpenAry, setIsOpenAry] = useStorage("isOpen", [true, true, true, true, true])
+  const [isOpenAry, setIsOpenAry] = useStorage("isOpen", INITIAL_DATA.IS_OPEN_ARY)
 
   const [selectedTaskId, setSelectedTaskId] = useState("")
   // JSONのインポート画面を切り替える

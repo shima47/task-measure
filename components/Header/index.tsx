@@ -1,5 +1,7 @@
 import { useContext, useState } from "react"
-import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "./common"
+import { INITIAL_DATA } from "~components/initialData"
+import * as context from "~components/Provider/MyProvider"
+import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "../../popup/common"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import exportIcon from "data-base64:~assets/export.svg"
@@ -14,8 +16,7 @@ function Header(props) {
   // データ系
   const [allTask, setAllTask] = props.grobalState.allTaskState
   const [orderData, setOrderData] = props.grobalState.orderDataState
-  const [startTime, setStartTime] = props.grobalState.doingTaskState
-  const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
+  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
   const [isImporting, setIsImporting] = useContext(isImportingContext)
 
@@ -67,12 +68,11 @@ function Header(props) {
 
   const onClickStop = () => {
     // 実行中だったタスクに時間を記録する
-    const didTask = allTask[doingTaskId]
-    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+    const didTask = allTask[runningTask.id]
+    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
+    updateTaskTime(props.grobalState.allTaskState, runningTask.id, newTaskTime)
 
-    setStartTime(0)
-    setDoingTaskId("")
+    setRunningTask(INITIAL_DATA.RUNNING_TASK)
   }
 
 

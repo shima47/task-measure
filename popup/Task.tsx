@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
+import { INITIAL_DATA } from "~components/initialData"
+import * as context from "~components/Provider/MyProvider"
 import { millisecondsToHours, updateTaskTitle, updateTaskTime } from "./common"
+
 
 /**
  * タスク名のInputについて
  * Inputの内容をUseStorageに依存すると、日本語入力が上手くいかない
  */
-
 function Task(props) {
   // データ系
   const [allTask, setAllTask] = props.grobalState.allTaskState
   const [orderData, setOrderData] = props.grobalState.orderDataState
-  const [startTime, setStartTime] = props.grobalState.doingTaskState
-  const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
+  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
 
   const task = allTask[props.taskId]
@@ -27,7 +28,7 @@ function Task(props) {
   const [editedTaskTime, setEditedTaskTime] = useState("")
   const [isEditTaskTime, setIsEditTaskTime] = useState(false)
 
-  const isRunningTask = doingTaskId === props.taskId //実行中のタスクかどうか
+  const isRunningTask = runningTask.id === props.taskId //実行中のタスクかどうか
   const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
 
   const taskTime = task.time.toFixed(2)
@@ -36,11 +37,11 @@ function Task(props) {
   useEffect(() => {
     if (!isRunningTask) return
     // 実行中のタスクならば実行時間分を加算して保存する
-    const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - startTime)) / 3600000
+    const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
     console.log(taskTime)
     updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
     // 開始時間をリセットする
-    isRunningTask && setStartTime(Date.now())
+    isRunningTask && setRunningTask(current => ({ startTime: Date.now(), ...current, }))
   }, [])
 
   const onChangeTitle = (event) => {
@@ -71,7 +72,7 @@ function Task(props) {
       // const roundedTime = newTaskTime.toFixed(2)
       // setTaskTime(roundedTime)
       // 実行中のタスクなら開始時間をリセットする
-      isRunningTask && setStartTime(Date.now())
+      isRunningTask && setRunningTask(current => ({ startTime: Date.now(), ...current, }))
     } catch (error) {
       // 小数変換に失敗したら編集中の値は保存しない
     } finally {
@@ -80,25 +81,23 @@ function Task(props) {
   }
 
   const startTask = async () => {
-    if (doingTaskId) {
+    if (runningTask.id) {
       // 前に実行中だったタスクに時間を記録する
-      const didTask = allTask[doingTaskId]
-      const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
-      updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+      const didTask = allTask[runningTask.id]
+      const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
+      updateTaskTime(props.grobalState.allTaskState, runningTask.id, newTaskTime)
     }
 
-    setStartTime(Date.now())
-    setDoingTaskId(props.taskId)
+    setRunningTask({ id: props.taskId, startTime: Date.now(), })
   }
 
   const stopTask = () => {
     // 実行中だったタスクに時間を記録する
-    const didTask = allTask[doingTaskId]
-    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - startTime)) / 3600000
-    updateTaskTime(props.grobalState.allTaskState, doingTaskId, newTaskTime)
+    const didTask = allTask[runningTask.id]
+    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
+    updateTaskTime(props.grobalState.allTaskState, runningTask.id, newTaskTime)
 
-    setStartTime(0)
-    setDoingTaskId("")
+    setRunningTask(INITIAL_DATA.RUNNING_TASK)
   }
 
   const onChangeSelect = () => {

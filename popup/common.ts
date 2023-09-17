@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid"
+import { INITIAL_DATA } from "~components/initialData"
 
 
 /**
@@ -115,8 +116,7 @@ export const deleteTask = (grobalState) => {
 
   const [allTask, setAllTask] = grobalState.allTaskState
   const [orderData, setOrderData] = grobalState.orderDataState
-  const [doingTaskId, setDoingTaskId] = grobalState.doingTaskState
-  const [startTime, setStartTime] = grobalState.startTimeState
+  const [runningTask, setRunningTask] = grobalState.runningTask
   const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
 
   // 削除するIDの項目を削除
@@ -131,10 +131,9 @@ export const deleteTask = (grobalState) => {
   setSelectedTaskId("")
 
   // 消えたのが実行中のタスクじゃなければ中断
-  if (selectedTaskId !== doingTaskId) return
+  if (selectedTaskId !== runningTask.id) return
 
-  setStartTime(0)
-  setDoingTaskId("")
+  setRunningTask(INITIAL_DATA.RUNNING_TASK)
 }
 
 export const deleteAllTask = (grobalState) => {
@@ -142,14 +141,12 @@ export const deleteAllTask = (grobalState) => {
 
   const [allTask, setAllTask] = grobalState.allTaskState
   const [orderData, setOrderData] = grobalState.orderDataState
-  const [doingTaskId, setDoingTaskId] = grobalState.doingTaskState
-  const [startTime, setStartTime] = grobalState.startTimeState
+  const [runningTask, setRunningTask] = grobalState.runningTask
   const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
 
-  setOrderData([0, 1, 2, 3, 4, 5])
-  setAllTask({})
-  setStartTime(0)
-  setDoingTaskId("")
-  setSelectedTaskId("")
+  setOrderData(INITIAL_DATA.ORDER)
+  setAllTask(INITIAL_DATA.ALL_TASK)
+  setRunningTask(INITIAL_DATA.RUNNING_TASK)
+  setSelectedTaskId(INITIAL_DATA.SELECTED_TASK_ID)
 }
 

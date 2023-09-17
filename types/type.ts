@@ -3,7 +3,7 @@ export type allTask = {
 }
 export type isOpenAry = boolean[]
 export type order = (string | number)[]
-export type runningTask = { runningTaskId: string, startTime: number, }
+export type runningTask = { id: string, startTime: number, }
 export type selectedTaskId = string
 export type isImporting = boolean
 

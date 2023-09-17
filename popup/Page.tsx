@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react"
 import { useStorage } from "@plasmohq/storage/hook"
 import { getDayTaskOrder } from "./common"
-import { INITIAL_DATA } from "~components/Provider/initialData"
+import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider";
-import Header from "./Header"
+import Header from "~components/Header";
 import DayDiv from "./DayDiv"
 import DataImport from "./DataImport"
 
@@ -14,8 +14,7 @@ const Page = () => {
   const [allTask, setAllTask] = useStorage("taskData", INITIAL_DATA.ALL_TASK)
   const [orderData, setOrderData] = useStorage("orderData", INITIAL_DATA.ORDER)
 
-  const [doingTaskId, setDoingTaskId] = useStorage("doingTaskId", "")
-  const [startTime, setStartTime] = useStorage("startTime", 0)
+  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
   const [isOpenAry, setIsOpenAry] = useStorage("isOpen", INITIAL_DATA.IS_OPEN_ARY)
 
   const [selectedTaskId, setSelectedTaskId] = useState("")
@@ -28,11 +27,9 @@ const Page = () => {
   const grobalState = {
     allTaskState: [allTask, setAllTask],
     orderDataState: [orderData, setOrderData],
-    doingTaskState: [doingTaskId, setDoingTaskId],
-    startTimeState: [startTime, setStartTime],
     isOpenAryState: [isOpenAry, setIsOpenAry],
+    runningTask: [runningTask, setRunningTask],
     selectedTaskIdState: [selectedTaskId, setSelectedTaskId],
-    isImportingState: [isImporting, setIsImporting],
   }
 
   return (

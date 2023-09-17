@@ -1,4 +1,4 @@
-import * as type from "../../types/type"
+import * as type from "~types/type"
 
 const ALL_TASK: type.allTask = {
   // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },
@@ -19,14 +19,18 @@ const ORDER: type.order = [
   5,
 ]
 const RUNNING_TASK: type.runningTask = {
-  runningTaskId: "",
+  id: "",
   startTime: 0,
 }
 const IS_OPEN_ARY: type.isOpenAry = [true, true, true, true, true]
+const SELECTED_TASK_ID = ""
+const IS_IMPORTING = false
 
 export const INITIAL_DATA = {
   ALL_TASK: ALL_TASK,
   ORDER: ORDER,
   RUNNING_TASK: RUNNING_TASK,
   IS_OPEN_ARY: IS_OPEN_ARY,
+  SELECTED_TASK_ID: SELECTED_TASK_ID,
+  IS_IMPORTING: IS_IMPORTING,
 }

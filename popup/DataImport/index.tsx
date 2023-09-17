@@ -1,7 +1,7 @@
 import { useDataImport } from "~features/DataImport/useDataImport"
 
-const DataImport = ({ grobalState }) => {
-  const [jsonData, { onChangeTextarea, onClickApply, onClickCancel }] = useDataImport(grobalState)
+const DataImport = () => {
+  const [jsonData, { onChangeTextarea, onClickApply, onClickCancel }] = useDataImport()
 
   return (
     <div className="dataImport">

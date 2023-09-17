@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "./common"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
@@ -7,6 +7,7 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
+import { isImportingContext } from "~components/Provider/MyProvider"
 
 
 function Header(props) {
@@ -16,7 +17,7 @@ function Header(props) {
   const [startTime, setStartTime] = props.grobalState.doingTaskState
   const [doingTaskId, setDoingTaskId] = props.grobalState.startTimeState
   const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
-  const [isImporting, setIsImporting] = props.grobalState.isImportingState
+  const [isImporting, setIsImporting] = useContext(isImportingContext)
 
 
   const onClickUpArrow = () => {

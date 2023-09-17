@@ -1,14 +1,17 @@
 import { useState, useEffect, useContext } from "react";
-import * as type from "~components/Provider/type";
-import { isImportingContext } from "~components/Provider/MyProvider";
+import * as context from "~components/Provider/MyProvider";
 
 
-export const useDataImport = (grobalState): type.useDataImport => {
-  const [isImporting, setIsImporting] = grobalState.isImportingState
+export const useDataImport = () => {
+  const [allTask, setAllTask] = useContext(context.allTaskContext)
+  const [order, setOrder] = useContext(context.orderContext)
+  const [isImporting, setIsImporting] = useContext(context.isImportingContext)
+
   const [jsonData, setJsonData] = useState("")
 
   useEffect(() => {
-    setJsonData(dataToJSON(grobalState))
+    const dataObj = { allTask: allTask, order: order, }
+    setJsonData(JSON.stringify(dataObj, null, 2))
   }, [])
 
   const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,41 +24,20 @@ export const useDataImport = (grobalState): type.useDataImport => {
 
   const onClickApply = async () => {
     if (!confirm("データをインポートして上書きしますか？")) return
+    // validationImport(json)
 
     try {
-      await applyImport(jsonData, grobalState)
+      const importedData = JSON.parse(jsonData)
+
+      await setAllTask(importedData.allTask)
+      await setOrder(importedData.order)
+
       setIsImporting(false)
     } catch (error) {
-      // validationImport(json)
       alert("インポートに失敗しました")
     }
   }
 
-  return [jsonData, { setJsonData, onChangeTextarea, onClickCancel, onClickApply }]
+  return [jsonData, { setJsonData, onChangeTextarea, onClickCancel, onClickApply }] as const
 }
 
-
-const dataToJSON = (grobalState) => {
-  const [allTask, setAllTask] = grobalState.allTaskState
-  const [orderData, setOrderData] = grobalState.orderDataState
-
-  const dataObj = {
-    allTask: allTask,
-    order: orderData,
-  }
-
-  // console.log(JSON.stringify(dataObj))
-  return JSON.stringify(dataObj, null, 2)
-}
-
-const applyImport = async (json: string, grobalState) => {
-  const [allTask, setAllTask] = grobalState.allTaskState
-  const [orderData, setOrderData] = grobalState.orderDataState
-
-  const dataObj = JSON.parse(json)
-  const importedAllTask = dataObj.allTask
-  const importedOrder = dataObj.order
-
-  await setAllTask(importedAllTask)
-  await setOrderData(importedOrder)
-}

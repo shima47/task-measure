@@ -1,10 +1,8 @@
 import { useState } from "react"
-import { v4 as uuid } from "uuid"
 import { createNewTask, getTotalDayTime } from "./common"
 import Task from "./Task"
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
-
 
 
 function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {

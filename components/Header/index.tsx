@@ -1,8 +1,10 @@
 import { useContext, useState } from "react"
 import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
-import { updateTaskTime, } from "../../popup/common"
+import { updateTaskTime } from "~popup/common"
 import useChangeOrder from "~features/changeOrder/useChangeOrder"
+import useDeleteTask from "~features/deleteTask/useDeleteTask"
+import useAdjustTime from "~features/adjustTime/useAdjustTime"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import exportIcon from "data-base64:~assets/export.svg"
@@ -10,42 +12,20 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
-import useDeleteTask from "~features/deleteTask/useDeleteTask"
 
 
 function Header(props) {
   // データ系
   const [allTask, setAllTask] = useContext(context.allTaskContext)
-  const [order, setOrder] = useContext(context.orderContext)
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
-  const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
   const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
   const { onClickUpArrow, onClickDownArrow } = useChangeOrder()
+  const { onClickRewind, onClickForward } = useAdjustTime()
   const { onClickDelete, } = useDeleteTask()
 
   const onClickImport = () => {
     setIsImporting(current => !current)
-  }
-
-  const onClickRewind = () => {
-    if (selectedTaskId === "") return
-
-    const timeToRewind = 0.25
-    // 実行中だったタスクに時間を記録する
-    const didTask = allTask[selectedTaskId]
-    const newTaskTime = (parseFloat(didTask.time) - timeToRewind)
-    updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
-  }
-
-  const onClickForward = () => {
-    if (selectedTaskId === "") return
-
-    const timeToForward = 0.25
-    // 実行中だったタスクに時間を記録する
-    const didTask = allTask[selectedTaskId]
-    const newTaskTime = (parseFloat(didTask.time) + timeToForward)
-    updateTaskTime(props.grobalState.allTaskState, selectedTaskId, newTaskTime)
   }
 
   const onClickStop = () => {

@@ -3,7 +3,6 @@ import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
-import { millisecondsToHours, updateTaskTitle, } from "./common"
 import useUpdateTask from "~hooks/useUpdateTask"
 import useRunTask from "~features/runTask/useRunTask"
 
@@ -19,7 +18,7 @@ function Task(props) {
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
 
-  const { updateTaskTime } = useUpdateTask()
+  const { updateTaskTitle, updateTaskTime } = useUpdateTask()
   const { onClickStart, onClickStop, } = useRunTask(props.taskId)
 
   const task = allTask[props.taskId]
@@ -51,7 +50,7 @@ function Task(props) {
 
   const onChangeTitle = (event) => {
     setTaskTitle(event.target.value)
-    updateTaskTitle(props.grobalState.allTaskState, props.taskId, event.target.value)
+    updateTaskTitle(props.taskId, event.target.value)
   }
 
   const onChangeTime = (event) => {

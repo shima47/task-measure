@@ -71,15 +71,5 @@ export const createNewUUID = (orderData) => {
   throw new Error("新しいUUIDが生成できませんでした。");
 }
 
-export const updateTaskTitle = (allTaskState, taskId: string, title: string) => {
-  const [allTask, setAllTask] = allTaskState
-
-  const task = allTask[taskId]
-  const updatedTask = { ...task, title: title }
-
-  const newAllTask = { ...allTask, [taskId]: updatedTask }
-  setAllTask(newAllTask)
-}
-
 
 

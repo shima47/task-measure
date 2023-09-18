@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
-import { updateTaskTime, deleteTask, deleteAllTask } from "../../popup/common"
+import { updateTaskTime, } from "../../popup/common"
 import useChangeOrder from "~features/changeOrder/useChangeOrder"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
@@ -10,6 +10,7 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
+import useDeleteTask from "~features/deleteTask/useDeleteTask"
 
 
 function Header(props) {
@@ -21,18 +22,10 @@ function Header(props) {
   const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
   const { onClickUpArrow, onClickDownArrow } = useChangeOrder()
+  const { onClickDelete, } = useDeleteTask()
 
   const onClickImport = () => {
     setIsImporting(current => !current)
-  }
-
-  const onClickDelete = () => {
-    // タスクが選択されていなければ全削除
-    if (selectedTaskId === "") {
-      deleteAllTask(props.grobalState)
-    } else {
-      deleteTask(props.grobalState)
-    }
   }
 
   const onClickRewind = () => {

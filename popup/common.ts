@@ -92,42 +92,4 @@ export const updateTaskTime = (allTaskState, doingTaskId: string, newTaskTime: n
   setAllTask(newAllTask)
 }
 
-export const deleteTask = (grobalState) => {
-  if (!confirm("タスクを削除しますか？")) return
-
-  const [allTask, setAllTask] = grobalState.allTaskState
-  const [orderData, setOrderData] = grobalState.orderDataState
-  const [runningTask, setRunningTask] = grobalState.runningTask
-  const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
-
-  // 削除するIDの項目を削除
-  const newAllTask = { ...allTask };
-  delete newAllTask[selectedTaskId];
-
-  // 削除するID以外を抽出
-  const newOrderData = orderData.filter(item => item !== selectedTaskId);
-
-  setOrderData(newOrderData)
-  setAllTask(newAllTask)
-  setSelectedTaskId("")
-
-  // 消えたのが実行中のタスクじゃなければ中断
-  if (selectedTaskId !== runningTask.id) return
-
-  setRunningTask(INITIAL_DATA.RUNNING_TASK)
-}
-
-export const deleteAllTask = (grobalState) => {
-  if (!confirm("タスクを全て削除しますか？")) return
-
-  const [allTask, setAllTask] = grobalState.allTaskState
-  const [orderData, setOrderData] = grobalState.orderDataState
-  const [runningTask, setRunningTask] = grobalState.runningTask
-  const [selectedTaskId, setSelectedTaskId] = grobalState.selectedTaskIdState
-
-  setOrderData(INITIAL_DATA.ORDER)
-  setAllTask(INITIAL_DATA.ALL_TASK)
-  setRunningTask(INITIAL_DATA.RUNNING_TASK)
-  setSelectedTaskId(INITIAL_DATA.SELECTED_TASK_ID)
-}
 

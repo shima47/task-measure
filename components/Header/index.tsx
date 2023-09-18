@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
-import { updateTaskTime, getChangedOrder, deleteTask, deleteAllTask } from "../../popup/common"
+import { updateTaskTime, deleteTask, deleteAllTask } from "../../popup/common"
+import useChangeOrder from "~features/changeOrder/useChangeOrder"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import exportIcon from "data-base64:~assets/export.svg"
@@ -19,18 +20,7 @@ function Header(props) {
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
   const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
-
-  const onClickUpArrow = () => {
-    if (selectedTaskId === "") return
-    const changedOrder = getChangedOrder(order, selectedTaskId)
-    setOrder(changedOrder)
-  }
-
-  const onClickDownArrow = () => {
-    if (selectedTaskId === "") return
-    const changedOrder = getChangedOrder(order, selectedTaskId, "backward")
-    setOrder(changedOrder)
-  }
+  const { onClickUpArrow, onClickDownArrow } = useChangeOrder()
 
   const onClickImport = () => {
     setIsImporting(current => !current)

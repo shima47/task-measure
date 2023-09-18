@@ -5,7 +5,7 @@ import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider";
 import Header from "~components/Header";
 import DayDiv from "./DayDiv"
-import DataImport from "./DataImport"
+import DataImport from "./importData"
 
 
 const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]

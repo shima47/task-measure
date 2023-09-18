@@ -41,25 +41,6 @@ export const getTotalDayTime = (dayTaskOrder: string[], allTaskState) => {
   return totalTime
 };
 
-export const getChangedOrder = (orderData: (string | number)[], taskId: string, direction: "forward" | "backward" = "forward") => {
-  const currentIndex = orderData.indexOf(taskId);
-  if (currentIndex === -1) {
-    return orderData; // 該当する文字列が見つからない場合は元の配列を返す
-  }
-
-  const nextIndex = direction === "forward" ? currentIndex + 1 : currentIndex - 1;
-
-  if (nextIndex === 0 || nextIndex === orderData.length - 1) {
-    return orderData; // 端の要素と入れ替えようとする場合は元の配列を返す
-  }
-
-  const copyOrderData = [...orderData]; // 元の配列を変更せずにコピー
-  // 配列の要素を入れ替え
-  [copyOrderData[currentIndex], copyOrderData[nextIndex]] = [copyOrderData[nextIndex], copyOrderData[currentIndex]];
-
-  return copyOrderData;
-}
-
 export const createNewTask = (allTaskState, orderDataState, dayIndex) => {
   const [allTask, setAllTask] = allTaskState
   const [orderData, setOrderData] = orderDataState

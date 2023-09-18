@@ -1,7 +1,7 @@
-import { useDataImport } from "~features/DataImport/useDataImport"
+import useImportData from "~features/importData/useImportData"
 
 const DataImport = () => {
-  const [jsonData, { onChangeTextarea, onClickApply, onClickCancel }] = useDataImport()
+  const [jsonData, { onChangeTextarea, onClickApply, onClickCancel }] = useImportData()
 
   return (
     <div className="dataImport">

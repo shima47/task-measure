@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import * as context from "~components/Provider/MyProvider";
 
 
-export const useDataImport = () => {
+const useImportData = () => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
   const [order, setOrder] = useContext(context.orderContext)
   const [isImporting, setIsImporting] = useContext(context.isImportingContext)
@@ -41,3 +41,4 @@ export const useDataImport = () => {
   return [jsonData, { setJsonData, onChangeTextarea, onClickCancel, onClickApply }] as const
 }
 
+export default useImportData

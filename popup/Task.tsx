@@ -12,10 +12,10 @@ import { millisecondsToHours, updateTaskTitle, updateTaskTime } from "./common"
  */
 function Task(props) {
   // データ系
-  const [allTask, setAllTask] = props.grobalState.allTaskState
-  const [orderData, setOrderData] = props.grobalState.orderDataState
+  const [allTask, setAllTask] = useContext(context.allTaskContext)
+  const [order, setOrder] = useContext(context.orderContext)
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
-  const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
+  const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
 
   const task = allTask[props.taskId]
 

@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { useContext, } from "react"
 import { createNewTask, getTotalDayTime } from "./common"
+import * as context from "~components/Provider/MyProvider";
 import Task from "./Task"
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
 
 
 function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
-  const [isOpenAry, setIsOpenAry] = props.grobalState.isOpenAryState
+  const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
   const isOpen = isOpenAry[dayIndex]
 
   // その曜日の合計時間

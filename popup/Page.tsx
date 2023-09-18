@@ -11,13 +11,13 @@ import DataImport from "./DataImport"
 const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]
 
 const Page = () => {
-  const [allTask, setAllTask] = useStorage("taskData", INITIAL_DATA.ALL_TASK)
-  const [orderData, setOrderData] = useStorage("orderData", INITIAL_DATA.ORDER)
+  const [allTask, setAllTask] = useContext(context.allTaskContext)
+  const [order, setOrder] = useContext(context.orderContext)
 
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
-  const [isOpenAry, setIsOpenAry] = useStorage("isOpen", INITIAL_DATA.IS_OPEN_ARY)
+  const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
 
-  const [selectedTaskId, setSelectedTaskId] = useState("")
+  const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
   // JSONのインポート画面を切り替える
   const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
@@ -26,7 +26,7 @@ const Page = () => {
 
   const grobalState = {
     allTaskState: [allTask, setAllTask],
-    orderDataState: [orderData, setOrderData],
+    orderDataState: [order, setOrder],
     isOpenAryState: [isOpenAry, setIsOpenAry],
     runningTask: [runningTask, setRunningTask],
     selectedTaskIdState: [selectedTaskId, setSelectedTaskId],
@@ -41,7 +41,7 @@ const Page = () => {
             <DataImport />
             :
             DAY_OF_WEEK_ARY.map((DAY_OF_WEEK, index) => {
-              const dayTaskOrder = getDayTaskOrder(orderData, index)
+              const dayTaskOrder = getDayTaskOrder(order, index)
 
               return <DayDiv
                 key={DAY_OF_WEEK}

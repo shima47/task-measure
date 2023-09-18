@@ -9,28 +9,27 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
-import { isImportingContext } from "~components/Provider/MyProvider"
 
 
 function Header(props) {
   // データ系
-  const [allTask, setAllTask] = props.grobalState.allTaskState
-  const [orderData, setOrderData] = props.grobalState.orderDataState
+  const [allTask, setAllTask] = useContext(context.allTaskContext)
+  const [order, setOrder] = useContext(context.orderContext)
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
-  const [selectedTaskId, setSelectedTaskId] = props.grobalState.selectedTaskIdState
-  const [isImporting, setIsImporting] = useContext(isImportingContext)
+  const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
+  const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
 
   const onClickUpArrow = () => {
     if (selectedTaskId === "") return
-    const changedOrder = getChangedOrder(orderData, selectedTaskId)
-    setOrderData(changedOrder)
+    const changedOrder = getChangedOrder(order, selectedTaskId)
+    setOrder(changedOrder)
   }
 
   const onClickDownArrow = () => {
     if (selectedTaskId === "") return
-    const changedOrder = getChangedOrder(orderData, selectedTaskId, "backward")
-    setOrderData(changedOrder)
+    const changedOrder = getChangedOrder(order, selectedTaskId, "backward")
+    setOrder(changedOrder)
   }
 
   const onClickImport = () => {

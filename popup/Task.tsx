@@ -41,7 +41,7 @@ function Task(props) {
     console.log(taskTime)
     updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
     // 開始時間をリセットする
-    isRunningTask && setRunningTask(current => ({ startTime: Date.now(), ...current, }))
+    isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
   }, [])
 
   const onChangeTitle = (event) => {
@@ -72,7 +72,7 @@ function Task(props) {
       // const roundedTime = newTaskTime.toFixed(2)
       // setTaskTime(roundedTime)
       // 実行中のタスクなら開始時間をリセットする
-      isRunningTask && setRunningTask(current => ({ startTime: Date.now(), ...current, }))
+      isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
     } catch (error) {
       // 小数変換に失敗したら編集中の値は保存しない
     } finally {

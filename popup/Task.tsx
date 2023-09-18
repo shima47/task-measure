@@ -3,7 +3,9 @@ import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
-import { millisecondsToHours, updateTaskTitle, updateTaskTime } from "./common"
+import { millisecondsToHours, updateTaskTitle, } from "./common"
+import useUpdateTask from "~hooks/useUpdateTask"
+import useRunTask from "~features/runTask/useRunTask"
 
 
 /**
@@ -16,6 +18,9 @@ function Task(props) {
   const [order, setOrder] = useContext(context.orderContext)
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
+
+  const { updateTaskTime } = useUpdateTask()
+  const { onClickStart, onClickStop, } = useRunTask(props.taskId)
 
   const task = allTask[props.taskId]
 
@@ -39,7 +44,7 @@ function Task(props) {
     // 実行中のタスクならば実行時間分を加算して保存する
     const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
     console.log(taskTime)
-    updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+    updateTaskTime(props.taskId, newTaskTime)
     // 開始時間をリセットする
     isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
   }, [])
@@ -67,7 +72,7 @@ function Task(props) {
       // 小数変換に失敗したら編集中の値は保存しない
       if (isNaN(newTaskTime)) { throw new Error("NaN") }
       // DBに保存
-      updateTaskTime(props.grobalState.allTaskState, props.taskId, newTaskTime)
+      updateTaskTime(props.taskId, newTaskTime)
       // // 小数二桁まで四捨五入して表示用Stateに反映
       // const roundedTime = newTaskTime.toFixed(2)
       // setTaskTime(roundedTime)
@@ -78,26 +83,6 @@ function Task(props) {
     } finally {
       setIsEditTaskTime(false)
     }
-  }
-
-  const startTask = async () => {
-    if (runningTask.id) {
-      // 前に実行中だったタスクに時間を記録する
-      const didTask = allTask[runningTask.id]
-      const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
-      updateTaskTime(props.grobalState.allTaskState, runningTask.id, newTaskTime)
-    }
-
-    setRunningTask({ id: props.taskId, startTime: Date.now(), })
-  }
-
-  const stopTask = () => {
-    // 実行中だったタスクに時間を記録する
-    const didTask = allTask[runningTask.id]
-    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
-    updateTaskTime(props.grobalState.allTaskState, runningTask.id, newTaskTime)
-
-    setRunningTask(INITIAL_DATA.RUNNING_TASK)
   }
 
   const onChangeSelect = () => {
@@ -133,11 +118,11 @@ function Task(props) {
       </div>
       {
         isRunningTask ?
-          <div className="btn" onClick={stopTask}>
+          <div className="btn" onClick={onClickStop}>
             <img src={stopIcon} alt="ストップ" />
           </div>
           :
-          <div className="btn" onClick={startTask}>
+          <div className="btn" onClick={onClickStart}>
             <img src={startIcon} alt="スタート" />
           </div>
       }

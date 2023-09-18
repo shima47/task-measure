@@ -81,15 +81,5 @@ export const updateTaskTitle = (allTaskState, taskId: string, title: string) => 
   setAllTask(newAllTask)
 }
 
-export const updateTaskTime = (allTaskState, doingTaskId: string, newTaskTime: number) => {
-  const [allTask, setAllTask] = allTaskState
-
-  const task = allTask[doingTaskId]
-  if (!task) return
-  const updatedTask = { ...task, time: newTaskTime, }
-
-  const newAllTask = { ...allTask, [doingTaskId]: updatedTask }
-  setAllTask(newAllTask)
-}
 
 

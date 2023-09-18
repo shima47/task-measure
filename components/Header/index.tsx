@@ -1,7 +1,5 @@
-import { useContext, useState } from "react"
-import { INITIAL_DATA } from "~components/initialData"
+import { useContext, } from "react"
 import * as context from "~components/Provider/MyProvider"
-import { updateTaskTime } from "~popup/common"
 import useChangeOrder from "~features/changeOrder/useChangeOrder"
 import useDeleteTask from "~features/deleteTask/useDeleteTask"
 import useAdjustTime from "~features/adjustTime/useAdjustTime"
@@ -12,31 +10,21 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
+import useRunTask from "~features/runTask/useRunTask"
 
 
 function Header(props) {
   // データ系
-  const [allTask, setAllTask] = useContext(context.allTaskContext)
-  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
   const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
   const { onClickUpArrow, onClickDownArrow } = useChangeOrder()
   const { onClickRewind, onClickForward } = useAdjustTime()
   const { onClickDelete, } = useDeleteTask()
+  const { onClickStop, } = useRunTask()
 
   const onClickImport = () => {
     setIsImporting(current => !current)
   }
-
-  const onClickStop = () => {
-    // 実行中だったタスクに時間を記録する
-    const didTask = allTask[runningTask.id]
-    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
-    updateTaskTime(props.grobalState.allTaskState, runningTask.id, newTaskTime)
-
-    setRunningTask(INITIAL_DATA.RUNNING_TASK)
-  }
-
 
   return (
     <div className="header">

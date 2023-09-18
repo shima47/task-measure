@@ -1,12 +1,13 @@
 import { useContext, } from "react"
 import * as type from "~types/type"
 import * as context from "~components/Provider/MyProvider"
+import useUpdateTask from "~hooks/useUpdateTask"
 
 
 const useAdjustTime = () => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
-
+  const { updateTaskTime } = useUpdateTask()
 
   const onClickRewind = () => {
     if (selectedTaskId === "") return
@@ -26,15 +27,6 @@ const useAdjustTime = () => {
     const selectedTask = allTask[selectedTaskId]
     const newTaskTime = (parseFloat(selectedTask.time) + timeToAdjust)
     updateTaskTime(selectedTaskId, newTaskTime)
-  }
-
-  const updateTaskTime = (taskId: string, newTaskTime: number) => {
-    const targetTask = allTask[taskId]
-    if (!targetTask) return
-
-    const updatedTask = { ...targetTask, time: newTaskTime, }
-    console.log(updatedTask)
-    setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
   }
 
   return { onClickRewind, onClickForward }

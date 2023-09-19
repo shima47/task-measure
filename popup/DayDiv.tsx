@@ -45,7 +45,7 @@ function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
         {
           isOpen ?
             dayTaskOrder.map((taskId, index) => {
-              return <Task key={taskId} taskId={taskId} {...props} />
+              return <Task key={taskId} taskId={taskId} />
             })
             :
             <></>

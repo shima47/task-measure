@@ -1,40 +1,38 @@
 import { useContext, useEffect, useState } from "react"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
-import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
 import useUpdateTask from "~hooks/useUpdateTask"
 import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
+import useSelectTask from "~hooks/useSelectTask"
 
 
 /**
  * タスク名のInputについて
  * Inputの内容をUseStorageに依存すると、日本語入力が上手くいかない
  */
-function Task(props) {
+function Task({ taskId }) {
   // データ系
   const [allTask, setAllTask] = useContext(context.allTaskContext)
-  const [order, setOrder] = useContext(context.orderContext)
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
-  const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
 
-  const { updateTaskTitle, updateTaskTime } = useUpdateTask()
-  const { onClickStart, onClickStop, } = useRunTask(props.taskId)
+  const { updateTaskTime } = useUpdateTask()
+  const { onClickStart, onClickStop, } = useRunTask(taskId)
 
-  const task = allTask[props.taskId]
+  const task = allTask[taskId]
 
   if (!task) return null
 
   console.dir(task)
   // ローカルのState
-  const [taskTitle, onChangeTitle] = useTaskTitle(props.taskId)
+  const [taskTitle, onChangeTitle] = useTaskTitle(taskId)
 
   const [editedTaskTime, setEditedTaskTime] = useState("")
   const [isEditTaskTime, setIsEditTaskTime] = useState(false)
 
-  const isRunningTask = runningTask.id === props.taskId //実行中のタスクかどうか
-  const selected = selectedTaskId === props.taskId //選択中のタスクかどうか
+  const isRunningTask = runningTask.id === taskId //実行中のタスクかどうか
+  const [isSelected, onChangeSelect] = useSelectTask(taskId)
 
   const taskTime = task.time.toFixed(2)
 
@@ -44,7 +42,7 @@ function Task(props) {
     // 実行中のタスクならば実行時間分を加算して保存する
     const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
     console.log(taskTime)
-    updateTaskTime(props.taskId, newTaskTime)
+    updateTaskTime(taskId, newTaskTime)
     // 開始時間をリセットする
     isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
   }, [])
@@ -67,7 +65,7 @@ function Task(props) {
       // 小数変換に失敗したら編集中の値は保存しない
       if (isNaN(newTaskTime)) { throw new Error("NaN") }
       // DBに保存
-      updateTaskTime(props.taskId, newTaskTime)
+      updateTaskTime(taskId, newTaskTime)
       // // 小数二桁まで四捨五入して表示用Stateに反映
       // const roundedTime = newTaskTime.toFixed(2)
       // setTaskTime(roundedTime)
@@ -80,19 +78,15 @@ function Task(props) {
     }
   }
 
-  const onChangeSelect = () => {
-    // すでに選択済みなら選択を外す
-    if (selected) {
-      setSelectedTaskId("")
-    } else {
-      setSelectedTaskId(props.taskId)
-    }
-  }
-
 
   return (
-    <div className={`task ${selected && "selectedTask"}`} >
-      <input className="taskCheckbox" type="checkbox" checked={selected} onChange={onChangeSelect} />
+    <div className={`task ${isSelected && "selectedTask"}`} >
+      <input
+        className="taskCheckbox"
+        type="checkbox"
+        checked={isSelected}
+        onChange={onChangeSelect}
+      />
       <div className="taskTitle">
         <input
           className="taskForm"

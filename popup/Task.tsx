@@ -5,6 +5,7 @@ import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider"
 import useUpdateTask from "~hooks/useUpdateTask"
 import useRunTask from "~features/runTask/useRunTask"
+import useTaskTitle from "~hooks/useTaskTitle"
 
 
 /**
@@ -27,7 +28,7 @@ function Task(props) {
 
   console.dir(task)
   // ローカルのState
-  const [taskTitle, setTaskTitle] = useState(task.title)
+  const [taskTitle, onChangeTitle] = useTaskTitle(props.taskId)
 
   const [editedTaskTime, setEditedTaskTime] = useState("")
   const [isEditTaskTime, setIsEditTaskTime] = useState(false)
@@ -47,11 +48,6 @@ function Task(props) {
     // 開始時間をリセットする
     isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
   }, [])
-
-  const onChangeTitle = (event) => {
-    setTaskTitle(event.target.value)
-    updateTaskTitle(props.taskId, event.target.value)
-  }
 
   const onChangeTime = (event) => {
     setEditedTaskTime(event.target.value)

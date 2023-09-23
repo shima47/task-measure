@@ -6,6 +6,7 @@ import useUpdateTask from "~hooks/useUpdateTask"
 import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
+import useTask from "~hooks/useTask"
 
 
 /**
@@ -14,13 +15,12 @@ import useSelectTask from "~hooks/useSelectTask"
  */
 function Task({ taskId }) {
   // データ系
-  const [allTask, setAllTask] = useContext(context.allTaskContext)
+  const task = useTask(taskId)
   const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
 
   const { updateTaskTime } = useUpdateTask()
   const { onClickStart, onClickStop, } = useRunTask(taskId)
 
-  const task = allTask[taskId]
 
   if (!task) return null
 

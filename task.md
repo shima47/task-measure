@@ -63,3 +63,32 @@
     - [ ] allTask, isOpenAryはトップに初回のみStateを置きつつ子コンポーネントで各自Stateを持つ
     - [ ] 更新はlocalstorageを直に更新
     - [ ] UseContextを使う
+- [ ] task timeのカスタムフック化
+  - タスクIDからタスクを割り出す
+    - UseTask
+  - タスクが削除されたらReturn Null
+  - 未反映の時間を反映させる
+    - UseApplyTime
+  - 時間編集カスタムフック
+    - UseTaskTime
+    - 表示用タスクタイムのForm用State
+    - 編集用タスクタイムのForm用State
+    - タスクタイムの編集状態State
+    - タスクの時間を小数点二桁にする
+    - OnForcus
+      - 編集状態ON
+      - 表示内容を編集Form Stateに渡す
+    - Onchange
+      - 編集用Form Stateを変更
+    - OnBlur
+      - 編集状態OFF
+      - 入力された内容を確定させる
+
+  - 実行中状態（Stateじゃない）
+    - 未反映の時間の反映に利用
+    - 脱フォーカス時に利用
+      - なのでカスタムフック化する
+
+  - タスクの選択状態
+    - カスタムフック
+

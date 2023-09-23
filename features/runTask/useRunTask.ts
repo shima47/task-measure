@@ -1,35 +1,27 @@
-import { useState, useEffect, useContext } from "react";
-import useUpdateTask from "~hooks/useUpdateTask";
-import { INITIAL_DATA } from "~components/initialData";
-import * as context from "~components/Provider/MyProvider";
+import useApplyTimeDiff from "~hooks/useApplyTimeDiff";
+import useRunningTaskInfo from "~hooks/useRunningTaskInfo";
 
 
-const useRunTask = (taskIdToRun: string = "") => {
-  const [allTask, setAllTask] = useContext(context.allTaskContext)
-  const [runningTask, setRunningTask] = useContext(context.runningTaskInfoContext)
-  const { updateTaskTime } = useUpdateTask()
+const useRunTask = (taskId: string = "") => {
+  const [runningTaskInfo, { setNewRunningTaskInfo, setRunningTaskInfoStop }] = useRunningTaskInfo()
 
   const onClickStart = () => {
     // このフックに引数が渡されなければ実行しない
-    if (taskIdToRun === "") return
-    // 前に実行中だったタスクに時間を記録する
-    if (runningTask.id) {
-      const task = allTask[runningTask.id]
-      const newTaskTime = ((parseFloat(task.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
-      updateTaskTime(runningTask.id, newTaskTime)
+    if (taskId === "") return
+    // 実行中だったタスクに時間を記録する
+    if (runningTaskInfo.id) {
+      useApplyTimeDiff(runningTaskInfo.id)
     }
-
-    setRunningTask({ id: taskIdToRun, startTime: Date.now(), })
+    // 新しい実行中タスクを設定する
+    setNewRunningTaskInfo(taskId)
   }
 
   const onClickStop = () => {
-    if (runningTask.id === "") return
+    if (runningTaskInfo.id === "") return
     // 実行中だったタスクに時間を記録する
-    const didTask = allTask[runningTask.id]
-    const newTaskTime = ((parseFloat(didTask.time) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
-    updateTaskTime(runningTask.id, newTaskTime)
-
-    setRunningTask(INITIAL_DATA.RUNNING_TASK)
+    useApplyTimeDiff(runningTaskInfo.id)
+    // 新しい実行中タスクを設定する
+    setRunningTaskInfoStop()
   }
 
   return { onClickStart, onClickStop, } as const

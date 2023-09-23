@@ -7,6 +7,7 @@ import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
 import useTask from "~hooks/useTask"
+import useApplyTime from "~hooks/useApplyTime"
 
 
 /**
@@ -37,15 +38,7 @@ function Task({ taskId }) {
   const taskTime = task.time.toFixed(2)
 
   // 実行中のタスクは実行時間を更新する
-  useEffect(() => {
-    if (!isRunningTask) return
-    // 実行中のタスクならば実行時間分を加算して保存する
-    const newTaskTime = ((parseFloat(taskTime) * 3600000) + (Date.now() - runningTask.startTime)) / 3600000
-    console.log(taskTime)
-    updateTaskTime(taskId, newTaskTime)
-    // 開始時間をリセットする
-    isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
-  }, [])
+  useApplyTime(taskId)
 
   const onChangeTime = (event) => {
     setEditedTaskTime(event.target.value)

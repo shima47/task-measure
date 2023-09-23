@@ -7,7 +7,7 @@ import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
 import useTask from "~hooks/useTask"
-import useApplyTime from "~hooks/useApplyTime"
+import useEffectTime from "~hooks/useEffectTime"
 
 
 /**
@@ -38,7 +38,7 @@ function Task({ taskId }) {
   const taskTime = task.time.toFixed(2)
 
   // 実行中のタスクは実行時間を更新する
-  useApplyTime(taskId)
+  useEffectTime(taskId)
 
   const onChangeTime = (event) => {
     setEditedTaskTime(event.target.value)

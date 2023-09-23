@@ -18,7 +18,7 @@ const ORDER: type.order = [
   // "46767c15-cb33-2c6d-1baa-72e093aae910",
   5,
 ]
-const RUNNING_TASK: type.runningTask = {
+const RUNNING_TASK: type.runningTaskInfo = {
   id: "",
   startTime: 0,
 }

@@ -6,7 +6,7 @@ import * as context from "~components/Provider/MyProvider";
 
 const useRunTask = (taskIdToRun: string = "") => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
-  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
+  const [runningTask, setRunningTask] = useContext(context.runningTaskInfoContext)
   const { updateTaskTime } = useUpdateTask()
 
   const onClickStart = () => {

@@ -3,20 +3,20 @@ export type allTask = {
 }
 export type isOpenAry = boolean[]
 export type order = (string | number)[]
-export type runningTask = { id: string, startTime: number, }
+export type runningTaskInfo = { id: string, startTime: number, }
 export type selectedTaskId = string
 export type isImporting = boolean
 
 export type allTaskState = [allTask, React.Dispatch<React.SetStateAction<allTask>>]
 export type isOpenAryState = [isOpenAry, React.Dispatch<React.SetStateAction<isOpenAry>>]
 export type orderState = [order, React.Dispatch<React.SetStateAction<order>>]
-export type runningTaskState = [runningTask, React.Dispatch<React.SetStateAction<runningTask>>]
+export type runningTaskInfoState = [runningTaskInfo, React.Dispatch<React.SetStateAction<runningTaskInfo>>]
 export type selectedTaskIdState = [selectedTaskId, React.Dispatch<React.SetStateAction<selectedTaskId>>]
 export type isImportingState = [isImporting, React.Dispatch<React.SetStateAction<isImporting>>]
 
 export type myBucket = {
     allTask: allTask,
     order: order,
-    runningTask: runningTask,
+    runningTask: runningTaskInfo,
     isOpenAry: isOpenAry,
 }

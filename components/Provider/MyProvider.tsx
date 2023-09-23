@@ -7,7 +7,7 @@ import { INITIAL_DATA } from "../initialData"
 export const allTaskContext = createContext(null)
 export const isOpenAryContext = createContext(null)
 export const orderContext = createContext(null)
-export const runningTaskContext = createContext<type.runningTaskState>(null)
+export const runningTaskInfoContext = createContext<type.runningTaskInfoState>(null)
 export const selectedTaskIdContext = createContext(null)
 export const isImportingContext = createContext(null)
 
@@ -39,13 +39,13 @@ const MyProvider = ({ children }) => {
     <allTaskContext.Provider value={[allTask, setAllTask]}>
       <isOpenAryContext.Provider value={[isOpenAry, setIsOpenAry]}>
         <orderContext.Provider value={[order, setOrder]}>
-          <runningTaskContext.Provider value={[runningTask, setRunningTask]}>
+          <runningTaskInfoContext.Provider value={[runningTask, setRunningTask]}>
             <selectedTaskIdContext.Provider value={[selectedTaskId, setSelectedTaskId]}>
               <isImportingContext.Provider value={[isImporting, setIsImporting]}>
                 {children}
               </isImportingContext.Provider>
             </selectedTaskIdContext.Provider>
-          </runningTaskContext.Provider>
+          </runningTaskInfoContext.Provider>
         </orderContext.Provider>
       </isOpenAryContext.Provider>
     </allTaskContext.Provider>

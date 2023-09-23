@@ -14,7 +14,7 @@ const Page = () => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
   const [order, setOrder] = useContext(context.orderContext)
 
-  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
+  const [runningTask, setRunningTask] = useContext(context.runningTaskInfoContext)
   const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
 
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)

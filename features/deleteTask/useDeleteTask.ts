@@ -7,7 +7,7 @@ import * as context from "~components/Provider/MyProvider"
 const useDeleteTask = () => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
   const [order, setOrder] = useContext(context.orderContext)
-  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
+  const [runningTask, setRunningTask] = useContext(context.runningTaskInfoContext)
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
 
   const onClickDelete = () => {

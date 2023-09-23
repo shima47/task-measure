@@ -17,7 +17,7 @@ import useApplyTime from "~hooks/useApplyTime"
 function Task({ taskId }) {
   // データ系
   const task = useTask(taskId)
-  const [runningTask, setRunningTask] = useContext(context.runningTaskContext)
+  const [runningTask, setRunningTask] = useContext(context.runningTaskInfoContext)
 
   const { updateTaskTime } = useUpdateTask()
   const { onClickStart, onClickStop, } = useRunTask(taskId)

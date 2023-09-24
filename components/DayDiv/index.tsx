@@ -1,7 +1,7 @@
 import { useContext, } from "react"
-import { createNewTask, getTotalDayTime } from "./common"
+import { createNewTask, getTotalDayTime } from "../../popup/common"
 import * as context from "~components/Provider/MyProvider";
-import Task from "../components/Task"
+import Task from "../Task"
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
 

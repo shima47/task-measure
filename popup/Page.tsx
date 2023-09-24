@@ -4,7 +4,7 @@ import { getDayTaskOrder } from "./common"
 import { INITIAL_DATA } from "~components/initialData"
 import * as context from "~components/Provider/MyProvider";
 import Header from "~components/Header";
-import DayDiv from "./DayDiv"
+import DayDiv from "../components/DayDiv"
 import DataImport from "./importData"
 
 

@@ -7,6 +7,8 @@ import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
 import useTask from "~hooks/useTask"
+import useIsRunning from "~hooks/useIsRunning"
+import useTaskTime from "~hooks/useTaskTime"
 import useEffectTime from "~hooks/useEffectTime"
 
 
@@ -15,62 +17,19 @@ import useEffectTime from "~hooks/useEffectTime"
  * Inputの内容をUseStorageに依存すると、日本語入力が上手くいかない
  */
 function Task({ taskId }) {
-  // データ系
   const task = useTask(taskId)
-  const [runningTask, setRunningTask] = useContext(context.runningTaskInfoContext)
-
-  const { updateTaskTime } = useUpdateTask()
-  const { onClickStart, onClickStop, } = useRunTask(taskId)
-
-
-  if (!task) return null
-
-  console.dir(task)
-  // ローカルのState
+  if (!task) return null // taskが削除されたらnullを返す
+  // Formの状態
   const [taskTitle, onChangeTitle] = useTaskTitle(taskId)
-
-  const [editedTaskTime, setEditedTaskTime] = useState("")
-  const [isEditTaskTime, setIsEditTaskTime] = useState(false)
-
-  const isRunningTask = runningTask.id === taskId //実行中のタスクかどうか
+  const [taskTimeValue, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime }] = useTaskTime(taskId)
+  // 実行状態
+  const isRunning = useIsRunning(taskId)
+  const { onClickStart, onClickStop, } = useRunTask(taskId)
+  // 選択状態
   const [isSelected, onChangeSelect] = useSelectTask(taskId)
 
-  const taskTime = task.time.toFixed(2)
-
-  // 実行中のタスクは実行時間を更新する
+  // 経過時間を反映させる
   useEffectTime(taskId)
-
-  const onChangeTime = (event) => {
-    setEditedTaskTime(event.target.value)
-  }
-
-  const onFocusTaskTime = () => {
-    // focus時に編集中に変更する
-    setIsEditTaskTime(true)
-    // 現在のフォーム内容を編集フォームに渡す
-    setEditedTaskTime(taskTime)
-  }
-
-  const onBlurTaskTime = () => {
-    try {
-      // 編集内容を小数に変換する
-      const newTaskTime = parseFloat(editedTaskTime)
-      // 小数変換に失敗したら編集中の値は保存しない
-      if (isNaN(newTaskTime)) { throw new Error("NaN") }
-      // DBに保存
-      updateTaskTime(taskId, newTaskTime)
-      // // 小数二桁まで四捨五入して表示用Stateに反映
-      // const roundedTime = newTaskTime.toFixed(2)
-      // setTaskTime(roundedTime)
-      // 実行中のタスクなら開始時間をリセットする
-      isRunningTask && setRunningTask(current => ({ ...current, startTime: Date.now(), }))
-    } catch (error) {
-      // 小数変換に失敗したら編集中の値は保存しない
-    } finally {
-      setIsEditTaskTime(false)
-    }
-  }
-
 
   return (
     <div className={`task ${isSelected && "selectedTask"}`} >
@@ -91,15 +50,15 @@ function Task({ taskId }) {
         <input
           className="taskTimeForm"
           type="text"
-          value={isEditTaskTime ? editedTaskTime : taskTime}
-          onChange={onChangeTime}
+          value={taskTimeValue}
+          onChange={onChangeTaskTime}
           onFocus={onFocusTaskTime}
           onBlur={onBlurTaskTime}
         />
         h
       </div>
       {
-        isRunningTask ?
+        isRunning ?
           <div className="btn" onClick={onClickStop}>
             <img src={stopIcon} alt="ストップ" />
           </div>

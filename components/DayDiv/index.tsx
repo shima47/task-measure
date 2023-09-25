@@ -6,13 +6,16 @@ import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
 import useNewTask from "~features/createNewTask/useNewTask";
 import useFoldingUp from "~features/foldingUp/useFoldingUp";
+import useDaytaskOrder from "~hooks/useDayTaskOrder";
 
 
-function dayDiv({ dayIndex, dOfW, dayTaskOrder, ...props }) {
+function dayDiv({ dayIndex, dOfW, ...props }) {
+  const dayTaskOrder = useDaytaskOrder(dayIndex)
   const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
   const isOpen = isOpenAry[dayIndex]
   const { onClickCreateTask } = useNewTask(dayIndex)
   const { onClickDayTitle } = useFoldingUp(dayIndex)
+
 
   // その曜日の合計時間
   const totalTime = getTotalDayTime(dayTaskOrder, props.grobalState.allTaskState)

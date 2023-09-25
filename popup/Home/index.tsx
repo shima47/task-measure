@@ -1,5 +1,4 @@
 import { useContext } from "react"
-import { getDayTaskOrder } from "~popup/common"
 import * as context from "~components/Provider/MyProvider";
 import DayDiv from "~components/DayDiv"
 
@@ -30,13 +29,10 @@ const Home = () => {
     <div className="home">
       {
         DAY_OF_WEEK_ARY.map((item, index) => {
-          const dayTaskOrder = getDayTaskOrder(order, index)
-
           return <DayDiv
             key={item}
             dayIndex={index}
             dOfW={item}
-            dayTaskOrder={dayTaskOrder}
             grobalState={grobalState}
           />
         })

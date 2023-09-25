@@ -21,7 +21,7 @@ function Task({ taskId }) {
   if (!task) return null // taskが削除されたらnullを返す
   // Formの状態
   const [taskTitle, onChangeTitle] = useTaskTitle(taskId)
-  const [taskTimeValue, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime }] = useTaskTime(taskId)
+  const [taskTime, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime }] = useTaskTime(taskId)
   // 実行状態
   const isRunning = useIsRunning(taskId)
   const { onClickStart, onClickStop, } = useRunTask(taskId)
@@ -50,7 +50,7 @@ function Task({ taskId }) {
         <input
           className="taskTimeForm"
           type="text"
-          value={taskTimeValue}
+          value={taskTime.toFixed(2)}
           onChange={onChangeTaskTime}
           onFocus={onFocusTaskTime}
           onBlur={onBlurTaskTime}

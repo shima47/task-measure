@@ -6,7 +6,6 @@ import useRunningTaskInfo from "./useRunningTaskInfo";
 
 
 const useTaskTime = (taskId: string) => {
-  console.log(taskId)
   const task = useTask(taskId)
 
   const [isEdit, setIsEdit] = useState(false)
@@ -45,8 +44,8 @@ const useTaskTime = (taskId: string) => {
     }
   }
 
-  const taskTimeValue = isEdit ? editedTaskTime : task.time.toFixed(2)
-  return [taskTimeValue, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime, }] as const
+  const taskTime = isEdit ? editedTaskTime : task.time
+  return [taskTime, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime, }] as const
 }
 
 export default useTaskTime

@@ -1,5 +1,4 @@
 import { useContext, } from "react"
-import { getTotalDayTime } from "../../popup/common"
 import * as context from "~components/Provider/MyProvider";
 import Task from "~components/Task"
 import addIcon from "data-base64:~assets/add.svg"
@@ -7,19 +6,18 @@ import accordionIcon from "data-base64:~assets/accordion.svg"
 import useNewTask from "~features/createNewTask/useNewTask";
 import useFoldingUp from "~features/foldingUp/useFoldingUp";
 import useDaytaskOrder from "~hooks/useDayTaskOrder";
+import useDayTotalTime from "~features/totalDayTime/useTotalDayTime";
 
 
 function dayDiv({ dayIndex, dOfW, ...props }) {
   const dayTaskOrder = useDaytaskOrder(dayIndex)
   const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
   const isOpen = isOpenAry[dayIndex]
+  // その曜日の合計時間
+  const totalTime = useDayTotalTime(dayIndex)
+
   const { onClickCreateTask } = useNewTask(dayIndex)
   const { onClickDayTitle } = useFoldingUp(dayIndex)
-
-
-  // その曜日の合計時間
-  const totalTime = getTotalDayTime(dayTaskOrder, props.grobalState.allTaskState)
-
 
   return (
     <div className="dayDiv">
@@ -34,7 +32,7 @@ function dayDiv({ dayIndex, dOfW, ...props }) {
       <div className="taskDiv">
         {
           isOpen ?
-            dayTaskOrder.map((taskId, index) => {
+            dayTaskOrder.map(taskId => {
               return <Task key={taskId} taskId={taskId} />
             })
             :

@@ -1,11 +1,12 @@
 import { useContext } from "react"
+import { getDayTaskOrder } from "~popup/common"
 import * as context from "~components/Provider/MyProvider";
-import Header from "~components/Header";
-import DataImport from "./importData"
-import Home from "./Home";
+import DayDiv from "~components/DayDiv"
 
 
-const Page = () => {
+const DAY_OF_WEEK_ARY = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.",]
+
+const Home = () => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
   const [order, setOrder] = useContext(context.orderContext)
 
@@ -13,8 +14,6 @@ const Page = () => {
   const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
 
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
-  // JSONのインポート画面を切り替える
-  const [isImporting, setIsImporting] = useContext(context.isImportingContext)
 
   console.dir(allTask)
 
@@ -28,19 +27,23 @@ const Page = () => {
   }
 
   return (
-    <div className="page">
-      <Header grobalState={grobalState} />
-      <div className="container">
-        {
-          isImporting ?
-            <DataImport />
-            :
-            <Home />
-        }
-      </div>
+    <div className="home">
+      {
+        DAY_OF_WEEK_ARY.map((item, index) => {
+          const dayTaskOrder = getDayTaskOrder(order, index)
+
+          return <DayDiv
+            key={item}
+            dayIndex={index}
+            dOfW={item}
+            dayTaskOrder={dayTaskOrder}
+            grobalState={grobalState}
+          />
+        })
+      }
     </div>
   )
 }
 
-export default Page
+export default Home
 

@@ -1,8 +1,8 @@
-import { useContext, } from "react"
-import * as context from "~components/Provider/MyProvider"
+import useRunTask from "~features/runTask/useRunTask"
 import useChangeOrder from "~features/changeOrder/useChangeOrder"
 import useDeleteTask from "~features/deleteTask/useDeleteTask"
 import useAdjustTime from "~features/adjustTime/useAdjustTime"
+import useIsImporting from "~features/importData/useIsImporting"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import exportIcon from "data-base64:~assets/export.svg"
@@ -10,8 +10,6 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
-import useRunTask from "~features/runTask/useRunTask"
-import useIsImporting from "~features/importData/useIsImporting"
 
 
 const Header = () => {

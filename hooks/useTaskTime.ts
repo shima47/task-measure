@@ -1,8 +1,8 @@
 import { useState, } from "react";
-import useTask from "./useTask";
-import useUpdateTask from "./useUpdateTask";
-import useIsRunning from "./useIsRunning";
-import useRunningTaskInfo from "./useRunningTaskInfo";
+import useTask from "~hooks/useTask";
+import useUpdateTask from "~hooks/useUpdateTask";
+import useIsRunning from "~hooks/useIsRunning";
+import useRunningTaskInfo from "~hooks/useRunningTaskInfo";
 
 
 const useTaskTime = (taskId: string) => {

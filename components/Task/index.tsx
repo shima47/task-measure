@@ -1,8 +1,3 @@
-import { useContext, useEffect, useState } from "react"
-import startIcon from "data-base64:~assets/start.svg"
-import stopIcon from "data-base64:~assets/stop.svg"
-import * as context from "~components/Provider/MyProvider"
-import useUpdateTask from "~hooks/useUpdateTask"
 import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
@@ -10,6 +5,8 @@ import useTask from "~hooks/useTask"
 import useIsRunning from "~hooks/useIsRunning"
 import useTaskTime from "~hooks/useTaskTime"
 import useEffectTime from "~hooks/useEffectTime"
+import startIcon from "data-base64:~assets/start.svg"
+import stopIcon from "data-base64:~assets/stop.svg"
 
 
 /**

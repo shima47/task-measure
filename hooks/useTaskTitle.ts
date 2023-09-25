@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import * as context from "~components/Provider/MyProvider";
-import useUpdateTask from "./useUpdateTask";
+import useUpdateTask from "~hooks/useUpdateTask";
 
 
 const useTaskTitle = (taskId: string) => {

@@ -1,12 +1,12 @@
 import { useContext, } from "react"
 import * as context from "~components/Provider/MyProvider";
 import Task from "~components/Task"
-import addIcon from "data-base64:~assets/add.svg"
-import accordionIcon from "data-base64:~assets/accordion.svg"
+import useDaytaskOrder from "~hooks/useDayTaskOrder";
 import useNewTask from "~features/createNewTask/useNewTask";
 import useFoldingUp from "~features/foldingUp/useFoldingUp";
-import useDaytaskOrder from "~hooks/useDayTaskOrder";
 import useDayTotalTime from "~features/totalDayTime/useTotalDayTime";
+import addIcon from "data-base64:~assets/add.svg"
+import accordionIcon from "data-base64:~assets/accordion.svg"
 
 
 const DayDiv = ({ dayIndex, dOfW, }) => {

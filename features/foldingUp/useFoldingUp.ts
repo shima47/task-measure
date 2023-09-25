@@ -5,6 +5,8 @@ import * as context from "~components/Provider/MyProvider";
 const useFoldingUp = (dayIndex: number) => {
   const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
 
+  const isOpen = isOpenAry[dayIndex]
+
   const onClickDayTitle = () => {
     setIsOpenAry(current => {
       const newIsOpenAry = [...current]
@@ -13,7 +15,7 @@ const useFoldingUp = (dayIndex: number) => {
     })
   }
 
-  return { onClickDayTitle, } as const
+  return [isOpen, { onClickDayTitle, }] as const
 }
 
 export default useFoldingUp

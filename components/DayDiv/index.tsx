@@ -11,13 +11,12 @@ import accordionIcon from "data-base64:~assets/accordion.svg"
 
 const DayDiv = ({ dayIndex, dOfW, }) => {
   const dayTaskOrder = useDaytaskOrder(dayIndex)
-  const [isOpenAry,] = useContext(context.isOpenAryContext)
-  const isOpen = isOpenAry[dayIndex]
+  const [isOpen, { onClickDayTitle }] = useFoldingUp(dayIndex)
   // その曜日の合計時間
   const totalTime = useDayTotalTime(dayIndex)
 
   const { onClickCreateTask } = useNewTask(dayIndex)
-  const { onClickDayTitle } = useFoldingUp(dayIndex)
+
 
   return (
     <div className="dayDiv">

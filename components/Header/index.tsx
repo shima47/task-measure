@@ -11,6 +11,7 @@ import forwardIcon from "data-base64:~assets/forward.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
 import useRunTask from "~features/runTask/useRunTask"
+import useIsImporting from "~features/importData/useIsImporting"
 
 
 function Header(props) {
@@ -21,10 +22,7 @@ function Header(props) {
   const { onClickRewind, onClickForward } = useAdjustTime()
   const { onClickDelete, } = useDeleteTask()
   const { onClickStop, } = useRunTask()
-
-  const onClickImport = () => {
-    setIsImporting(current => !current)
-  }
+  const [, { onClickImport }] = useIsImporting()
 
   return (
     <div className="header">

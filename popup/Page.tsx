@@ -3,6 +3,7 @@ import * as context from "~components/Provider/MyProvider";
 import Header from "~components/Header";
 import DataImport from "./importData"
 import Home from "./Home";
+import useIsImporting from "~features/importData/useIsImporting";
 
 
 const Page = () => {
@@ -14,9 +15,7 @@ const Page = () => {
 
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
   // JSONのインポート画面を切り替える
-  const [isImporting, setIsImporting] = useContext(context.isImportingContext)
-
-  console.dir(allTask)
+  const [isImporting,] = useIsImporting()
 
 
   const grobalState = {

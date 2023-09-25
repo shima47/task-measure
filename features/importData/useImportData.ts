@@ -5,7 +5,7 @@ import * as context from "~components/Provider/MyProvider";
 const useImportData = () => {
   const [allTask, setAllTask] = useContext(context.allTaskContext)
   const [order, setOrder] = useContext(context.orderContext)
-  const [isImporting, setIsImporting] = useContext(context.isImportingContext)
+  const [, setIsImporting] = useContext(context.isImportingContext)
 
   const [jsonData, setJsonData] = useState("")
 
@@ -38,7 +38,7 @@ const useImportData = () => {
     }
   }
 
-  return [jsonData, { setJsonData, onChangeTextarea, onClickCancel, onClickApply }] as const
+  return [jsonData, { onChangeTextarea, onClickCancel, onClickApply }] as const
 }
 
 export default useImportData

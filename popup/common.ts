@@ -1,6 +1,3 @@
-import { v4 as uuid } from "uuid"
-import { INITIAL_DATA } from "~components/initialData"
-
 
 /**
  * ミリ秒を00h 00mの形にフォーマットする関数 by ChatGPT3.5
@@ -40,36 +37,4 @@ export const getTotalDayTime = (dayTaskOrder: string[], allTaskState) => {
   const totalTime: number = dayTimeAry.reduce((sum, time) => sum + time, 0)
   return totalTime
 };
-
-export const createNewTask = (allTaskState, orderDataState, dayIndex) => {
-  const [allTask, setAllTask] = allTaskState
-  const [orderData, setOrderData] = orderDataState
-
-  const newId = createNewUUID(orderData) // かぶらないようにUUID発行
-
-  // orderDataのdayIndexの次の仕切りの手前に挿入する
-  const newOrderData = [...orderData]
-  const indexToInsert = newOrderData.indexOf(dayIndex + 1);
-  newOrderData.splice(indexToInsert, 0, newId)
-
-  const newTask = { title: "タスク", time: 0, }
-  const newAllTask = { ...allTask, [newId]: newTask }
-
-  setAllTask(newAllTask)
-  setOrderData(newOrderData)
-}
-
-export const createNewUUID = (orderData) => {
-  //既存のOrderData配列に含まれないUUIDが出たらReturn
-  let tries = 0;
-  while (tries < 100) {
-    const id: string = uuid();
-    if (!orderData.includes(id)) { return id }
-    tries++;
-  }
-
-  throw new Error("新しいUUIDが生成できませんでした。");
-}
-
-
 

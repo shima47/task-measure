@@ -14,10 +14,8 @@ import useRunTask from "~features/runTask/useRunTask"
 import useIsImporting from "~features/importData/useIsImporting"
 
 
-function Header(props) {
+const Header = () => {
   // データ系
-  const [isImporting, setIsImporting] = useContext(context.isImportingContext)
-
   const { onClickUpArrow, onClickDownArrow } = useChangeOrder()
   const { onClickRewind, onClickForward } = useAdjustTime()
   const { onClickDelete, } = useDeleteTask()

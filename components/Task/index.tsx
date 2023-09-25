@@ -16,7 +16,7 @@ import useEffectTime from "~hooks/useEffectTime"
  * タスク名のInputについて
  * Inputの内容をUseStorageに依存すると、日本語入力が上手くいかない
  */
-function Task({ taskId }) {
+const Task = ({ taskId }) => {
   const task = useTask(taskId)
   if (!task) return null // taskが削除されたらnullを返す
   // Formの状態

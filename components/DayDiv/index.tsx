@@ -9,9 +9,9 @@ import useDaytaskOrder from "~hooks/useDayTaskOrder";
 import useDayTotalTime from "~features/totalDayTime/useTotalDayTime";
 
 
-function dayDiv({ dayIndex, dOfW, ...props }) {
+const DayDiv = ({ dayIndex, dOfW, }) => {
   const dayTaskOrder = useDaytaskOrder(dayIndex)
-  const [isOpenAry, setIsOpenAry] = useContext(context.isOpenAryContext)
+  const [isOpenAry,] = useContext(context.isOpenAryContext)
   const isOpen = isOpenAry[dayIndex]
   // その曜日の合計時間
   const totalTime = useDayTotalTime(dayIndex)
@@ -43,4 +43,4 @@ function dayDiv({ dayIndex, dOfW, ...props }) {
   )
 }
 
-export default dayDiv
+export default DayDiv

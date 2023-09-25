@@ -44,7 +44,7 @@ const useTaskTime = (taskId: string) => {
     }
   }
 
-  const taskTime = isEdit ? editedTaskTime : task.time
+  const taskTime = isEdit ? editedTaskTime : task.time.toFixed(2)
   return [taskTime, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime, }] as const
 }
 

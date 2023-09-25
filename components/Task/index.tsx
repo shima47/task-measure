@@ -47,7 +47,7 @@ const Task = ({ taskId }) => {
         <input
           className="taskTimeForm"
           type="text"
-          value={taskTime.toFixed(2)}
+          value={taskTime}
           onChange={onChangeTaskTime}
           onFocus={onFocusTaskTime}
           onBlur={onBlurTaskTime}

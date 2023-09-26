@@ -1,10 +1,9 @@
-import { useContext, } from "react"
-import * as context from "~components/Provider/MyProvider";
 import Task from "~components/Task"
 import useDaytaskOrder from "~hooks/useDayTaskOrder";
 import useNewTask from "~features/createNewTask/useNewTask";
 import useFoldingUp from "~features/foldingUp/useFoldingUp";
 import useDayTotalTime from "~features/totalDayTime/useTotalDayTime";
+import useFixTaskTime from "~features/fixTaskTime/useFixTaskTime";
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
 
@@ -16,6 +15,7 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
   const totalTime = useDayTotalTime(dayIndex)
 
   const { onClickCreateTask } = useNewTask(dayIndex)
+  const { onClickFixTaskTime } = useFixTaskTime(dayIndex)
 
 
   return (
@@ -24,6 +24,9 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
         <img className={isOpen ? "accordionOpen" : "accordionClose"} src={accordionIcon} alt="開く" />
         <div className="dayTitile">{dOfW}</div>
         <div className="totalTime">{totalTime.toFixed(2)} h</div>
+        <div className="btn" onClick={onClickFixTaskTime}>
+          <img src={addIcon} alt="時間確定" />
+        </div>
         <div className="btn" onClick={onClickCreateTask}>
           <img src={addIcon} alt="新規追加" />
         </div>

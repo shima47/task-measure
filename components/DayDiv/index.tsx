@@ -6,6 +6,7 @@ import useDayTotalTime from "~features/totalDayTime/useTotalDayTime";
 import useFixTaskTime from "~features/fixTaskTime/useFixTaskTime";
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
+import checkIcon from "data-base64:~assets/check.svg"
 
 
 const DayDiv = ({ dayIndex, dOfW, }) => {
@@ -24,11 +25,11 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
         <img className={isOpen ? "accordionOpen" : "accordionClose"} src={accordionIcon} alt="開く" />
         <div className="dayTitile">{dOfW}</div>
         <div className="totalTime">{totalTime.toFixed(2)} h</div>
-        <div className="btn" onClick={onClickFixTaskTime}>
-          <img src={addIcon} alt="時間確定" />
-        </div>
         <div className="btn" onClick={onClickCreateTask}>
           <img src={addIcon} alt="新規追加" />
+        </div>
+        <div className="btn" onClick={onClickFixTaskTime}>
+          <img src={checkIcon} alt="時間確定" />
         </div>
       </div>
       <div className="taskDiv">

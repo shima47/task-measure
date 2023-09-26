@@ -54,16 +54,27 @@
   - [ ] バリデーション
   - [x] 基礎機能
 
+## 経過時間をきりよく丸める
+- [ ] 1.34みたいな時間を1.25にする
+- [x] 丸める計算ロジック作成
+  - チャッピー
+- [ ] クリックカスタムフック
+  - [ ] dayTaskOrderを取得
+  - [ ] それぞれ丸めてデータ保存
+- [ ] ボタン作成
+  - [ ] DayDivに配置
+  - [ ] アイコンはチェックボタンかな
+
 ## リファクタ
-- [ ] UseStateをまとめる
-  - [ ] 全体レンダリング系をまとめる
+- [x] UseStateをまとめる
+  - [x] 全体レンダリング系をまとめる
     - order, startTime, runningTaskId, 
-    - [ ] UseContextにする
-  - [ ] 全体レンダリングが不要なものを分散
-    - [ ] allTask, isOpenAryはトップに初回のみStateを置きつつ子コンポーネントで各自Stateを持つ
+    - [x] UseContextにする
+  - [x] 全体レンダリングが不要なものを分散
+    - [x] allTask, isOpenAryはトップに初回のみStateを置きつつ子コンポーネントで各自Stateを持つ
     - [ ] 更新はlocalstorageを直に更新
-    - [ ] UseContextを使う
-- [ ] task timeのカスタムフック化
+    - [x] UseContextを使う
+- [x] task timeのカスタムフック化
   - タスクIDからタスクを割り出す
     - UseTask
   - タスクが削除されたらReturn Null

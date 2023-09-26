@@ -11,7 +11,7 @@ const useFixTaskTime = (dayIndex: number) => {
     // 親コンポーネントへのイベントの伝搬を防ぐ
     event.stopPropagation()
 
-    if (!confirm("時間を確定して値を丸めます")) return
+    if (!confirm("時間を整理します")) return
     let newTaskObj = {}
     dayTaskOrder.forEach((taskId) => {
       const task = allTask[taskId]

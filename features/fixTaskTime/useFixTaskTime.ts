@@ -1,24 +1,24 @@
 import { useContext } from "react"
 import * as context from "~components/Provider/MyProvider"
 import useDaytaskOrder from "~hooks/useDayTaskOrder"
-import useUpdateTask from "~hooks/useUpdateTask"
 
 
 const useFixTaskTime = (dayIndex: number) => {
   const dayTaskOrder = useDaytaskOrder(dayIndex)
-  const [allTask,] = useContext(context.allTaskContext)
-  const { updateTaskTime } = useUpdateTask()
+  const [allTask, setAllTask] = useContext(context.allTaskContext)
 
   const onClickFixTaskTime = (event) => {
     // 親コンポーネントへのイベントの伝搬を防ぐ
     event.stopPropagation()
 
     if (!confirm("時間を確定して値を丸めます")) return
-    dayTaskOrder.map(taskId => {
-      const newTaskTime = roundToNearestQuarter(allTask[taskId]["time"])
-      console.log(newTaskTime)
-      updateTaskTime(taskId, newTaskTime)
+    let newTaskObj = {}
+    dayTaskOrder.forEach((taskId) => {
+      const task = allTask[taskId]
+      const newTaskTime = roundToNearestQuarter(task.time)
+      newTaskObj[taskId] = { ...task, time: newTaskTime }
     })
+    setAllTask(current => ({ ...current, ...newTaskObj }))
   }
 
   // 入力値を丸める関数 by ChatGPT3.5

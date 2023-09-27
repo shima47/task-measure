@@ -1,7 +1,7 @@
 import MyProvider from "~components/Provider/MyProvider"
 import Page from "~popup/Page"
 import "~css/common.css"
-import "~css/index.css"
+import "~css/page.css"
 import "~css/header.css"
 import "~css/home.css"
 import "~css/dayDiv.css"

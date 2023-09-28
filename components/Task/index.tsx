@@ -17,7 +17,7 @@ const Task = ({ taskId }) => {
   const task = useTask(taskId)
   if (!task) return null // taskが削除されたらnullを返す
   // Formの状態
-  const [taskTitle, onChangeTitle] = useTaskTitle(taskId)
+  const [taskTitle, { onChangeTitle, onFocusTitle }] = useTaskTitle(taskId)
   const [taskTime, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime }] = useTaskTime(taskId)
   // 実行状態
   const isRunning = useIsRunning(taskId)
@@ -41,7 +41,8 @@ const Task = ({ taskId }) => {
           className="taskForm"
           type="text"
           value={taskTitle}
-          onChange={onChangeTitle} />
+          onChange={onChangeTitle}
+          onFocus={onFocusTitle} />
       </div>
       <div className="taskTime">
         <input

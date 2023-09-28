@@ -27,7 +27,7 @@ const useExportData = () => {
     }
   }
 
-  // 月曜日の日付（YYYYMMDD）で返す By ChatGPT3.5
+  // 月曜日の日付（YYYYMMDD）で返す With ChatGPT3.5
   const getMondayDate = () => {
     const today = new Date();
     const dayOfWeek = today.getDay(); // 0 (日曜) から 6 (土曜) までの値を取得
@@ -35,6 +35,10 @@ const useExportData = () => {
     // 今日が日曜日の場合、6日前の日付を返す
     if (dayOfWeek === 0) {
       today.setDate(today.getDate() - 6);
+    }
+    // 今日が月曜日の場合、7日前の日付を返す
+    else if (dayOfWeek === 1) {
+      today.setDate(today.getDate() - 7);
     } else {
       // 今日から月曜日までの日数を計算し、日付を調整
       today.setDate(today.getDate() - dayOfWeek + 1);

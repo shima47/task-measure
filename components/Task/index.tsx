@@ -29,7 +29,7 @@ const Task = ({ taskId }) => {
   useEffectTime(taskId)
 
   return (
-    <div className={`task ${isSelected && "selectedTask"}`} >
+    <div className="task" >
       <input
         className="taskCheckbox"
         type="checkbox"

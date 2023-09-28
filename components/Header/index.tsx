@@ -2,7 +2,7 @@ import useRunTask from "~features/runTask/useRunTask"
 import useChangeOrder from "~features/changeOrder/useChangeOrder"
 import useDeleteTask from "~features/deleteTask/useDeleteTask"
 import useAdjustTime from "~features/adjustTime/useAdjustTime"
-import useIsImporting from "~features/importData/useIsImporting"
+import useImportData from "~features/importData/useImportData"
 import useExportData from "~features/exportData/useExportData"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
@@ -20,7 +20,7 @@ const Header = () => {
   const { onClickRewind, onClickForward } = useAdjustTime()
   const { onClickDelete, } = useDeleteTask()
   const { onClickStop, } = useRunTask()
-  const [, { onClickImport }] = useIsImporting()
+  const [fileInputRef, { onClickImport, onChangeFile, }] = useImportData()
   const { onClickExport, } = useExportData()
 
   return (
@@ -38,6 +38,7 @@ const Header = () => {
         </div>
         <div className="btn" onClick={onClickImport}>
           <img src={importIcon} alt="JSONインポート"></img>
+          <input style={{ display: "none" }} ref={fileInputRef} type="file" accept='.json' onChange={onChangeFile} />
         </div>
         <div className="btn" onClick={onClickExport}>
           <img src={exportIcon} alt="JSONエクスポート"></img>

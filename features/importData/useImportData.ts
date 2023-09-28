@@ -1,44 +1,32 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext, useRef } from "react";
 import * as context from "~components/Provider/MyProvider";
 
 
 const useImportData = () => {
-  const [allTask, setAllTask] = useContext(context.allTaskContext)
-  const [order, setOrder] = useContext(context.orderContext)
-  const [, setIsImporting] = useContext(context.isImportingContext)
+  const [, setAllTask] = useContext(context.allTaskContext)
+  const [, setOrder] = useContext(context.orderContext)
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [jsonData, setJsonData] = useState("")
-
-  useEffect(() => {
-    const dataObj = { allTask: allTask, order: order, }
-    setJsonData(JSON.stringify(dataObj, null, 2))
-  }, [])
-
-  const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setJsonData(event.target.value)
+  const onClickImport = async () => {
+    fileInputRef.current?.click()
   }
 
-  const onClickCancel = () => {
-    setIsImporting(false)
-  }
-
-  const onClickApply = async () => {
+  const onChangeFile = (event) => {
     if (!confirm("データをインポートして上書きしますか？")) return
-    // validationImport(json)
 
-    try {
-      const importedData = JSON.parse(jsonData)
+    const files = event.currentTarget.files;
+    // ファイルがなければ終了
+    if (!files || files?.length === 0) return;
+    // 先頭のファイルを取得
+    const file = files[0];
+    // 拡張子がJSONでなければ終了
+    const extension = file.name.split(".").at(-1);
+    if (extension === "json") return
 
-      await setAllTask(importedData.allTask)
-      await setOrder(importedData.order)
 
-      setIsImporting(false)
-    } catch (error) {
-      alert("インポートに失敗しました")
-    }
   }
 
-  return [jsonData, { onChangeTextarea, onClickCancel, onClickApply }] as const
+  return [fileInputRef, { onClickImport, onChangeFile, }] as const
 }
 
 export default useImportData

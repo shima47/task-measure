@@ -1,8 +1,9 @@
-import { useState, } from "react";
+import { useContext, useState, } from "react";
 import useTask from "~hooks/useTask";
 import useUpdateTask from "~hooks/useUpdateTask";
 import useIsRunning from "~hooks/useIsRunning";
 import useRunningTaskInfo from "~hooks/useRunningTaskInfo";
+import * as context from "~components/Provider/MyProvider";
 
 
 const useTaskTime = (taskId: string) => {
@@ -15,12 +16,15 @@ const useTaskTime = (taskId: string) => {
   const { updateTaskTime } = useUpdateTask()
   const [, { setStartTimeNow }] = useRunningTaskInfo()
 
+  const [, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
 
   const onFocusTaskTime = (event) => {
     // focus時に編集中に変更する
     setIsEdit(true)
     // 現在のフォーム内容を編集フォームに渡す
     setEditedTaskTime(event.target.value)
+    // タスクを選択状態にする
+    setSelectedTaskId(taskId)
   }
 
   const onChangeTaskTime = (event) => {

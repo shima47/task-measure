@@ -7,9 +7,10 @@ const useExportData = () => {
   const [order,] = useContext(context.orderContext)
 
   const onClickExport = () => {
-    const fileName = `${getMondayDate()}.json`
+    if (!confirm("ファイルをエクスポートします")) return
+
     try {
-      // validationImport(json)
+      const fileName = `${getMondayDate()}.json`
       const dataObj = { allTask: allTask, order: order, }
       const blobData = new Blob(
         [JSON.stringify(dataObj, null, 2)],

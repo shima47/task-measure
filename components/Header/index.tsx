@@ -27,10 +27,10 @@ const Header = () => {
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
-        <div className="btn" onClick={onClickDownArrow}>
+        <div className="btn" onClick={onClickUpArrow} >
           <img src={upArrowIcon} alt="上矢印" ></img>
         </div>
-        <div className="btn" onClick={onClickUpArrow}>
+        <div className="btn" onClick={onClickDownArrow}>
           <img src={downArrowIcon} alt="下矢印"></img>
         </div>
         <div className="btn" onClick={onClickDelete}>

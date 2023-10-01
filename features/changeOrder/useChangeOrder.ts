@@ -25,12 +25,12 @@ const useChangeOrder = () => {
     });
   }
 
-  const onClickUpArrow = () => {
+  const onClickDownArrow = () => {
     if (selectedTaskId === "") return
     changeOrder()
   }
 
-  const onClickDownArrow = () => {
+  const onClickUpArrow = () => {
     if (selectedTaskId === "") return
     changeOrder("backward")
   }

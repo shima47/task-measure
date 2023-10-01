@@ -10,15 +10,15 @@ import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import importIcon from "data-base64:~assets/import.svg"
 import exportIcon from "data-base64:~assets/export.svg"
 import deleteIcon from "data-base64:~assets/delete.svg"
-import forwardIcon from "data-base64:~assets/forward.svg"
+import reduceTimeIcon from "data-base64:~assets/reduceTime.svg"
+import increaseTimeIcon from "data-base64:~assets/increaseTime.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
-import rewindTimeIcon from "data-base64:~assets/rewindTime.svg"
 
 
 const Header = () => {
   // データ系
   const { onClickUpArrow, onClickDownArrow } = useChangeOrder()
-  const { onClickRewind, onClickForward } = useAdjustTime()
+  const { onClickReduceTime, onClickIncreaseTime } = useAdjustTime()
   const { onClickDelete, } = useDeleteTask()
   const { onClickStop, } = useRunTask()
   const [fileInputRef, { onClickImport, onChangeFile, }] = useImportData()
@@ -50,13 +50,13 @@ const Header = () => {
           <img src={exportIcon} alt="JSONエクスポート"></img>
           <Tooltip anchorSelect="#exportBtn" content='エクスポート' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" id='rewindBtn' onClick={onClickRewind}>
-          <img src={rewindTimeIcon} alt="巻き戻し"></img>
-          <Tooltip anchorSelect="#rewindBtn" content='巻き戻し' place='bottom' delayShow={700} />
+        <div className="btn" id='reduceTimeBtn' onClick={onClickReduceTime}>
+          <img src={reduceTimeIcon} alt="時間減"></img>
+          <Tooltip anchorSelect="#reduceTimeBtn" content='時間減' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" id='forwardBtn' onClick={onClickForward}>
-          <img src={forwardIcon} alt="早送り"></img>
-          <Tooltip anchorSelect="#forwardBtn" content='早送り' place='bottom' delayShow={700} />
+        <div className="btn" id='increaseTimeBtn' onClick={onClickIncreaseTime}>
+          <img src={increaseTimeIcon} alt="時間増"></img>
+          <Tooltip anchorSelect="#increaseTimeBtn" content='時間増' place='bottom' delayShow={700} />
         </div>
         <div className="btn" id='stopBtn' onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>

@@ -17,7 +17,7 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
   const totalTime = useDayTotalTime(dayIndex)
 
   const { onClickCreateTask } = useNewTask(dayIndex)
-  const { onClickFixTaskTime } = useFixTaskTime(dayIndex)
+  const { onClickOrganizeTaskTime } = useFixTaskTime(dayIndex)
 
 
   return (
@@ -30,9 +30,9 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
           <img src={addIcon} alt="新規追加" />
           <Tooltip anchorSelect="#createBtn" content='新規作成' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" id="fixTimeBtn" onClick={onClickFixTaskTime}>
-          <img src={checkIcon} alt="時間確定" />
-          <Tooltip anchorSelect="#fixTimeBtn" content='時間確定' place='bottom' delayShow={700} />
+        <div className="btn" id="organizeTimeBtn" onClick={onClickOrganizeTaskTime}>
+          <img src={checkIcon} alt="時間整理" />
+          <Tooltip anchorSelect="#organizeTimeBtn" content='時間整理' place='bottom' delayShow={700} />
         </div>
       </div>
       <div className="taskDiv">

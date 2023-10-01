@@ -1,3 +1,4 @@
+import { Tooltip } from "react-tooltip";
 import Task from "~components/Task"
 import useDaytaskOrder from "~hooks/useDayTaskOrder";
 import useNewTask from "~features/createNewTask/useNewTask";
@@ -16,7 +17,7 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
   const totalTime = useDayTotalTime(dayIndex)
 
   const { onClickCreateTask } = useNewTask(dayIndex)
-  const { onClickFixTaskTime } = useFixTaskTime(dayIndex)
+  const { onClickOrganizeTaskTime } = useFixTaskTime(dayIndex)
 
 
   return (
@@ -25,11 +26,13 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
         <img className={isOpen ? "accordionOpen" : "accordionClose"} src={accordionIcon} alt="開く" />
         <div className="dayTitile">{dOfW}</div>
         <div className="totalTime">{totalTime.toFixed(2)} h</div>
-        <div className="btn" onClick={onClickCreateTask}>
+        <div className="btn" id="createBtn" onClick={onClickCreateTask}>
           <img src={addIcon} alt="新規追加" />
+          <Tooltip anchorSelect="#createBtn" content='新規作成' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickFixTaskTime}>
-          <img src={checkIcon} alt="時間確定" />
+        <div className="btn" id="organizeTimeBtn" onClick={onClickOrganizeTaskTime}>
+          <img src={checkIcon} alt="時間整理" />
+          <Tooltip anchorSelect="#organizeTimeBtn" content='時間整理' place='bottom' delayShow={700} />
         </div>
       </div>
       <div className="taskDiv">

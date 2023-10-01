@@ -3,11 +3,11 @@ import * as context from "~components/Provider/MyProvider"
 import useDaytaskOrder from "~hooks/useDayTaskOrder"
 
 
-const useFixTaskTime = (dayIndex: number) => {
+const useOrganizeTaskTime = (dayIndex: number) => {
   const dayTaskOrder = useDaytaskOrder(dayIndex)
   const [allTask, setAllTask] = useContext(context.allTaskContext)
 
-  const onClickFixTaskTime = (event) => {
+  const onClickOrganizeTaskTime = (event) => {
     // 親コンポーネントへのイベントの伝搬を防ぐ
     event.stopPropagation()
 
@@ -34,7 +34,7 @@ const useFixTaskTime = (dayIndex: number) => {
     }
   }
 
-  return { onClickFixTaskTime }
+  return { onClickOrganizeTaskTime }
 }
 
-export default useFixTaskTime
+export default useOrganizeTaskTime

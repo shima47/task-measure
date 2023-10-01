@@ -9,14 +9,14 @@ const useAdjustTime = () => {
   const [selectedTaskId, setSelectedTaskId] = useContext(context.selectedTaskIdContext)
   const { updateTaskTime } = useUpdateTask()
 
-  const onClickRewind = () => {
+  const onClickReduceTime = () => {
     if (selectedTaskId === "") return
 
     const timeToAdjust = -0.25
     adjustTime(timeToAdjust)
   }
 
-  const onClickForward = () => {
+  const onClickIncreaseTime = () => {
     if (selectedTaskId === "") return
 
     const timeToAdjust = 0.25
@@ -29,7 +29,7 @@ const useAdjustTime = () => {
     updateTaskTime(selectedTaskId, newTaskTime)
   }
 
-  return { onClickRewind, onClickForward }
+  return { onClickReduceTime, onClickIncreaseTime }
 }
 
 export default useAdjustTime

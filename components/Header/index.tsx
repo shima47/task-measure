@@ -1,3 +1,4 @@
+import { Tooltip } from 'react-tooltip'
 import useRunTask from "~features/runTask/useRunTask"
 import useChangeOrder from "~features/changeOrder/useChangeOrder"
 import useDeleteTask from "~features/deleteTask/useDeleteTask"
@@ -23,34 +24,43 @@ const Header = () => {
   const [fileInputRef, { onClickImport, onChangeFile, }] = useImportData()
   const { onClickExport, } = useExportData()
 
+
   return (
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
-        <div className="btn" onClick={onClickUpArrow} >
-          <img src={upArrowIcon} alt="上矢印" ></img>
+        <div className="btn" id="upArrowBtn" onClick={onClickUpArrow} >
+          <img src={upArrowIcon} alt="上矢印"></img>
+          <Tooltip anchorSelect="#upArrowBtn" content='ひとつ上に' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickDownArrow}>
+        <div className="btn" id="downArrowBtn" onClick={onClickDownArrow}>
           <img src={downArrowIcon} alt="下矢印"></img>
+          <Tooltip anchorSelect="#downArrowBtn" content='ひとつ下に' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickDelete}>
+        <div className="btn" id="deleteBtn" onClick={onClickDelete}>
           <img src={deleteIcon} alt="削除"></img>
+          <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickImport}>
+        <div className="btn" id='importBtn' onClick={onClickImport}>
           <img src={importIcon} alt="JSONインポート"></img>
           <input style={{ display: "none" }} ref={fileInputRef} type="file" accept='.json' onChange={onChangeFile} />
+          <Tooltip anchorSelect="#importBtn" content='インポート' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickExport}>
+        <div className="btn" id='exportBtn' onClick={onClickExport}>
           <img src={exportIcon} alt="JSONエクスポート"></img>
+          <Tooltip anchorSelect="#exportBtn" content='エクスポート' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickRewind}>
+        <div className="btn" id='rewindBtn' onClick={onClickRewind}>
           <img src={rewindTimeIcon} alt="巻き戻し"></img>
+          <Tooltip anchorSelect="#rewindBtn" content='巻き戻し' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickForward}>
+        <div className="btn" id='forwardBtn' onClick={onClickForward}>
           <img src={forwardIcon} alt="早送り"></img>
+          <Tooltip anchorSelect="#forwardBtn" content='早送り' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" onClick={onClickStop}>
+        <div className="btn" id='stopBtn' onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>
+          <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
         </div>
       </div>
     </div>

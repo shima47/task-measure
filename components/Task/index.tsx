@@ -1,3 +1,4 @@
+import { Tooltip } from "react-tooltip"
 import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
@@ -57,12 +58,14 @@ const Task = ({ taskId }) => {
       </div>
       {
         isRunning ?
-          <div className="btn" onClick={onClickStop}>
+          <div className="btn" id="stopBtn" onClick={onClickStop}>
             <img src={stopIcon} alt="ストップ" />
+            <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
           </div>
           :
-          <div className="btn" onClick={onClickStart}>
+          <div className="btn" id="startBtn" onClick={onClickStart}>
             <img src={startIcon} alt="スタート" />
+            <Tooltip anchorSelect="#startBtn" content='開始' place='bottom' delayShow={700} />
           </div>
       }
     </div >

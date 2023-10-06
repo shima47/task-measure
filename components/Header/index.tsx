@@ -15,6 +15,7 @@ import reduceTimeIcon from "data-base64:~assets/reduceTime.svg"
 import increaseTimeIcon from "data-base64:~assets/increaseTime.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import settingIcon from "data-base64:~assets/setting.svg"
+import useNaviHooks from '~features/navigate/useNaviHooks'
 
 
 const Header = () => {
@@ -25,13 +26,14 @@ const Header = () => {
   const { onClickStop, } = useRunTask()
   const [fileInputRef, { onClickImport, onChangeFile, }] = useImportData()
   const { onClickExport, } = useExportData()
+  const { onClickHome, onClickSetting } = useNaviHooks()
 
 
   return (
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
-        <div className="btn" id="homeBtn" onClick={onClickStop} >
+        <div className="btn" id="homeBtn" onClick={onClickHome} >
           <img src={homeIcon} alt="ホーム"></img>
           <Tooltip anchorSelect="#homeBtn" content='ホーム' place='bottom' delayShow={700} />
         </div>
@@ -68,7 +70,7 @@ const Header = () => {
           <img src={stopIcon} alt="ストップ"></img>
           <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
         </div>
-        <div className="btn" id='settingBtn' onClick={onClickStop}>
+        <div className="btn" id='settingBtn' onClick={onClickSetting}>
           <img src={settingIcon} alt="設定"></img>
           <Tooltip anchorSelect="#settingBtn" content='設定' place='bottom' delayShow={700} />
         </div>

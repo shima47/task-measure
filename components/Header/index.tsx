@@ -6,6 +6,7 @@ import useAdjustTime from "~features/adjustTime/useAdjustTime"
 import useImportData from "~features/importData/useImportData"
 import useExportData from "~features/exportData/useExportData"
 import upArrowIcon from "data-base64:~assets/upArrow.svg"
+import homeIcon from "data-base64:~assets/home.svg"
 import downArrowIcon from "data-base64:~assets/downArrow.svg"
 import importIcon from "data-base64:~assets/import.svg"
 import exportIcon from "data-base64:~assets/export.svg"
@@ -13,6 +14,7 @@ import deleteIcon from "data-base64:~assets/delete.svg"
 import reduceTimeIcon from "data-base64:~assets/reduceTime.svg"
 import increaseTimeIcon from "data-base64:~assets/increaseTime.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
+import settingIcon from "data-base64:~assets/setting.svg"
 
 
 const Header = () => {
@@ -29,6 +31,10 @@ const Header = () => {
     <div className="header">
       <div className="headerTitle">Task Measure</div>
       <div className="headerBtns">
+        <div className="btn" id="homeBtn" onClick={onClickStop} >
+          <img src={homeIcon} alt="ホーム"></img>
+          <Tooltip anchorSelect="#homeBtn" content='ホーム' place='bottom' delayShow={700} />
+        </div>
         <div className="btn" id="upArrowBtn" onClick={onClickUpArrow} >
           <img src={upArrowIcon} alt="上矢印"></img>
           <Tooltip anchorSelect="#upArrowBtn" content='ひとつ上に' place='bottom' delayShow={700} />
@@ -61,6 +67,10 @@ const Header = () => {
         <div className="btn" id='stopBtn' onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>
           <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
+        </div>
+        <div className="btn" id='settingBtn' onClick={onClickStop}>
+          <img src={settingIcon} alt="設定"></img>
+          <Tooltip anchorSelect="#settingBtn" content='設定' place='bottom' delayShow={700} />
         </div>
       </div>
     </div>

@@ -1,0 +1,47 @@
+.setting {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settingItem {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.settingTitle {
+  display: flex;
+  margin-right: auto;
+}
+
+.settingInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.restTime {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeTypeInput {
+  border: none;
+  border-bottom: solid 1px;
+  outline: none;
+
+  color: black;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}

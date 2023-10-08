@@ -32,7 +32,7 @@ const Task = ({ taskId }) => {
   return (
     <div className="task" >
       <input
-        className="taskCheckbox"
+        className="checkbox"
         type="checkbox"
         checked={isSelected}
         onChange={onChangeSelect}

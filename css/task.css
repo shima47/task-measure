@@ -6,14 +6,6 @@
     align-self: stretch;
 }
 
-.taskCheckbox {
-    transform: scale(1.5);
-}
-
-.taskCheckbox:hover {
-    cursor: pointer;
-}
-
 .taskTitle {
     display: flex;
     padding: 0px;

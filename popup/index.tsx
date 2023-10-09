@@ -1,3 +1,5 @@
+import { BrowserRouter, } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
 import MyProvider from "~components/Provider/MyProvider"
 import Page from "~popup/Page"
 import "~css/common.css"
@@ -7,15 +9,14 @@ import "~css/home.css"
 import "~css/dayDiv.css"
 import "~css/task.css"
 import "~css/dataImport.css"
+import "~css/setting.css"
 
-const IndexPopup = () => {
 
-  return (
-    <MyProvider >
+ReactDOM.createRoot(document.getElementById('__plasmo')).render(
+  <MyProvider >
+    <BrowserRouter>
       <Page />
-    </MyProvider>
-  )
-}
-
-export default IndexPopup
+    </BrowserRouter>
+  </MyProvider>
+)
 

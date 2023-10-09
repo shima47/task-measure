@@ -13,6 +13,7 @@ body {
     display: flex;
     padding: 5px;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     user-select: none;
 
@@ -40,4 +41,12 @@ body {
 .btnRow {
     display: flex;
     gap: 10px;
+}
+
+.checkbox {
+    transform: scale(1.5);
+}
+
+.checkbox:hover {
+    cursor: pointer;
 }

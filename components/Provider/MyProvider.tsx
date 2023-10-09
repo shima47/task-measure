@@ -11,7 +11,7 @@ export const runningTaskInfoContext = createContext<type.runningTaskInfoState>(n
 export const selectedTaskIdContext = createContext(null)
 export const isImportingContext = createContext(null)
 
-const bucket = getBucket<type.myBucket>('my_bucket');
+const bucket = getBucket<type.myBucket>('myBucket');
 
 const MyProvider = ({ children }) => {
   const [allTask, setAllTask] = useStorage("taskData", INITIAL_DATA.ALL_TASK)
@@ -33,6 +33,7 @@ const MyProvider = ({ children }) => {
     // setIsOpenAry(value.isOpenAry)
     // setOrder(value.order)
     // setRunningTask(value.runningTask)
+    // await bucket.set({ restTime: INITIAL_DATA.REST_TIME })
   }
 
   return (

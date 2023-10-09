@@ -1,21 +1,17 @@
-import { useState } from "react"
+import useSettingRestTime from "~features/restTime/useSettingRestTime"
 
 const RestTime = () => {
-  const [startRestTime, setStartRestTime] = useState("")
-  const [endRestTime, setEndRestTime] = useState("")
-  const [isSelect, setIsSelect] = useState(false)
+  const [
+    startRestTime,
+    endRestTime,
+    isSelect,
+    {
+      onChangeStartRestTime,
+      onChangeEndRestTime,
+      onChangeSelect
+    }
+  ] = useSettingRestTime(0)
 
-  const onChangeSelect = () => {
-    setIsSelect(current => !current)
-  }
-
-  const onChangeStartRestTime = (e) => {
-    setStartRestTime(e.target.value)
-  }
-
-  const onChangeEndRestTime = (e) => {
-    setEndRestTime(e.target.value)
-  }
 
   return (
     <div className="restTime">

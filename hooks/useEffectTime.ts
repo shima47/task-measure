@@ -12,15 +12,17 @@ const useEffectTime = (taskId: string) => {
   const [, { setStartTimeNow }] = useRunningTaskInfo()
 
   // 実行中のタスクは実行時間を更新する
-  useEffect(() => {
+  useEffect(() => { effectFn() }, [])
+
+  const effectFn = async () => {
     // 実行中のタスクじゃないなら終了
     if (!isRunning) return
     // 未反映の経過時間分を加算する
-    const elapsedTime = getElapsedTime()
+    const elapsedTime = await getElapsedTime()
     updateTaskTime(taskId, elapsedTime)
     // 開始時間をリセットする
     setStartTimeNow()
-  }, [])
+  }
 }
 
 export default useEffectTime

@@ -7,10 +7,12 @@ export type runningTaskInfo = { id: string, startTime: number, }
 export type selectedTaskId = string
 export type isImporting = boolean
 export type restTime = {
-    startRestTime: string,
-    endRestTime: string,
+    start: string,
+    end: string,
     isSelect: boolean,
 }
+export type restTimeKeys = "start" | "end" | "isSelect"
+export type restTimeValues = string | boolean
 
 export type allTaskState = [allTask, React.Dispatch<React.SetStateAction<allTask>>]
 export type isOpenAryState = [isOpenAry, React.Dispatch<React.SetStateAction<isOpenAry>>]

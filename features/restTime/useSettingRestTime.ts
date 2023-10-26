@@ -1,6 +1,6 @@
 import { getBucket } from "@extend-chrome/storage";
 import { useEffect, useState } from "react"
-import * as type from "../../types/type"
+import * as type from "~types/type"
 
 const bucket = getBucket<type.myBucket>('myBucket');
 
@@ -14,8 +14,8 @@ const useSettingRestTime = (restTimeIndex: number) => {
   const effectFn = async () => {
     const res = await bucket.get(["restTime"])
     const restTime: type.restTime = res.restTime[restTimeIndex]
-    setStartRestTime(restTime.startRestTime)
-    setEndRestTime(restTime.endRestTime)
+    setStartRestTime(restTime.start)
+    setEndRestTime(restTime.end)
     setIsSelect(restTime.isSelect)
   }
 
@@ -29,7 +29,7 @@ const useSettingRestTime = (restTimeIndex: number) => {
   const onChangeStartRestTime = async (e) => {
     const startRestTime = e.target.value
     // ローカルストレージに保存
-    updateRestTime(restTimeIndex, "startRestTime", startRestTime)
+    updateRestTime(restTimeIndex, "start", startRestTime)
     // state更新
     setStartRestTime(startRestTime)
   }
@@ -37,12 +37,12 @@ const useSettingRestTime = (restTimeIndex: number) => {
   const onChangeEndRestTime = async (e) => {
     const endRestTime = e.target.value
     // ローカルストレージに保存
-    updateRestTime(restTimeIndex, "endRestTime", endRestTime)
+    updateRestTime(restTimeIndex, "end", endRestTime)
     // state更新
     setEndRestTime(endRestTime)
   }
 
-  const updateRestTime = async (restTimeIndex: number, key: string, value: string | boolean) => {
+  const updateRestTime = async (restTimeIndex: number, key: type.restTimeKeys, value: type.restTimeValues) => {
     // ローカルストレージから取得
     const res = await bucket.get(["restTime"])
     const restTimeAry: type.restTime[] = res.restTime

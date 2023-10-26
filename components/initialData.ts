@@ -26,8 +26,8 @@ const IS_OPEN_ARY: type.isOpenAry = [true, true, true, true, true]
 const SELECTED_TASK_ID = ""
 const IS_IMPORTING = false
 const REST_TIME: type.restTime[] = [{
-  startRestTime: "",
-  endRestTime: "",
+  start: "",
+  end: "",
   isSelect: false,
 }]
 

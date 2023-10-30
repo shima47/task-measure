@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import { Tooltip } from "react-tooltip";
+import { getRestTime } from "~features/restTime/storage";
 import RestTime from "~components/RestTime"
 import addIcon from "data-base64:~assets/add.svg"
 
 
 const Setting = () => {
+  const [restTimeAry, setRestTimeAry] = useState([])
+
+  useEffect(() => { effectFn() }, [])
+  
+  const effectFn = async () => {
+    const restTimeAry = await getRestTime()
+    setRestTimeAry(restTimeAry)
+  }
+
   return (
     <div className="setting">
       <div className="settingItem">
@@ -15,7 +26,11 @@ const Setting = () => {
           </div>
         </div>
         <div className="settingRight">
-          <RestTime></RestTime>
+          {
+            restTimeAry.map((item, index) => {
+              return <RestTime restTimeIndex={index}></RestTime>
+            })
+          }
         </div>
       </div>
       <br />

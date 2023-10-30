@@ -1,7 +1,7 @@
 import { getBucket } from "@extend-chrome/storage";
 import * as type from "~types/type"
-import { INITIAL_DATA } from "~components/initialData";
 import * as restTimeType from "~features/restTime/type"
+import { getRestTime } from "~features/restTime/storage";
 
 
 const bucket = getBucket<type.myBucket>('myBucket');
@@ -9,16 +9,17 @@ const bucket = getBucket<type.myBucket>('myBucket');
 // 未反映の経過時間から差し引くための休憩時間を返す
 export const getTotalRestTime = async (taskStartTime: number, now: number) => {
   // 休憩時間の設定を取得
-  const res = await bucket.get({ restTime: INITIAL_DATA.REST_TIME })
+  const restTimeAry = await getRestTime()
 
   // 選択されたものだけ取り出す
-  const restTimeAry = res.restTime.filter(item => item.isSelect)
+  const selectedRestTimeAry = restTimeAry.filter(item => item.isSelect)
+  const a = await getRestTime
 
   // 休憩時間がなければReturn
-  if (restTimeAry.length === 0) return 0
+  if (selectedRestTimeAry.length === 0) return 0
 
   // 休憩時間の変換（String to UNIX time）
-  const convertedRestTimeAry: restTimeType.convertedRestTime[] = restTimeAry.map(restTime => {
+  const convertedRestTimeAry: restTimeType.convertedRestTime[] = selectedRestTimeAry.map(restTime => {
     return {
       start: convertRestTime(restTime.start),
       end: convertRestTime(restTime.end),

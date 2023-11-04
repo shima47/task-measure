@@ -19,3 +19,7 @@ export const updateRestTime = async (restTimeIndex: number, key: type.restTimeKe
   await bucket.set({ restTime: restTimeAry })
 }
 
+export const updateRestTimeAry = async (newRestTimeAry: type.restTime[]) => {
+  await bucket.set({ restTime: newRestTimeAry })
+}
+

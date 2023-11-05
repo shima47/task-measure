@@ -3,7 +3,7 @@ import * as type from "~types/type"
 import { getRestTime, updateRestTime, } from "~features/restTime/storage";
 
 
-const useSettingRestTime = (restTimeIndex: number) => {
+const useRestTime = (restTimeIndex: number) => {
   const [startRestTime, setStartRestTime] = useState("")
   const [endRestTime, setEndRestTime] = useState("")
   const [isSelect, setIsSelect] = useState(false)
@@ -53,4 +53,4 @@ const updateRestTimeValue = async (restTimeIndex: number, key: type.restTimeKeys
   await updateRestTime(newRestTimeAry)
 }
 
-export default useSettingRestTime
+export default useRestTime

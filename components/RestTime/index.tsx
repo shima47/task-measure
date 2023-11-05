@@ -1,4 +1,4 @@
-import useSettingRestTime from "~features/restTime/useSettingRestTime"
+import useRestTime from "~features/restTime/useSettingRestTime"
 
 const RestTime = ({ restTimeIndex }) => {
   const [
@@ -10,7 +10,7 @@ const RestTime = ({ restTimeIndex }) => {
       onChangeEndRestTime,
       onChangeSelect
     }
-  ] = useSettingRestTime(restTimeIndex)
+  ] = useRestTime(restTimeIndex)
 
 
   return (

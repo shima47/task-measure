@@ -1,28 +1,24 @@
 import { useEffect, useState } from "react"
 import * as type from "~types/type"
+import { INITIAL_DATA } from "~components/initialData";
 import { readRestTime, updateRestTime, } from "~features/restTime/storage";
 
 
 const useRestTime = (restTimeIndex: number) => {
-  const [startRestTime, setStartRestTime] = useState("")
-  const [endRestTime, setEndRestTime] = useState("")
-  const [isSelect, setIsSelect] = useState(false)
+  const [restTime, setRestTime] = useState(INITIAL_DATA.REST_TIME[0])
 
   useEffect(() => { effectFn() }, [])
 
   const effectFn = async () => {
     const restTimeAry = await readRestTime()
-    const restTime = restTimeAry[restTimeIndex]
-    setStartRestTime(restTime.start)
-    setEndRestTime(restTime.end)
-    setIsSelect(restTime.isSelect)
+    setRestTime(restTimeAry.at(restTimeIndex))
   }
 
   const onChangeSelect = async () => {
     // ローカルストレージに保存
-    updateRestTimeValue(restTimeIndex, "isSelect", !isSelect)
+    updateRestTimeValue(restTimeIndex, "isSelect", !restTime.isSelect)
     // state更新
-    setIsSelect(current => !current)
+    setRestTime(current => ({ ...current, isSelect: !current.isSelect }))
   }
 
   const onChangeStartRestTime = async (e) => {
@@ -30,7 +26,7 @@ const useRestTime = (restTimeIndex: number) => {
     // ローカルストレージに保存
     updateRestTimeValue(restTimeIndex, "start", startRestTime)
     // state更新
-    setStartRestTime(startRestTime)
+    setRestTime(current => ({ ...current, start: startRestTime }))
   }
 
   const onChangeEndRestTime = async (e) => {
@@ -38,10 +34,10 @@ const useRestTime = (restTimeIndex: number) => {
     // ローカルストレージに保存
     updateRestTimeValue(restTimeIndex, "end", endRestTime)
     // state更新
-    setEndRestTime(endRestTime)
+    setRestTime(current => ({ ...current, end: endRestTime }))
   }
 
-  return [startRestTime, endRestTime, isSelect, { onChangeStartRestTime, onChangeEndRestTime, onChangeSelect }] as const
+  return [restTime, { onChangeStartRestTime, onChangeEndRestTime, onChangeSelect }] as const
 }
 
 const updateRestTimeValue = async (restTimeIndex: number, key: type.restTimeKeys, value: type.restTimeValues) => {

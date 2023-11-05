@@ -7,6 +7,7 @@ export type runningTaskInfo = { id: string, startTime: number, }
 export type selectedTaskId = string
 export type isImporting = boolean
 export type restTime = {
+    id: string,
     start: string,
     end: string,
     isSelect: boolean,

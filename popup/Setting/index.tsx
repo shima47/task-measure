@@ -20,7 +20,7 @@ const Setting = () => {
         <div className="settingRight">
           {
             restTimeAry.map((item, index) => {
-              return <RestTime restTimeIndex={index}></RestTime>
+              return <RestTime key={item.id} restTimeIndex={index}></RestTime>
             })
           }
         </div>

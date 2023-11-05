@@ -38,19 +38,19 @@ const useNewTask = (dayIndex: number) => {
     setOrder(newOrder)
   }
 
-  const getNewUUID = (order: type.order) => {
-    //既存のOrderData配列に含まれないUUIDが出たらReturn
-    let tries = 0;
-    while (tries < 100) {
-      const id: string = uuid();
-      if (!order.includes(id)) { return id }
-      tries++;
-    }
+  return { onClickCreateTask, } as const
+}
 
-    throw new Error("新しいUUIDが生成できませんでした。");
+const getNewUUID = (order: type.order) => {
+  //既存のOrderData配列に含まれないUUIDが出たらReturn
+  let tries = 0;
+  while (tries < 100) {
+    const id: string = uuid();
+    if (!order.includes(id)) { return id }
+    tries++;
   }
 
-  return { onClickCreateTask, } as const
+  throw new Error("新しいUUIDが生成できませんでした。");
 }
 
 export default useNewTask

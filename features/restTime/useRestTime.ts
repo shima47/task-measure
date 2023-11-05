@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import * as type from "~types/type"
-import { getRestTime, updateRestTime, } from "~features/restTime/storage";
+import { readRestTime, updateRestTime, } from "~features/restTime/storage";
 
 
 const useRestTime = (restTimeIndex: number) => {
@@ -11,7 +11,7 @@ const useRestTime = (restTimeIndex: number) => {
   useEffect(() => { effectFn() }, [])
 
   const effectFn = async () => {
-    const restTimeAry = await getRestTime()
+    const restTimeAry = await readRestTime()
     const restTime = restTimeAry[restTimeIndex]
     setStartRestTime(restTime.start)
     setEndRestTime(restTime.end)
@@ -46,7 +46,7 @@ const useRestTime = (restTimeIndex: number) => {
 
 const updateRestTimeValue = async (restTimeIndex: number, key: type.restTimeKeys, value: type.restTimeValues) => {
   // ローカルストレージから取得
-  const restTimeAry = await getRestTime()
+  const restTimeAry = await readRestTime()
   // データを更新
   const newRestTime: type.restTime = { ...restTimeAry.at(restTimeIndex), [key]: value }
   const newRestTimeAry = restTimeAry.with(restTimeIndex, newRestTime)

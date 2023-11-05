@@ -4,7 +4,7 @@ import { INITIAL_DATA } from "~components/initialData";
 
 const bucket = getBucket<type.myBucket>('myBucket');
 
-export const getRestTime = async () => {
+export const readRestTime = async () => {
   // ローカルストレージから取得
   const res = await bucket.get({ restTime: INITIAL_DATA.REST_TIME })
   return res.restTime

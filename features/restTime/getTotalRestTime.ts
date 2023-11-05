@@ -19,9 +19,12 @@ export const getTotalRestTime = async (taskStartTime: number, now: number) => {
 
   // 休憩時間の変換（String to UNIX time）
   const convertedRestTimeAry: restTimeType.convertedRestTime[] = selectedRestTimeAry.map(restTime => {
+    const tempAry = [convertRestTime(restTime.start), convertRestTime(restTime.end)]
+    // 昇順にする
+    const sortedAry = tempAry.toSorted()
     return {
-      start: convertRestTime(restTime.start),
-      end: convertRestTime(restTime.end),
+      start: sortedAry.at(0),
+      end: sortedAry.at(1),
     }
   })
 

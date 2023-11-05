@@ -3,8 +3,12 @@ import useRestTime from "~features/restTime/useRestTime"
 import deleteIcon from "data-base64:~assets/delete.svg"
 
 const RestTime = ({ restTimeIndex }) => {
-  const [restTime, { onChangeStartRestTime, onChangeEndRestTime, onChangeSelect }] = useRestTime(restTimeIndex)
-
+  const [restTime, {
+    onChangeStartRestTime,
+    onChangeEndRestTime,
+    onChangeSelect,
+    onClickDeleteRestTime,
+  }] = useRestTime(restTimeIndex)
 
   return (
     <div className="restTime">
@@ -12,10 +16,10 @@ const RestTime = ({ restTimeIndex }) => {
       <input className="timeTypeInput" type="time" value={restTime.start} onChange={onChangeStartRestTime} />
       <div>～</div>
       <input className="timeTypeInput" type="time" value={restTime.end} onChange={onChangeEndRestTime} />
-      <div className="restTimeDeleteBtn" id="deleteBtn" onClick={()=>{}}>
-          <img src={deleteIcon} alt="削除"></img>
-          <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={700} />
-        </div>
+      <div className="restTimeDeleteBtn" id="deleteBtn" onClick={onClickDeleteRestTime}>
+        <img src={deleteIcon} alt="削除"></img>
+        <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={700} />
+      </div>
     </div>
   )
 }

@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import * as type from "~types/type"
 import { INITIAL_DATA } from "~components/initialData";
+import { restTimeAryContext } from "~components/Provider/MyProvider";
 import { readRestTime, updateRestTime, } from "~features/restTime/storage";
 
 
 const useRestTime = (restTimeIndex: number) => {
   const [restTime, setRestTime] = useState(INITIAL_DATA.REST_TIME[0])
+  const [, setRestTimeAry] = useContext(restTimeAryContext)
 
   useEffect(() => { effectFn() }, [])
 
@@ -37,7 +39,17 @@ const useRestTime = (restTimeIndex: number) => {
     setRestTime(current => ({ ...current, end: endRestTime }))
   }
 
-  return [restTime, { onChangeStartRestTime, onChangeEndRestTime, onChangeSelect }] as const
+  const onClickDeleteRestTime = async () => {
+    const restTimeAry = await readRestTime()
+    // restTimeIndexの要素を削除
+    const newRestTimeAry = restTimeAry.toSpliced(restTimeIndex, 1)
+    // ローカルストレージに保存
+    await updateRestTime(newRestTimeAry)
+    // state更新
+    setRestTimeAry(newRestTimeAry)
+  }
+
+  return [restTime, { onChangeStartRestTime, onChangeEndRestTime, onChangeSelect, onClickDeleteRestTime }] as const
 }
 
 const updateRestTimeValue = async (restTimeIndex: number, key: type.restTimeKeys, value: type.restTimeValues) => {

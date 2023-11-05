@@ -14,3 +14,4 @@ export const updateRestTime = async (newRestTimeAry: type.restTime[]) => {
   await bucket.set({ restTime: newRestTimeAry })
 }
 
+

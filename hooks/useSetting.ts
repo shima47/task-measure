@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 import * as type from "~types/type"
-import { readRestTime, updateRestTime, } from "~features/restTime/storage";
 import { INITIAL_DATA } from "~components/initialData";
+import { restTimeAryContext } from "~components/Provider/MyProvider";
+import { readRestTime, updateRestTime, } from "~features/restTime/storage";
 
 
 const useSetting = () => {
-  const [restTimeAry, setRestTimeAry] = useState(INITIAL_DATA.REST_TIME)
+  const [restTimeAry, setRestTimeAry] = useContext(restTimeAryContext)
 
   useEffect(() => { effectFn() }, [])
 

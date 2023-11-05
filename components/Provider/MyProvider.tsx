@@ -10,6 +10,7 @@ export const orderContext = createContext(null)
 export const runningTaskInfoContext = createContext<type.runningTaskInfoState>(null)
 export const selectedTaskIdContext = createContext(null)
 export const isImportingContext = createContext(null)
+export const restTimeAryContext = createContext(null)
 
 const bucket = getBucket<type.myBucket>('myBucket');
 
@@ -23,6 +24,8 @@ const MyProvider = ({ children }) => {
   const [selectedTaskId, setSelectedTaskId] = useState(INITIAL_DATA.SELECTED_TASK_ID)
   // JSONのインポート画面を切り替える
   const [isImporting, setIsImporting] = useState(INITIAL_DATA.IS_IMPORTING)
+
+  const [restTimeAry, setRestTimeAry] = useState(INITIAL_DATA.REST_TIME)
 
   useEffect(() => { effectFn() }, [])
 
@@ -43,7 +46,9 @@ const MyProvider = ({ children }) => {
           <runningTaskInfoContext.Provider value={[runningTask, setRunningTask]}>
             <selectedTaskIdContext.Provider value={[selectedTaskId, setSelectedTaskId]}>
               <isImportingContext.Provider value={[isImporting, setIsImporting]}>
-                {children}
+                <restTimeAryContext.Provider value={[restTimeAry, setRestTimeAry]}>
+                  {children}
+                </restTimeAryContext.Provider>
               </isImportingContext.Provider>
             </selectedTaskIdContext.Provider>
           </runningTaskInfoContext.Provider>

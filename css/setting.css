@@ -15,12 +15,19 @@
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.settingTitle {
+.settingLeft {
   display: flex;
   margin-right: auto;
+  gap: 5px;
+  height: 25px;
 }
 
-.settingInput {
+.settingTitle {
+  display: flex;
+  align-items: center;
+}
+
+.settingRight {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -44,4 +51,32 @@
   font-size: 13px;
   font-weight: 400;
   line-height: normal;
+}
+
+.restTimeDeleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  user-select: none;
+  transform: translateY(-1px);
+
+  border-radius: 25px;
+  background: white;
+
+  color: black;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.restTimeDeleteBtn:hover {
+  cursor: pointer;
+}
+
+.restTimeDeleteBtn:active {
+  background-color: #c5c5c5;
+  transform: translateY(2px);
 }

@@ -1,4 +1,6 @@
 import * as type from "~types/type"
+import { v4 as uuid } from "uuid"
+
 
 const ALL_TASK: type.allTask = {
   // "a1e73c8a-74d0-a1a5-4ef3-a58d99f0f69f": { title: "タスク", time: 11234567, },
@@ -26,8 +28,9 @@ const IS_OPEN_ARY: type.isOpenAry = [true, true, true, true, true]
 const SELECTED_TASK_ID = ""
 const IS_IMPORTING = false
 const REST_TIME: type.restTime[] = [{
-  startRestTime: "",
-  endRestTime: "",
+  id: "",
+  start: "",
+  end: "",
   isSelect: false,
 }]
 

@@ -8,22 +8,22 @@ const useRunTask = (taskId: string = "") => {
   const { getElapsedTime } = useElapsedTime(runningTaskInfo.id)
   const { updateTaskTime } = useUpdateTask()
 
-  const onClickStart = () => {
+  const onClickStart = async () => {
     // このフックに引数が渡されなければ実行しない
     if (taskId === "") return
     // 実行中だったタスクに時間を記録する
     if (runningTaskInfo.id) {
-      const elapsedTime = getElapsedTime()
+      const elapsedTime = await getElapsedTime()
       updateTaskTime(runningTaskInfo.id, elapsedTime)
     }
     // 新しい実行中タスクを設定する
     setNewRunningTaskInfo(taskId)
   }
 
-  const onClickStop = () => {
+  const onClickStop = async () => {
     if (runningTaskInfo.id === "") return
     // 実行中だったタスクに時間を記録する
-    const elapsedTime = getElapsedTime()
+    const elapsedTime = await getElapsedTime()
     updateTaskTime(runningTaskInfo.id, elapsedTime)
     // 新しい実行中タスクを設定する
     setRunningTaskInfoStop()

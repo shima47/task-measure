@@ -1,24 +1,25 @@
-import useSettingRestTime from "~features/restTime/useSettingRestTime"
+import { Tooltip } from 'react-tooltip'
+import useRestTime from "~features/restTime/useRestTime"
+import deleteIcon from "data-base64:~assets/delete.svg"
 
-const RestTime = () => {
-  const [
-    startRestTime,
-    endRestTime,
-    isSelect,
-    {
-      onChangeStartRestTime,
-      onChangeEndRestTime,
-      onChangeSelect
-    }
-  ] = useSettingRestTime(0)
-
+const RestTime = ({ restTimeIndex }) => {
+  const [restTime, {
+    onChangeStartRestTime,
+    onChangeEndRestTime,
+    onChangeSelect,
+    onClickDeleteRestTime,
+  }] = useRestTime(restTimeIndex)
 
   return (
     <div className="restTime">
-      <input className="checkbox" type="checkbox" checked={isSelect} onChange={onChangeSelect} />
-      <input className="timeTypeInput" type="time" value={startRestTime} onChange={onChangeStartRestTime} />
+      <input className="checkbox" type="checkbox" checked={restTime.isSelect} onChange={onChangeSelect} />
+      <input className="timeTypeInput" type="time" value={restTime.start} onChange={onChangeStartRestTime} />
       <div>～</div>
-      <input className="timeTypeInput" type="time" value={endRestTime} onChange={onChangeEndRestTime} />
+      <input className="timeTypeInput" type="time" value={restTime.end} onChange={onChangeEndRestTime} />
+      <div className="restTimeDeleteBtn" id="deleteBtn" onClick={onClickDeleteRestTime}>
+        <img src={deleteIcon} alt="削除"></img>
+        <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={700} />
+      </div>
     </div>
   )
 }

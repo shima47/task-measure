@@ -1,27 +1,11 @@
-import { useEffect, useState } from "react";
 import { Tooltip } from "react-tooltip";
-import { INITIAL_DATA } from "~components/initialData";
-import { getRestTime, updateRestTime } from "~features/restTime/storage";
+import useSetting from "~hooks/useSetting";
 import RestTime from "~components/RestTime"
 import addIcon from "data-base64:~assets/add.svg"
 
 
 const Setting = () => {
-  const [restTimeAry, setRestTimeAry] = useState([])
-
-  useEffect(() => { effectFn() }, [])
-
-  const effectFn = async () => {
-    const restTimeAry = await getRestTime()
-    setRestTimeAry(restTimeAry)
-  }
-
-  const onClickAddRestTime = async () => {
-    const restTimeAry = await getRestTime()
-    const newRestTimeAry = [...restTimeAry, INITIAL_DATA.REST_TIME[0]]
-    await updateRestTime(newRestTimeAry)
-    setRestTimeAry(newRestTimeAry)
-  }
+  const [restTimeAry, { onClickAddRestTime }] = useSetting()
 
   return (
     <div className="setting">

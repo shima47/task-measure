@@ -1,4 +1,4 @@
-import useRestTime from "~features/restTime/useSettingRestTime"
+import useRestTime from "~features/restTime/useRestTime"
 
 const RestTime = ({ restTimeIndex }) => {
   const [

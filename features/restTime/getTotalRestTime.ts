@@ -13,7 +13,6 @@ export const getTotalRestTime = async (taskStartTime: number, now: number) => {
 
   // 選択されたものだけ取り出す
   const selectedRestTimeAry = restTimeAry.filter(item => item.isSelect)
-  const a = await getRestTime
 
   // 休憩時間がなければReturn
   if (selectedRestTimeAry.length === 0) return 0

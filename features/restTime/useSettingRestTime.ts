@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import * as type from "~types/type"
-import { getRestTime, updateRestTime } from "~features/restTime/storage";
+import { getRestTime, updateRestTime, } from "~features/restTime/storage";
 
 
 const useSettingRestTime = (restTimeIndex: number) => {
@@ -20,7 +20,7 @@ const useSettingRestTime = (restTimeIndex: number) => {
 
   const onChangeSelect = async () => {
     // ローカルストレージに保存
-    updateRestTime(restTimeIndex, "isSelect", !isSelect)
+    updateRestTimeValue(restTimeIndex, "isSelect", !isSelect)
     // state更新
     setIsSelect(current => !current)
   }
@@ -28,7 +28,7 @@ const useSettingRestTime = (restTimeIndex: number) => {
   const onChangeStartRestTime = async (e) => {
     const startRestTime = e.target.value
     // ローカルストレージに保存
-    updateRestTime(restTimeIndex, "start", startRestTime)
+    updateRestTimeValue(restTimeIndex, "start", startRestTime)
     // state更新
     setStartRestTime(startRestTime)
   }
@@ -36,13 +36,21 @@ const useSettingRestTime = (restTimeIndex: number) => {
   const onChangeEndRestTime = async (e) => {
     const endRestTime = e.target.value
     // ローカルストレージに保存
-    updateRestTime(restTimeIndex, "end", endRestTime)
+    updateRestTimeValue(restTimeIndex, "end", endRestTime)
     // state更新
     setEndRestTime(endRestTime)
   }
 
-
   return [startRestTime, endRestTime, isSelect, { onChangeStartRestTime, onChangeEndRestTime, onChangeSelect }] as const
+}
+
+const updateRestTimeValue = async (restTimeIndex: number, key: type.restTimeKeys, value: type.restTimeValues) => {
+  // ローカルストレージから取得
+  const restTimeAry = await getRestTime()
+  // データを更新
+  const newRestTime: type.restTime = { ...restTimeAry.at(restTimeIndex), [key]: value }
+  const newRestTimeAry = restTimeAry.with(restTimeIndex, newRestTime)
+  await updateRestTime(newRestTimeAry)
 }
 
 export default useSettingRestTime

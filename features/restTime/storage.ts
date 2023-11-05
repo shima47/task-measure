@@ -10,16 +10,7 @@ export const getRestTime = async () => {
   return res.restTime
 }
 
-export const updateRestTime = async (restTimeIndex: number, key: type.restTimeKeys, value: type.restTimeValues) => {
-  // ローカルストレージから取得
-  const restTimeAry = await getRestTime()
-  // データを更新
-  const newRestTime: type.restTime = { ...restTimeAry[restTimeIndex], [key]: value }
-  restTimeAry[restTimeIndex] = newRestTime
-  await bucket.set({ restTime: restTimeAry })
-}
-
-export const updateRestTimeAry = async (newRestTimeAry: type.restTime[]) => {
+export const updateRestTime = async (newRestTimeAry: type.restTime[]) => {
   await bucket.set({ restTime: newRestTimeAry })
 }
 

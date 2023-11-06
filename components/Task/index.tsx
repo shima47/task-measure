@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Tooltip } from "react-tooltip"
 import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
@@ -8,6 +9,8 @@ import useTaskTime from "~hooks/useTaskTime"
 import useEffectTime from "~hooks/useEffectTime"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
+import linkIcon from "data-base64:~assets/link.svg"
+import activeLinkIcon from "data-base64:~assets/activeLink.svg"
 
 
 /**
@@ -29,6 +32,8 @@ const Task = ({ taskId }) => {
   // 経過時間を反映させる
   useEffectTime(taskId)
 
+  const [isTransfer, setIsTranfer] = useState(false)
+
   return (
     <div className="task" >
       <input
@@ -37,6 +42,10 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
+      <div className={`transferBtn ${isTransfer && "activeTransferBtn"}`} id="transferBtn" onClick={()=>{setIsTranfer(c => !c)}}>
+        <img src={isTransfer ? activeLinkIcon : linkIcon} alt="移行先"></img>
+        <Tooltip anchorSelect="#transferBtn" content='移行先' place='bottom' delayShow={700} />
+      </div>
       <div className="taskTitle">
         <input
           className="taskForm"

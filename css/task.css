@@ -57,19 +57,3 @@
     font-weight: 400;
     line-height: normal;
 }
-
-.transferBtn{
-    padding: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-}
-
-.activeTransferBtn {
-    background-color: #767676;
-}
-
-.transferBtn:hover {
-    cursor: pointer;
-}

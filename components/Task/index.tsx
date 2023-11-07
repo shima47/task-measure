@@ -8,6 +8,7 @@ import useTaskTime from "~hooks/useTaskTime"
 import useEffectTime from "~hooks/useEffectTime"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
+import transferIcon from "data-base64:~assets/transfer.svg"
 
 
 /**
@@ -37,6 +38,10 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
+      <div className="btn" id="transferBtn" onClick={() => { }}>
+        <img src={transferIcon} alt="時間移行"></img>
+        <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={700} />
+      </div>
       <div className="taskTitle">
         <input
           className="taskForm"

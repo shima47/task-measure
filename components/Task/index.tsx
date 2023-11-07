@@ -9,6 +9,7 @@ import useEffectTime from "~hooks/useEffectTime"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import transferIcon from "data-base64:~assets/transfer.svg"
+import useTransferTime from "~features/transferTime/useTransferTime"
 
 
 /**
@@ -26,7 +27,8 @@ const Task = ({ taskId }) => {
   const { onClickStart, onClickStop, } = useRunTask(taskId)
   // 選択状態
   const [isSelected, onChangeSelect] = useSelectTask(taskId)
-
+  // 時間の移し替え
+  const { onClickTransferTime } = useTransferTime(taskId)
   // 経過時間を反映させる
   useEffectTime(taskId)
 
@@ -38,7 +40,7 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
-      <div className="btn" id="transferBtn" onClick={() => { }}>
+      <div className="btn" id="transferBtn" onClick={onClickTransferTime}>
         <img src={transferIcon} alt="時間移行"></img>
         <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={700} />
       </div>

@@ -1,8 +1,8 @@
+import { useState } from "react"
 import { Tooltip } from "react-tooltip"
 import useRunTask from "~features/runTask/useRunTask"
 import useTaskTitle from "~hooks/useTaskTitle"
 import useSelectTask from "~hooks/useSelectTask"
-import useTransferTime from "~features/adjustTime/useTransferTime"
 import useTask from "~hooks/useTask"
 import useIsRunning from "~hooks/useIsRunning"
 import useTaskTime from "~hooks/useTaskTime"
@@ -28,11 +28,11 @@ const Task = ({ taskId }) => {
   const { onClickStart, onClickStop, } = useRunTask(taskId)
   // 選択状態
   const [isSelected, onChangeSelect] = useSelectTask(taskId)
-  const [isTransfer, onChangeTransfer] = useTransferTime(taskId)
 
   // 経過時間を反映させる
   useEffectTime(taskId)
 
+  const [isTransfer, setIsTranfer] = useState(false)
 
   return (
     <div className="task" >
@@ -42,7 +42,7 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
-      <div className={`transferBtn ${isTransfer && "activeTransferBtn"}`} id="transferBtn" onClick={onChangeTransfer}>
+      <div className={`transferBtn ${isTransfer && "activeTransferBtn"}`} id="transferBtn" onClick={()=>{setIsTranfer(c => !c)}}>
         <img src={isTransfer ? activeLinkIcon : linkIcon} alt="移行先"></img>
         <Tooltip anchorSelect="#transferBtn" content='移行先' place='bottom' delayShow={700} />
       </div>

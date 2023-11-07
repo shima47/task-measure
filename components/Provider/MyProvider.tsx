@@ -9,10 +9,10 @@ export const isOpenAryContext = createContext(null)
 export const orderContext = createContext(null)
 export const runningTaskInfoContext = createContext<type.runningTaskInfoState>(null)
 export const selectedTaskIdContext = createContext(null)
-export const transferTaskIdContext = createContext(null)
 export const isImportingContext = createContext(null)
 export const restTimeAryContext = createContext(null)
 
+const bucket = getBucket<type.myBucket>('myBucket');
 
 const MyProvider = ({ children }) => {
   const [allTask, setAllTask] = useStorage("taskData", INITIAL_DATA.ALL_TASK)
@@ -22,7 +22,6 @@ const MyProvider = ({ children }) => {
   const [isOpenAry, setIsOpenAry] = useStorage("isOpen", INITIAL_DATA.IS_OPEN_ARY)
 
   const [selectedTaskId, setSelectedTaskId] = useState(INITIAL_DATA.SELECTED_TASK_ID)
-  const [transferTaskId, setTransferTaskId] = useState(INITIAL_DATA.SELECTED_TASK_ID)
   // JSONのインポート画面を切り替える
   const [isImporting, setIsImporting] = useState(INITIAL_DATA.IS_IMPORTING)
 
@@ -46,13 +45,11 @@ const MyProvider = ({ children }) => {
         <orderContext.Provider value={[order, setOrder]}>
           <runningTaskInfoContext.Provider value={[runningTask, setRunningTask]}>
             <selectedTaskIdContext.Provider value={[selectedTaskId, setSelectedTaskId]}>
-              <transferTaskIdContext.Provider value={[transferTaskId, setTransferTaskId]}>
-                <isImportingContext.Provider value={[isImporting, setIsImporting]}>
-                  <restTimeAryContext.Provider value={[restTimeAry, setRestTimeAry]}>
-                    {children}
-                  </restTimeAryContext.Provider>
-                </isImportingContext.Provider>
-              </transferTaskIdContext.Provider>
+              <isImportingContext.Provider value={[isImporting, setIsImporting]}>
+                <restTimeAryContext.Provider value={[restTimeAry, setRestTimeAry]}>
+                  {children}
+                </restTimeAryContext.Provider>
+              </isImportingContext.Provider>
             </selectedTaskIdContext.Provider>
           </runningTaskInfoContext.Provider>
         </orderContext.Provider>

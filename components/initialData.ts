@@ -26,7 +26,6 @@ const RUNNING_TASK: type.runningTaskInfo = {
 }
 const IS_OPEN_ARY: type.isOpenAry = [true, true, true, true, true]
 const SELECTED_TASK_ID = ""
-const TRANSFER_TASK_ID = ""
 const IS_IMPORTING = false
 const REST_TIME: type.restTime[] = [{
   id: "",
@@ -41,7 +40,6 @@ export const INITIAL_DATA = {
   RUNNING_TASK: RUNNING_TASK,
   IS_OPEN_ARY: IS_OPEN_ARY,
   SELECTED_TASK_ID: SELECTED_TASK_ID,
-  TRANSFER_TASK_ID: TRANSFER_TASK_ID,
   IS_IMPORTING: IS_IMPORTING,
   REST_TIME: REST_TIME,
 }

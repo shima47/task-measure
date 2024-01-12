@@ -14,10 +14,10 @@
   - [x] 元のStateに反映
   - [x] 実行中のタスクならStartTimeをリセットする
   - [x] 編集状態OFF
-- [ ] 0.25減らすボタン
+- [x] 0.25減らすボタン
 
 ## タスク実行
-- [ ] 実行時間計算の共通化
+- [x] 実行時間計算の共通化
 - [x] 曜日の合計時間
 
 ## 並べ替え
@@ -29,24 +29,27 @@
 
 ## 新規作成
 - [ ] 選択の場所に作成
+
+## コピー機能
 - [ ] コピー機能
-- [ ] 削除保護
-  - [ ] Task.tsxにボタン追加する
-  - [ ] onClickProtection関数作る
-  - [ ] UpdateTaskProtection作成
-    - [ ] 新規作成関数でisProtectedプロパティを追加するように修正
-    - [ ] isProtectedプロパティ：Boolを変更する
-    - [ ] 他の関数に影響ありそう？
-  - [ ] DeleteTaskの修正
-    - [ ] CheckProtection関数で共通化したい
-    - [ ] DeleteAllTask関数修正
-      - [ ] Filterで削除しないデータだけ抜き取る
-        - [ ] AllTask
-        - [ ] Order
-    - [ ] DeleteTask関数修正
-      - [ ] 保護フラグチェックするだけ
-  - [ ] 保護表示かどうかをUIに反映
-    - [ ] isProtectedStateで管理
+
+## 削除保護
+- [ ] Task.tsxにボタン追加する
+- [ ] onClickProtection関数作る
+- [ ] UpdateTaskProtection作成
+  - [ ] 新規作成関数でisProtectedプロパティを追加するように修正
+  - [ ] isProtectedプロパティ：Boolを変更する
+  - [ ] 他の関数に影響ありそう？
+- [ ] DeleteTaskの修正
+  - [ ] CheckProtection関数で共通化したい
+  - [ ] DeleteAllTask関数修正
+    - [ ] Filterで削除しないデータだけ抜き取る
+      - [ ] AllTask
+      - [ ] Order
+  - [ ] DeleteTask関数修正
+    - [ ] 保護フラグチェックするだけ
+- [ ] 保護表示かどうかをUIに反映
+  - [ ] isProtectedStateで管理
 
 ## JSON
 - [x] エクスポート
@@ -55,17 +58,18 @@
   - [x] 基礎機能
 
 ## 経過時間をきりよく丸める
-- [ ] 1.34みたいな時間を1.25にする
+- [x] 1.34みたいな時間を1.25にする
 - [x] 丸める計算ロジック作成
   - チャッピー
-- [ ] クリックカスタムフック
-  - [ ] dayTaskOrderを取得
-  - [ ] それぞれ丸めてデータ保存
-- [ ] ボタン作成
-  - [ ] DayDivに配置
-  - [ ] アイコンはチェックボタンかな
+- [x] クリックカスタムフック
+  - [x] dayTaskOrderを取得
+  - [x] それぞれ丸めてデータ保存
+- [x] ボタン作成
+  - [x] DayDivに配置
+  - [x] アイコンはチェックボタンかな
 
 ## リファクタ
+- [ ] データ格納形式
 - [x] UseStateをまとめる
   - [x] 全体レンダリング系をまとめる
     - order, startTime, runningTaskId, 

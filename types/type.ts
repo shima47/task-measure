@@ -1,5 +1,5 @@
 export type allTask = {
-    [key: string]: { title: string, time: number, }
+    [key: string]: { title: string, time: number, isProtected: boolean }
 }
 export type isOpenAry = boolean[]
 export type order = (string | number)[]

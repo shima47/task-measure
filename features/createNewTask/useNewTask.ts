@@ -31,7 +31,7 @@ const useNewTask = (dayIndex: number) => {
     const newOrder = [...order]
     newOrder.splice(indexToInsert + 1, 0, newId)
 
-    const newTask = { title: "タスク", time: 0, }
+    const newTask = { title: "タスク", time: 0, isProtected: false }
     const newAllTask = { ...allTask, [newId]: newTask }
 
     setAllTask(newAllTask)

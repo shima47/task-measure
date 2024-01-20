@@ -28,11 +28,11 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
         <div className="totalTime">{totalTime.toFixed(2)} h</div>
         <div className="btn" id="createBtn" onClick={onClickCreateTask}>
           <img src={addIcon} alt="新規追加" />
-          <Tooltip anchorSelect="#createBtn" content='新規作成' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#createBtn" content='新規作成' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id="organizeTimeBtn" onClick={onClickOrganizeTaskTime}>
           <img src={checkIcon} alt="時間整理" />
-          <Tooltip anchorSelect="#organizeTimeBtn" content='時間整理' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#organizeTimeBtn" content='時間整理' place='bottom' delayShow={800} />
         </div>
       </div>
       <div className="taskDiv">

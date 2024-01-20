@@ -49,11 +49,11 @@ const Task = ({ taskId }) => {
       />
       <div className="btn" id="protectBtn" onClick={onClickProtect}>
         <img src={isProtected ? protectIcon : unProtectIcon} alt="削除保護"></img>
-        <Tooltip anchorSelect="#protectBtn" content='削除保護' place='bottom' delayShow={700} />
+        <Tooltip anchorSelect="#protectBtn" content='削除保護' place='bottom' delayShow={800} />
       </div>
       <div className="btn" id="transferBtn" onClick={onClickTransferTime}>
         <img src={transferIcon} alt="時間移行"></img>
-        <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={700} />
+        <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={800} />
       </div>
       <div className="taskTitle">
         <input
@@ -78,12 +78,12 @@ const Task = ({ taskId }) => {
         isRunning ?
           <div className="btn" id="stopBtn" onClick={onClickStop}>
             <img src={stopIcon} alt="ストップ" />
-            <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
+            <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={800} />
           </div>
           :
           <div className="btn" id="startBtn" onClick={onClickStart}>
             <img src={startIcon} alt="スタート" />
-            <Tooltip anchorSelect="#startBtn" content='開始' place='bottom' delayShow={700} />
+            <Tooltip anchorSelect="#startBtn" content='開始' place='bottom' delayShow={800} />
           </div>
       }
     </div >

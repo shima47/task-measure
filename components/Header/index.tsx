@@ -35,44 +35,44 @@ const Header = () => {
       <div className="headerBtns">
         <div className="btn" id="homeBtn" onClick={onClickHome} >
           <img src={homeIcon} alt="ホーム"></img>
-          <Tooltip anchorSelect="#homeBtn" content='ホーム' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#homeBtn" content='ホーム' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id="upArrowBtn" onClick={onClickUpArrow} >
           <img src={upArrowIcon} alt="上矢印"></img>
-          <Tooltip anchorSelect="#upArrowBtn" content='ひとつ上に' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#upArrowBtn" content='ひとつ上に' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id="downArrowBtn" onClick={onClickDownArrow}>
           <img src={downArrowIcon} alt="下矢印"></img>
-          <Tooltip anchorSelect="#downArrowBtn" content='ひとつ下に' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#downArrowBtn" content='ひとつ下に' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id="deleteBtn" onClick={onClickDelete}>
           <img src={deleteIcon} alt="削除"></img>
-          <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id='importBtn' onClick={onClickImport}>
           <img src={importIcon} alt="JSONインポート"></img>
           <input style={{ display: "none" }} ref={fileInputRef} type="file" accept='.json' onChange={onChangeFile} />
-          <Tooltip anchorSelect="#importBtn" content='インポート' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#importBtn" content='インポート' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id='exportBtn' onClick={onClickExport}>
           <img src={exportIcon} alt="JSONエクスポート"></img>
-          <Tooltip anchorSelect="#exportBtn" content='エクスポート' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#exportBtn" content='エクスポート' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id='reduceTimeBtn' onClick={onClickReduceTime}>
           <img src={reduceTimeIcon} alt="時間減"></img>
-          <Tooltip anchorSelect="#reduceTimeBtn" content='時間減' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#reduceTimeBtn" content='時間減' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id='increaseTimeBtn' onClick={onClickIncreaseTime}>
           <img src={increaseTimeIcon} alt="時間増"></img>
-          <Tooltip anchorSelect="#increaseTimeBtn" content='時間増' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#increaseTimeBtn" content='時間増' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id='stopBtn' onClick={onClickStop}>
           <img src={stopIcon} alt="ストップ"></img>
-          <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={800} />
         </div>
         <div className="btn" id='settingBtn' onClick={onClickSetting}>
           <img src={settingIcon} alt="設定"></img>
-          <Tooltip anchorSelect="#settingBtn" content='設定' place='bottom' delayShow={700} />
+          <Tooltip anchorSelect="#settingBtn" content='設定' place='bottom' delayShow={800} />
         </div>
       </div>
     </div>

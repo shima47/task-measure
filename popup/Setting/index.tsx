@@ -14,7 +14,7 @@ const Setting = () => {
           <div className="settingTitle">Rest Time</div>
           <div className="btn" id="addBtn" onClick={onClickAddRestTime}>
             <img src={addIcon} alt="追加" />
-            <Tooltip anchorSelect="#addBtn" content='追加' place='bottom' delayShow={700} />
+            <Tooltip anchorSelect="#addBtn" content='追加' place='bottom' delayShow={800} />
           </div>
         </div>
         <div className="settingRight">

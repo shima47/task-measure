@@ -12,6 +12,7 @@ import transferIcon from "data-base64:~assets/transfer.svg"
 import protectIcon from "data-base64:~assets/protect.svg"
 import unProtectIcon from "data-base64:~assets/unProtect.svg"
 import useTransferTime from "~features/transferTime/useTransferTime"
+import useProtectTask from "~features/protectTask/useProtectTask"
 import { useState } from "react"
 
 
@@ -32,14 +33,11 @@ const Task = ({ taskId }) => {
   const [isSelected, onChangeSelect] = useSelectTask(taskId)
   // 時間の移し替え
   const { onClickTransferTime } = useTransferTime(taskId)
+  // 削除保護
+  const { isProtected, onClickProtect } = useProtectTask(taskId)
   // 経過時間を反映させる
   useEffectTime(taskId)
 
-  const [isProtect, setIsProtect] = useState(false);
-
-  const onClickProtection = () => {
-    setIsProtect(prevIsProtect => !prevIsProtect);
-  }
 
   return (
     <div className="task" >
@@ -49,8 +47,8 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
-      <div className="btn" id="protectBtn" onClick={onClickProtection}>
-        <img src={isProtect ? protectIcon : unProtectIcon} alt="削除保護"></img>
+      <div className="btn" id="protectBtn" onClick={onClickProtect}>
+        <img src={isProtected ? protectIcon : unProtectIcon} alt="削除保護"></img>
         <Tooltip anchorSelect="#protectBtn" content='削除保護' place='bottom' delayShow={700} />
       </div>
       <div className="btn" id="transferBtn" onClick={onClickTransferTime}>

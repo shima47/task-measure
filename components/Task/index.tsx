@@ -9,7 +9,10 @@ import useEffectTime from "~hooks/useEffectTime"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import transferIcon from "data-base64:~assets/transfer.svg"
+import protectIcon from "data-base64:~assets/protect.svg"
+import unProtectIcon from "data-base64:~assets/unProtect.svg"
 import useTransferTime from "~features/transferTime/useTransferTime"
+import { useState } from "react"
 
 
 /**
@@ -32,6 +35,12 @@ const Task = ({ taskId }) => {
   // 経過時間を反映させる
   useEffectTime(taskId)
 
+  const [isProtect, setIsProtect] = useState(false);
+
+  const onClickProtection = () => {
+    setIsProtect(prevIsProtect => !prevIsProtect);
+  }
+
   return (
     <div className="task" >
       <input
@@ -40,6 +49,10 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
+      <div className="btn" id="protectBtn" onClick={onClickProtection}>
+        <img src={isProtect ? protectIcon : unProtectIcon} alt="削除保護"></img>
+        <Tooltip anchorSelect="#protectBtn" content='削除保護' place='bottom' delayShow={700} />
+      </div>
       <div className="btn" id="transferBtn" onClick={onClickTransferTime}>
         <img src={transferIcon} alt="時間移行"></img>
         <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={700} />

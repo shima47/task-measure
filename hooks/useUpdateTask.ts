@@ -8,7 +8,7 @@ const useUpdateTask = () => {
   const updateTaskTitle = (taskId: string, newTaskTitle: string) => {
     const targetTask = allTask[taskId]
     if (!targetTask) return
-    
+
     const updatedTask = { ...targetTask, title: newTaskTitle }
     setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
   }
@@ -21,7 +21,15 @@ const useUpdateTask = () => {
     setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
   }
 
-  return { updateTaskTitle, updateTaskTime, } as const
+  const updateTaskProtected = (taskId: string, newTaskProtected: boolean) => {
+    const targetTask = allTask[taskId]
+    if (!targetTask) return
+
+    const updatedTask = { ...targetTask, isProtected: newTaskProtected, }
+    setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
+  }
+
+  return { updateTaskTitle, updateTaskTime, updateTaskProtected } as const
 }
 
 export default useUpdateTask

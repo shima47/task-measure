@@ -9,7 +9,11 @@ import useEffectTime from "~hooks/useEffectTime"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
 import transferIcon from "data-base64:~assets/transfer.svg"
+import protectIcon from "data-base64:~assets/protect.svg"
+import unProtectIcon from "data-base64:~assets/unProtect.svg"
 import useTransferTime from "~features/transferTime/useTransferTime"
+import useProtectTask from "~features/protectTask/useProtectTask"
+import { useState } from "react"
 
 
 /**
@@ -29,8 +33,11 @@ const Task = ({ taskId }) => {
   const [isSelected, onChangeSelect] = useSelectTask(taskId)
   // 時間の移し替え
   const { onClickTransferTime } = useTransferTime(taskId)
+  // 削除保護
+  const { isProtected, onClickProtect } = useProtectTask(taskId)
   // 経過時間を反映させる
   useEffectTime(taskId)
+
 
   return (
     <div className="task" >
@@ -40,9 +47,13 @@ const Task = ({ taskId }) => {
         checked={isSelected}
         onChange={onChangeSelect}
       />
+      <div className="btn" id="protectBtn" onClick={onClickProtect}>
+        <img src={isProtected ? protectIcon : unProtectIcon} alt="削除保護"></img>
+        <Tooltip anchorSelect="#protectBtn" content='削除保護' place='bottom' delayShow={800} />
+      </div>
       <div className="btn" id="transferBtn" onClick={onClickTransferTime}>
         <img src={transferIcon} alt="時間移行"></img>
-        <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={700} />
+        <Tooltip anchorSelect="#transferBtn" content='時間移行' place='bottom' delayShow={800} />
       </div>
       <div className="taskTitle">
         <input
@@ -67,12 +78,12 @@ const Task = ({ taskId }) => {
         isRunning ?
           <div className="btn" id="stopBtn" onClick={onClickStop}>
             <img src={stopIcon} alt="ストップ" />
-            <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={700} />
+            <Tooltip anchorSelect="#stopBtn" content='停止' place='bottom' delayShow={800} />
           </div>
           :
           <div className="btn" id="startBtn" onClick={onClickStart}>
             <img src={startIcon} alt="スタート" />
-            <Tooltip anchorSelect="#startBtn" content='開始' place='bottom' delayShow={700} />
+            <Tooltip anchorSelect="#startBtn" content='開始' place='bottom' delayShow={800} />
           </div>
       }
     </div >

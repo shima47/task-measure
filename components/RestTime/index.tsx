@@ -18,7 +18,7 @@ const RestTime = ({ restTimeIndex }) => {
       <input className="timeTypeInput" type="time" value={restTime.end} onChange={onChangeEndRestTime} />
       <div className="restTimeDeleteBtn" id="deleteBtn" onClick={onClickDeleteRestTime}>
         <img src={deleteIcon} alt="削除"></img>
-        <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={700} />
+        <Tooltip anchorSelect="#deleteBtn" content='削除' place='bottom' delayShow={800} />
       </div>
     </div>
   )

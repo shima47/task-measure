@@ -34,22 +34,22 @@
 - [ ] コピー機能
 
 ## 削除保護
-- [ ] Task.tsxにボタン追加する
-- [ ] onClickProtection関数作る
-- [ ] UpdateTaskProtection作成
-  - [ ] 新規作成関数でisProtectedプロパティを追加するように修正
-  - [ ] isProtectedプロパティ：Boolを変更する
+- [x] Task.tsxにボタン追加する
+- [x] onClickProtection関数作る
+- [x] UpdateTaskProtection作成
+  - [x] 新規作成関数でisProtectedプロパティを追加するように修正
+  - [x] isProtectedプロパティ：Boolを変更する
   - [ ] 他の関数に影響ありそう？
-- [ ] DeleteTaskの修正
-  - [ ] CheckProtection関数で共通化したい
-  - [ ] DeleteAllTask関数修正
-    - [ ] Filterで削除しないデータだけ抜き取る
-      - [ ] AllTask
-      - [ ] Order
-  - [ ] DeleteTask関数修正
-    - [ ] 保護フラグチェックするだけ
-- [ ] 保護表示かどうかをUIに反映
-  - [ ] isProtectedStateで管理
+- [x] DeleteTaskの修正
+  - [x] CheckProtection関数で共通化したい
+  - [x] DeleteAllTask関数修正
+    - [x] Filterで削除しないデータだけ抜き取る
+      - [x] AllTask
+      - [x] Order
+  - [x] DeleteTask関数修正
+    - [x] 保護フラグチェックするだけ
+- [x] 保護表示かどうかをUIに反映
+  - [x] isProtectedStateで管理
 
 ## JSON
 - [x] エクスポート

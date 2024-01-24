@@ -20,16 +20,38 @@ const useDeleteTask = () => {
   }
 
   const deleteAllTask = () => {
-    if (!confirm("タスクを全て削除しますか？")) return
+    if (!confirm("タスクを全て削除しますか？（保護されたタスクは除外）")) return
 
-    setOrder(INITIAL_DATA.ORDER)
-    setAllTask(INITIAL_DATA.ALL_TASK)
+    // 削除保護されていないタスクIDを削除
+    setOrder(prevOrder => prevOrder.filter(item => {
+      // 削除保護されているタスクIDと初期データの数字だけ返す
+      return checkTaskProtection(item) || INITIAL_DATA.ORDER.includes(item)
+    }))
+
+    // 削除保護されていないタスクだけ削除
+    setAllTask(prevAllTask => {
+      const newAllTask = { ...prevAllTask }
+      // prevAllTaskのKeyを全て取得し、削除保護されていないタスクを削除
+      Object.keys(prevAllTask).forEach(item => {
+        if (!checkTaskProtection(item)) {
+          delete newAllTask[item]
+        }
+      })
+      return newAllTask
+    })
+
     setRunningTask(INITIAL_DATA.RUNNING_TASK)
     setSelectedTaskId(INITIAL_DATA.SELECTED_TASK_ID)
   }
 
   const deleteTask = () => {
-    if (!confirm("タスクを削除しますか？")) return
+    if (!confirm("タスクを削除しますか？（保護されたタスクは除外）")) return
+
+    // 削除するタスクの削除保護をチェック
+    if (checkTaskProtection(selectedTaskId)) {
+      alert("削除保護されているため削除できません")
+      return
+    }
 
     // 削除するID以外を抽出
     setOrder(current => current.filter(item => item !== selectedTaskId))
@@ -47,6 +69,14 @@ const useDeleteTask = () => {
     if (selectedTaskId !== runningTask.id) return
 
     setRunningTask(INITIAL_DATA.RUNNING_TASK)
+  }
+
+  // タスクの削除保護をチェック
+  const checkTaskProtection = (taskId: string) => {
+    const targetTask = allTask[taskId]
+    if (!targetTask) return false
+
+    return targetTask.isProtected
   }
 
   return { onClickDelete, }

@@ -29,11 +29,14 @@ const useDeleteTask = () => {
     }))
 
     // 削除保護されていないタスクだけ削除
-    setAllTask(prevAllTask => {
-      const newAllTask = { ...prevAllTask }
+    setAllTask(prev => {
+      const newAllTask = { ...prev }
       // prevAllTaskのKeyを全て取得し、削除保護されていないタスクを削除
-      Object.keys(prevAllTask).forEach(item => {
-        if (!checkTaskProtection(item)) {
+      Object.keys(prev).forEach(item => {
+        if (checkTaskProtection(item)) {
+          // 削除保護されているタスクの時間を0にする
+          newAllTask[item].time = 0
+        } else {
           delete newAllTask[item]
         }
       })
@@ -49,7 +52,13 @@ const useDeleteTask = () => {
 
     // 削除するタスクの削除保護をチェック
     if (checkTaskProtection(selectedTaskId)) {
-      alert("削除保護されているため削除できません")
+      // 削除するIDのタスク時間を0にする
+      setAllTask(prev => {
+        const newAllTask = { ...prev };
+        newAllTask[selectedTaskId].time = 0;
+        return newAllTask
+      })
+      // 終了
       return
     }
 

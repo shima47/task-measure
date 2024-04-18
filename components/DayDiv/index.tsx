@@ -25,7 +25,10 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
       <div className="dayTitleDiv" onClick={onClickDayTitle}>
         <img className={isOpen ? "accordionOpen" : "accordionClose"} src={accordionIcon} alt="開く" />
         <div className="dayTitile">{dOfW}</div>
-        <div className="totalTime">{totalTime.toFixed(2)} h</div>
+        <div className="totalTime">{totalTime.toFixed(2)} </div>
+        /
+        <div className="totalTime">{totalTime.toFixed(2)} </div>
+        h
         <div className="btn" id="createBtn" onClick={onClickCreateTask}>
           <img src={addIcon} alt="新規追加" />
           <Tooltip anchorSelect="#createBtn" content='新規作成' place='bottom' delayShow={800} />

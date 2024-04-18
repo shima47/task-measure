@@ -72,6 +72,17 @@ const Task = ({ taskId }) => {
           onFocus={onFocusTaskTime}
           onBlur={onBlurTaskTime}
         />
+      </div>
+      <div className="taskTime">
+        /
+        <input
+          className="taskTimeForm"
+          type="text"
+          value={taskTime}
+          onChange={onChangeTaskTime}
+          onFocus={onFocusTaskTime}
+          onBlur={onBlurTaskTime}
+        />
         h
       </div>
       {

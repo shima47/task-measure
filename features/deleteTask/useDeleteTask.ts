@@ -36,6 +36,7 @@ const useDeleteTask = () => {
         if (checkTaskProtection(item)) {
           // 削除保護されているタスクの時間を0にする
           newAllTask[item].time = 0
+          newAllTask[item].schedule = 0
         } else {
           delete newAllTask[item]
         }
@@ -56,6 +57,7 @@ const useDeleteTask = () => {
       setAllTask(prev => {
         const newAllTask = { ...prev };
         newAllTask[selectedTaskId].time = 0;
+        newAllTask[selectedTaskId].schedule = 0;
         return newAllTask
       })
       // 終了

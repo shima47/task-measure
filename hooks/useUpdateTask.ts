@@ -21,6 +21,14 @@ const useUpdateTask = () => {
     setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
   }
 
+  const updateScheduleTime = (taskId: string, newScheduleTime: number) => {
+    const targetTask = allTask[taskId]
+    if (!targetTask) return
+
+    const updatedTask = { ...targetTask, schedule: newScheduleTime, }
+    setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
+  }
+
   const updateTaskProtected = (taskId: string, newTaskProtected: boolean) => {
     const targetTask = allTask[taskId]
     if (!targetTask) return
@@ -29,7 +37,7 @@ const useUpdateTask = () => {
     setAllTask(current => ({ ...current, [taskId]: updatedTask, }))
   }
 
-  return { updateTaskTitle, updateTaskTime, updateTaskProtected } as const
+  return { updateTaskTitle, updateTaskTime, updateScheduleTime, updateTaskProtected } as const
 }
 
 export default useUpdateTask

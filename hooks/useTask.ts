@@ -7,6 +7,14 @@ const useTask = (taskId: string) => {
 
   const task = allTask[taskId]
 
+  // データ上にプロパティがない場合の対応 
+  if(task && !task.time){
+    task.time = 0
+  }
+  if(task && !task.schedule){
+    task.schedule = 0
+  }
+
   return task
 }
 

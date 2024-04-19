@@ -5,6 +5,7 @@ import useSelectTask from "~hooks/useSelectTask"
 import useTask from "~hooks/useTask"
 import useIsRunning from "~hooks/useIsRunning"
 import useTaskTime from "~hooks/useTaskTime"
+import useScheduleTime from "~hooks/useScheduleTime"
 import useEffectTime from "~hooks/useEffectTime"
 import startIcon from "data-base64:~assets/start.svg"
 import stopIcon from "data-base64:~assets/stop.svg"
@@ -13,7 +14,6 @@ import protectIcon from "data-base64:~assets/protect.svg"
 import unProtectIcon from "data-base64:~assets/unProtect.svg"
 import useTransferTime from "~features/transferTime/useTransferTime"
 import useProtectTask from "~features/protectTask/useProtectTask"
-import { useState } from "react"
 
 
 /**
@@ -26,6 +26,7 @@ const Task = ({ taskId }) => {
   // Formの状態
   const [taskTitle, { onChangeTitle, onFocusTitle }] = useTaskTitle(taskId)
   const [taskTime, { onFocusTaskTime, onChangeTaskTime, onBlurTaskTime }] = useTaskTime(taskId)
+  const [scheduleTime, { onFocusScheduleTime, onChangeScheduleTime, onBlurScheduleTime }] = useScheduleTime(taskId)
   // 実行状態
   const isRunning = useIsRunning(taskId)
   const { onClickStart, onClickStop, } = useRunTask(taskId)
@@ -78,10 +79,10 @@ const Task = ({ taskId }) => {
         <input
           className="taskTimeForm"
           type="text"
-          value={taskTime}
-          onChange={onChangeTaskTime}
-          onFocus={onFocusTaskTime}
-          onBlur={onBlurTaskTime}
+          value={scheduleTime}
+          onChange={onChangeScheduleTime}
+          onFocus={onFocusScheduleTime}
+          onBlur={onBlurScheduleTime}
         />
         h
       </div>

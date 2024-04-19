@@ -4,6 +4,7 @@ import useDaytaskOrder from "~hooks/useDayTaskOrder";
 import useNewTask from "~features/createNewTask/useNewTask";
 import useFoldingUp from "~features/foldingUp/useFoldingUp";
 import useDayTotalTime from "~features/totalDayTime/useTotalDayTime";
+import useDayTotalSchedule from "~features/totalDaySchedule/useTotalDaySchedule";
 import useFixTaskTime from "~features/fixTaskTime/useFixTaskTime";
 import addIcon from "data-base64:~assets/add.svg"
 import accordionIcon from "data-base64:~assets/accordion.svg"
@@ -15,6 +16,7 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
   const [isOpen, { onClickDayTitle }] = useFoldingUp(dayIndex)
   // その曜日の合計時間
   const totalTime = useDayTotalTime(dayIndex)
+  const totalSchedule = useDayTotalSchedule(dayIndex)
 
   const { onClickCreateTask } = useNewTask(dayIndex)
   const { onClickOrganizeTaskTime } = useFixTaskTime(dayIndex)
@@ -27,7 +29,7 @@ const DayDiv = ({ dayIndex, dOfW, }) => {
         <div className="dayTitile">{dOfW}</div>
         <div className="totalTime">{totalTime.toFixed(2)} </div>
         /
-        <div className="totalTime">{totalTime.toFixed(2)} </div>
+        <div className="totalTime">{totalSchedule.toFixed(2)} </div>
         h
         <div className="btn" id="createBtn" onClick={onClickCreateTask}>
           <img src={addIcon} alt="新規追加" />
